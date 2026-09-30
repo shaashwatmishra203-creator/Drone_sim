@@ -1,0 +1,13 @@
+name: cruise_sweep
+description: >
+  Step through forward airspeeds at constant altitude to find max speed and
+  the best-endurance / best-range cruise points.
+world: default
+wind: {mean_ms: [0.0, 0.0, 0.0], gust_ms: 0.0}
+until_empty: false
+max_duration_s: 400
+profile:
+  type: speed_steps
+  altitude_m: 15.0
+  speeds: [2, 4, 6, 8, 10, 12, 14, 16]
+  dwell_s: 20

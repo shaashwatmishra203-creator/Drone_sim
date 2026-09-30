@@ -1,0 +1,7 @@
+payload,prop,in_parts_list,auw_kg,disc_loading_kgm2,hover_power_w,hover_current_a,hover_throttle,hover_rpm,hover_minutes,twr,max_thrust_kgf,max_rpm,limited_by,best_endurance_v_ms,best_endurance_min,best_range_v_ms,best_range_km,max_speed_ms,gates_failed
+pi5,9x4.5,True,3.1170,18.99,600.8,28.63,0.2894,8569,10.72,3.455,10.77,15927,current,9.5,11.53,17.5,9.66,20.0,
+pi5,11x4.5,False,3.1330,12.77,469.5,22.17,0.3319,5940,13.83,3.013,9.44,10310,current,9.5,15.50,16.0,12.10,20.0,
+pi5,13x4.4,False,3.1570,9.22,388.1,18.23,0.3630,4419,16.82,2.755,8.70,7334,current,9.0,19.60,15.0,14.37,20.0,
+orin_nx,9x4.5,True,3.1970,19.47,636.0,30.38,0.2969,8678,10.10,3.369,10.77,15927,current,9.0,10.83,18.0,9.25,20.0,
+orin_nx,11x4.5,False,3.2130,13.10,499.5,23.64,0.3403,6015,12.98,2.938,9.44,10310,current,9.5,14.50,16.0,11.52,20.0,
+orin_nx,13x4.4,False,3.2370,9.45,415.0,19.52,0.3721,4474,15.70,2.687,8.70,7334,current,9.0,18.23,15.5,13.61,20.0,

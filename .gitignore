@@ -1,0 +1,29 @@
+# Raw simulator noise — regenerate by re-running a scenario.
+# The flight-log CSVs ARE kept: they are the evidence behind the results.
+out/runs/*/px4.log
+out/runs/*/agent.log
+out/runs/*/logger.log
+out/runs/*/runner.log
+out/runs/*/wind.log
+*.ulg
+log/
+
+# Generated models and airframes — reproduce with tools/gen_model.py.
+out/generated/
+
+# Scratch / isolation scenarios and their runs
+scenarios/_*.yaml
+out/runs/hover_test_*/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

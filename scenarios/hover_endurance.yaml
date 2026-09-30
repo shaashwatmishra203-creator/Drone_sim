@@ -1,0 +1,11 @@
+name: hover_endurance
+description: >
+  Still air, hold 5 m until the battery model hits the DoD gate.
+  This is the headline endurance number.
+world: default
+wind: {mean_ms: [0.0, 0.0, 0.0], gust_ms: 0.0}
+until_empty: true
+max_duration_s: 1500
+profile:
+  type: hover
+  altitude_m: 5.0

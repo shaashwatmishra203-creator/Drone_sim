@@ -1,0 +1,12 @@
+name: hover_windy
+description: >
+  Hold position in wind. Measures the endurance penalty and the position-hold
+  error that wind costs.
+world: windy
+wind: {mean_ms: [6.0, 0.0, 0.0], gust_ms: 3.0}
+until_empty: false
+max_duration_s: 300
+profile:
+  type: hover
+  altitude_m: 5.0
+  hold_s: 180

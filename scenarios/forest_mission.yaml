@@ -1,0 +1,17 @@
+name: forest_mission
+description: >
+  Waypoint run in the forest world with wind — a realistic mission profile
+  rather than a bench condition.
+world: forest
+wind: {mean_ms: [4.0, 2.0, 0.0], gust_ms: 2.0}
+until_empty: false
+max_duration_s: 420
+profile:
+  type: waypoints
+  altitude_m: 12.0
+  accept_radius_m: 2.0
+  waypoints:
+    - [ 40.0,   0.0, 12.0]
+    - [ 40.0,  40.0, 12.0]
+    - [  0.0,  40.0, 12.0]
+    - [  0.0,   0.0, 12.0]

@@ -1,0 +1,11 @@
+name: climb_test
+description: Maximum-rate climb, to measure thrust margin in the vertical axis.
+world: default
+wind: {mean_ms: [0.0, 0.0, 0.0], gust_ms: 0.0}
+until_empty: false
+max_duration_s: 180
+profile:
+  type: climb
+  altitude_m: 5.0
+  ceiling_m: 80.0
+  climb_rate_ms: 5.0

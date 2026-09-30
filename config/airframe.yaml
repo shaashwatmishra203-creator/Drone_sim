@@ -1,0 +1,300 @@
+# ============================================================================
+# Drone Team — Airframe Configuration
+# Single source of truth for the sizing model, the Gazebo SDF, the PX4 airframe,
+# and the generated documentation. Change numbers HERE, never in generated files.
+#
+# confidence:  measured    — someone put it on a scale
+#              vendor      — manufacturer published spec
+#              estimated   — engineering estimate, NEEDS VERIFICATION
+#
+# Frame convention: FLU body frame (x fwd, y left, z up), origin at the
+# geometric centre of the main frame plate. Positions in metres.
+# ============================================================================
+
+meta:
+  name: n360_quad
+  description: "Quadrotor, 500 mm class, 6S, autonomy/perception payload"
+  revision: 0
+  date: 2026-09-30
+  # Every mass below marked 'estimated' is a placeholder until the team weighs it.
+  masses_are_provisional: true
+
+environment:
+  # Density altitude is a real endurance factor — do not silently assume ISA SL.
+  altitude_m: 0.0
+  temperature_c: 15.0
+  pressure_pa: 101325.0
+  gravity: 9.80665
+
+geometry:
+  layout: quad_x
+  arm_length_m: 0.2475        # motor axis to CG, => 495 mm diagonal wheelbase
+  motor_cant_deg: 0.0
+  body:                       # main body box, used for the inertia estimate
+    x_m: 0.200
+    y_m: 0.160
+    z_m: 0.110
+  # Rotor order follows PX4 quad_x: 1=FR(ccw) 2=RL(ccw) 3=FL(cw) 4=RR(cw)
+
+# ---------------------------------------------------------------------------
+# MASS REGISTER
+# ---------------------------------------------------------------------------
+# Each item: mass_kg (per unit), qty, confidence, source, pos (CG of that item),
+# power_w (avionics electrical draw in flight; omit or 0 for passive parts).
+components:
+
+  - id: motor
+    name: "HobbyWing XRotor 3115 900KV"
+    qty: 4
+    mass_kg: 0.195
+    confidence: estimated
+    source: "typical 31xx-class outrunner; CONFIRM from vendor datasheet"
+    pos: [0.175, 0.175, 0.020]     # magnitude; mirrored to 4 arms by the tool
+    mirror: arms
+
+  - id: prop
+    name: "propeller (see prop_options)"
+    qty: 4
+    mass_kg: 0.010
+    confidence: estimated
+    source: "HQProp 9x4.5 nylon composite, typical"
+    pos: [0.175, 0.175, 0.045]
+    mirror: arms
+
+  - id: battery
+    name: "Ovonic 22.2V 6S 50C 6000mAh (XT90 female)"
+    qty: 1
+    mass_kg: 0.830
+    confidence: estimated
+    source: "typical 6S 6000mAh LiPo; WEIGH THIS — largest single mass"
+    pos: [0.000, 0.000, 0.055]
+
+  - id: fc_stack
+    name: "SpeedyBee F405 V5 stack (FC + 4-in-1 ESC, 30x30)"
+    qty: 1
+    mass_kg: 0.035
+    confidence: vendor
+    source: "SpeedyBee F405 V5 product page"
+    pos: [0.000, 0.000, 0.000]
+    power_w: 2.0
+
+  - id: gps
+    name: "GPS / compass module + mast"
+    qty: 1
+    mass_kg: 0.040
+    confidence: estimated
+    source: "typical M8N/M9N puck plus mast"
+    pos: [-0.060, 0.000, 0.150]
+    power_w: 0.5
+
+  - id: wifi
+    name: "ALFA AWUS036ACM dual-band USB adapter + antennas"
+    qty: 1
+    mass_kg: 0.170
+    confidence: estimated
+    source: "adapter ~130 g + 2 antennas; CONFIRM"
+    pos: [-0.080, 0.000, 0.090]
+    power_w: 3.0
+
+  - id: zed2
+    name: "Stereolabs ZED 2"
+    qty: 1
+    mass_kg: 0.180
+    confidence: vendor
+    source: "ZED 2 = 166 g body, +cable"
+    pos: [0.090, 0.000, -0.030]
+    power_w: 2.0
+
+  - id: zed_mini
+    name: "Stereolabs ZED Mini"
+    qty: 1
+    mass_kg: 0.062
+    confidence: vendor
+    source: "ZED Mini = 62.9 g"
+    pos: [0.075, -0.080, -0.025]
+    power_w: 2.0
+
+  - id: gimbal
+    name: "3-DoF gimbal + gimbal camera"
+    qty: 1
+    mass_kg: 0.210
+    confidence: estimated
+    source: "unidentified lab unit — WEIGH AND IDENTIFY"
+    pos: [0.030, 0.000, -0.090]
+    power_w: 5.0
+
+  - id: frame
+    name: "Frame, PETG-CF printed, + nylon legs"
+    qty: 1
+    mass_kg: 0.550
+    confidence: estimated
+    source: "500 mm class printed frame estimate — DERIVE FROM CAD VOLUME"
+    pos: [0.000, 0.000, -0.010]
+
+  - id: wiring
+    name: "Wiring, XT90, standoffs, fasteners, straps"
+    qty: 1
+    mass_kg: 0.120
+    confidence: estimated
+    source: "build allowance"
+    pos: [0.000, 0.000, 0.010]
+
+# Compute variants — swapped in as the onboard computer.
+# NOTE: the ZED SDK requires an NVIDIA CUDA GPU. The Pi 5 has none, so the
+# pi5 variant CANNOT run either ZED camera. Modelled anyway because it is the
+# currently listed part; see docs/06-findings.md.
+payload_variants:
+  pi5:
+    name: "Raspberry Pi 5 (8 GB) + active cooler + 5V regulator"
+    mass_kg: 0.100
+    confidence: vendor
+    source: "Pi 5 = 46 g, cooler 25 g, regulator ~30 g"
+    pos: [-0.030, 0.000, 0.040]
+    power_w: 12.0
+    cuda_capable: false
+  orin_nx:
+    name: "Jetson Orin NX + carrier + cooler"
+    mass_kg: 0.180
+    confidence: estimated
+    source: "Orin NX module 25 g + carrier/cooler; CONFIRM carrier choice"
+    pos: [-0.030, 0.000, 0.045]
+    power_w: 25.0
+    cuda_capable: true
+
+# ---------------------------------------------------------------------------
+# PROPULSION
+# ---------------------------------------------------------------------------
+motor:
+  name: "HobbyWing XRotor 3115 900KV"
+  kv: 900.0                  # rpm per volt, no load
+  i0_a: 1.2                  # no-load current at 10 V
+  rm_ohm: 0.048              # phase resistance
+  i_max_cont_a: 40.0         # continuous current limit per motor
+  confidence: estimated
+  source: "CONFIRM all four values from the XRotor 3115 datasheet"
+
+esc:
+  name: "SpeedyBee F405 V5 4-in-1 ESC"
+  i_max_cont_a: 45.0
+  efficiency: 0.95
+  confidence: vendor
+
+# Thrust/power coefficients use T = Ct*rho*n^2*D^4, P = Cp*rho*n^3*D^5, n in rev/s.
+# max_rpm uses the composite-prop rule of thumb 145000 / D_inch.
+prop_options:
+  - id: "9x4.5"
+    diameter_in: 9.0
+    pitch_in: 4.5
+    blades: 2
+    mass_kg: 0.010
+    ct: 0.112
+    cp: 0.048
+    max_rpm: 16111            # 145000 / 9
+    figure_of_merit: 0.58
+    confidence: estimated
+    source: "HQProp 9x4.5 nylon composite — CURRENT PARTS LIST. Ct/Cp are
+             generic thin-electric values; replace with thrust-stand data."
+    in_parts_list: true
+
+  - id: "11x4.5"
+    diameter_in: 11.0
+    pitch_in: 4.5
+    blades: 2
+    mass_kg: 0.014
+    ct: 0.105
+    cp: 0.042
+    max_rpm: 13182            # 145000 / 11
+    figure_of_merit: 0.62
+    confidence: estimated
+    source: "candidate upsize"
+    in_parts_list: false
+
+  - id: "13x4.4"
+    diameter_in: 13.0
+    pitch_in: 4.4
+    blades: 2
+    mass_kg: 0.020
+    ct: 0.098
+    cp: 0.036
+    max_rpm: 11154            # 145000 / 13
+    figure_of_merit: 0.65
+    confidence: estimated
+    source: "candidate upsize, best endurance match for a 3115 motor"
+    in_parts_list: false
+
+# ---------------------------------------------------------------------------
+# BATTERY
+# ---------------------------------------------------------------------------
+battery:
+  name: "Ovonic 22.2V 6S1P 50C 6000mAh"
+  cells_series: 6
+  capacity_ah: 6.0
+  c_rating: 50
+  nominal_v_per_cell: 3.70
+  internal_resistance_ohm: 0.030   # whole pack; CONFIRM by measurement
+  confidence: estimated
+  # Depth-of-discharge limit. GATE: 80% is the standard LiPo cycle-life limit;
+  # going deeper trades pack life for flight time. Do not relax to make a
+  # scenario pass.
+  dod_limit: 0.80
+  # Open-circuit voltage per cell vs state of charge, 1.0 = full.
+  ocv_curve:
+    - [1.00, 4.20]
+    - [0.90, 4.06]
+    - [0.80, 3.96]
+    - [0.70, 3.89]
+    - [0.60, 3.83]
+    - [0.50, 3.78]
+    - [0.40, 3.74]
+    - [0.30, 3.70]
+    - [0.20, 3.64]
+    - [0.10, 3.52]
+    - [0.05, 3.40]
+    - [0.00, 3.20]
+
+# ---------------------------------------------------------------------------
+# MODEL GATES — each has a source and an uncertainty. Do not relax to pass.
+# ---------------------------------------------------------------------------
+gates:
+  dod_limit:
+    value: 0.80
+    rationale: "LiPo cycle-life limit; deeper discharge degrades the pack."
+    uncertainty: "+/- 0.05 depending on how much pack life the team will trade"
+  prop_rpm_margin:
+    value: 1.00
+    rationale: "Loaded RPM must not exceed the prop's rated max RPM."
+    uncertainty: "max_rpm is the 145000/D rule of thumb, not an HQProp figure.
+                  CONFIRM with the manufacturer before treating as pass/fail."
+  thrust_to_weight_min:
+    value: 2.0
+    rationale: "Below ~2:1 a multirotor has no authority for wind rejection or
+                aggressive attitude correction. Standard design minimum."
+    uncertainty: "1.8 is flyable but marginal; 2.0 is the working target."
+  hover_thrust_fraction_max:
+    value: 0.50
+    rationale: "Hover must consume no more than half of available thrust, so
+                half remains for climb, attitude authority and gust rejection.
+                This is the thrust fraction (hover thrust / max thrust), NOT
+                the rpm/stick fraction — the two are routinely confused and
+                differ by roughly a square root."
+    uncertainty: "Equivalent to T/W >= 2.0, so it deliberately restates the
+                  thrust_to_weight gate in the units a pilot sees."
+
+# ---------------------------------------------------------------------------
+# MODELLING ASSUMPTIONS
+# ---------------------------------------------------------------------------
+assumptions:
+  motor_esc_efficiency: 0.80    # combined, at hover operating point
+  # Figure of merit is per-prop, see prop_options.
+  avionics_always_on: true
+  # Parasitic drag for forward-flight scenarios
+  drag:
+    # Drag area (Cd * frontal area). Revised up from an initial 0.035: this
+    # airframe is not clean — ZED 2 and ZED Mini out front, a gimbal slung
+    # underneath, tall legs, a GPS mast and two large WiFi antennas. A bare
+    # 500 mm quad is ~0.03; this one carries a lot of exposed hardware.
+    # Sensitive: best-endurance cruise speed moves several m/s with this value.
+    cd_a_m2: 0.060
+    confidence: estimated
+    source: "engineering estimate; refine from CAD frontal area or measure
+             power vs. airspeed in flight test"
