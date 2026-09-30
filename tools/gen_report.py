@@ -37,6 +37,7 @@ MID = colors.HexColor("#CBD5E1")
 GREY = colors.HexColor("#475569")
 
 ROOT = os.path.expanduser("~/drone_sim")
+VERSION = "v1.1.0"
 
 
 # ---------------------------------------------------------------- styles
@@ -127,6 +128,58 @@ def load():
     return cfg, sizing
 
 
+def read_mission(name="factory_mission_9x45_pi5"):
+    """Mission-level metrics: leg times, path length, energy, reserve."""
+    import re
+    d = f"{ROOT}/out/runs/{name}"
+    p = f"{d}/flight_log.csv"
+    if not os.path.exists(p):
+        return None
+    rows = list(csv.DictReader(open(p)))
+
+    def fl(x):
+        try:
+            return float(x)
+        except (TypeError, ValueError):
+            return float("nan")
+
+    air = [r for r in rows if fl(r["z"]) < -0.8]
+    if not air:
+        return None
+
+    legs, total = [], None
+    rl = f"{d}/runner.log"
+    if os.path.exists(rl):
+        for ln in open(rl):
+            m = re.search(r"LEG (\w+): ([\d.]+) s", ln)
+            if m:
+                legs.append((m.group(1), float(m.group(2))))
+            m = re.search(r"TOTAL\s+([\d.]+) s", ln)
+            if m:
+                total = float(m.group(1))
+
+    dist, prev = 0.0, None
+    for r in air:
+        q = (fl(r["x"]), fl(r["y"]), fl(r["z"]))
+        if prev:
+            dist += math.dist(q, prev)
+        prev = q
+
+    pw = [fl(r["power_total_w"]) for r in air]
+    sp = [fl(r["speed_ms"]) for r in air]
+    wh = fl(air[-1]["energy_wh"]) - fl(air[0]["energy_wh"])
+    return {"airborne": fl(air[-1]["t_s"]) - fl(air[0]["t_s"]),
+            "legs": legs, "total": total, "dist": dist,
+            "mean_p": sum(pw) / len(pw), "peak_p": max(pw),
+            "mean_v": sum(sp) / len(sp), "peak_v": max(sp),
+            "wh": wh, "soc_end": fl(air[-1]["soc"])}
+
+
+def read_compute():
+    p = f"{ROOT}/out/compute_tradeoff.json"
+    return json.load(open(p)) if os.path.exists(p) else None
+
+
 def read_run(name):
     p = f"{ROOT}/out/runs/{name}/flight_log.csv"
     if not os.path.exists(p):
@@ -181,7 +234,7 @@ def make_page(title_text):
         canv.setFont("Helvetica-Bold", 9)
         canv.drawString(20 * mm, A4[1] - 10.5 * mm, title_text)
         canv.setFont("Helvetica", 8)
-        canv.drawRightString(A4[0] - 20 * mm, A4[1] - 10.5 * mm, "v1.0.0")
+        canv.drawRightString(A4[0] - 20 * mm, A4[1] - 10.5 * mm, VERSION)
 
         canv.setStrokeColor(MID)
         canv.setLineWidth(0.5)
@@ -207,12 +260,17 @@ def cover_deco(canv, doc):
     cx = A4[0] / 2
     canv.setFillColor(colors.white)
     canv.setFont("Helvetica-Bold", 25)
-    canv.drawCentredString(cx, A4[1] - 33 * mm, "Quadrotor Flyability")
-    canv.drawCentredString(cx, A4[1] - 45 * mm, "& Endurance Report")
+    canv.drawCentredString(cx, A4[1] - 30 * mm, "Quadrotor Flyability,")
+    canv.drawCentredString(cx, A4[1] - 42 * mm, "Mission & Compute Report")
     canv.setFont("Helvetica", 11)
     canv.setFillColor(colors.HexColor("#93C5FD"))
-    canv.drawCentredString(cx, A4[1] - 58 * mm,
+    canv.drawCentredString(cx, A4[1] - 54 * mm,
                            "PX4 SITL  +  Gazebo Harmonic  +  ROS 2 Humble")
+    canv.setFont("Helvetica", 9)
+    canv.setFillColor(colors.HexColor("#64A8E0"))
+    canv.drawCentredString(cx, A4[1] - 64 * mm,
+                           "Endurance  |  Factory navigation mission  |  "
+                           "Cloud vs edge compute")
     canv.setFillColor(GREY)
     canv.setFont("Helvetica", 7.5)
     canv.drawCentredString(A4[0] / 2, 12 * mm,
@@ -242,7 +300,8 @@ def build(out_path):
             doc.leftMargin, doc.bottomMargin, doc.width, doc.height - 40 * mm, id="c")],
             onPage=cover_deco),
         PageTemplate(id="main", frames=[fr],
-                     onPage=make_page("Drone_sim - Flyability & Endurance, v1")),
+                     onPage=make_page(
+                         "Drone_sim - Flyability, Endurance, Mission & Compute")),
     ])
 
     E = []
@@ -250,12 +309,18 @@ def build(out_path):
     # ---------------- cover
     E += [Spacer(1, 18 * mm)]
 
-    meta = [["Version", "v1.0.0"],
+    _m = read_mission()
+    meta = [["Version", VERSION],
             ["Date", today],
             ["Repository", "github.com/shaashwatmishra203-creator/Drone_sim"],
             ["Airframe", f"{cfg['meta']['name']} - quad X, "
                          f"{cfg['geometry']['arm_length_m']*2000:.0f} mm diagonal"],
             ["Estimated AUW", f"{base['auw_kg']:.3f} kg  (88% still unweighed)"],
+            ["Hover endurance", f"{hover['gate_min']:.2f} min measured in SITL"],
+            ["Factory mission",
+             (f"{_m['airborne']:.0f} s, {_m['dist']:.0f} m, "
+              f"{_m['soc_end']*100:.0f}% pack remaining" if _m else "not run")],
+            ["Compute", "Edge required onboard; cloud for map sharing"],
             ["Verdict", "FLIES. Endurance is the constraint, not thrust."]]
     t = Table([[Paragraph(f"<b>{a}</b>", S["cell"]), Paragraph(b, S["cell"])]
                for a, b in meta], colWidths=[38 * mm, 122 * mm])
@@ -632,8 +697,238 @@ def build(out_path):
 
     E += [PageBreak()]
 
-    # ---------------- 6 next steps
-    E += [P("6. Recommended actions", "h1")]
+    # ---------------- 6 factory mission
+    mis = read_mission()
+    E += [P("6. Factory navigation and mapping mission", "h1")]
+    if mis:
+        E += [P("The representative mission, flown end to end: launch from base, "
+                "slalom an obstacle course past storage racks and centreline "
+                "pillars, fly a lawnmower scan pattern inside a 12 x 12 m room - "
+                "the mapping pass whose data would go to the other vehicles - then "
+                "return to base and land. Light wind (1.5 m/s, 0.8 m/s gusts) was "
+                "applied after takeoff.")]
+
+        mk = [[Paragraph("<b>Airborne</b>", S["cell"]),
+               Paragraph("<b>Path flown</b>", S["cell"]),
+               Paragraph("<b>Energy used</b>", S["cell"]),
+               Paragraph("<b>Pack remaining</b>", S["cell"])],
+              [Paragraph(f"<font size=15 color='#1B6CA8'><b>{mis['airborne']:.1f}</b></font> s", S["cell"]),
+               Paragraph(f"<font size=15 color='#1B6CA8'><b>{mis['dist']:.0f}</b></font> m", S["cell"]),
+               Paragraph(f"<font size=15 color='#1B6CA8'><b>{mis['wh']:.1f}</b></font> Wh", S["cell"]),
+               Paragraph(f"<font size=15 color='#1B7F43'><b>{mis['soc_end']*100:.1f}</b></font> %", S["cell"])]]
+        t = Table(mk, colWidths=[41 * mm] * 4)
+        t.setStyle(TableStyle([("GRID", (0, 0), (-1, -1), 0.4, MID),
+                               ("BACKGROUND", (0, 0), (-1, 0), LIGHT),
+                               ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+                               ("TOPPADDING", (0, 0), (-1, -1), 6),
+                               ("BOTTOMPADDING", (0, 0), (-1, -1), 6)]))
+        E += [Spacer(1, 2 * mm), t, Spacer(1, 4 * mm)]
+
+        usable = base["pack_wh"] * cfg["battery"]["dod_limit"]
+        trips = usable / mis["wh"]
+        E += [P("Leg breakdown", "h2")]
+        lt = sum(d for _, d in mis["legs"]) or 1
+        names = {"outbound": "Outbound (obstacle course)",
+                 "scan": "Scan (mapping pass)",
+                 "inbound": "Inbound (return to base)", "land": "Land"}
+        lrows = [[names.get(n, n), Paragraph(f"{d:.1f}", S["cellr"]),
+                  Paragraph(f"{100*d/lt:.1f}%", S["cellr"])] for n, d in mis["legs"]]
+        lrows.append([Paragraph("<b>TOTAL</b>", S["cellb"]),
+                      Paragraph(f"<b>{lt:.1f}</b>", S["cellr"]),
+                      Paragraph("", S["cellr"])])
+        E += [table(["Leg", "Time (s)", "Share"], lrows,
+                    [95 * mm, 35 * mm, 35 * mm], ["LEFT", "RIGHT", "RIGHT"])]
+
+        scan_share = next((100 * d / lt for n, d in mis["legs"] if n == "scan"), 0)
+        E += [Spacer(1, 2 * mm), callout(
+            "Scanning is a third of the flight",
+            f"The mapping pass is <b>{scan_share:.0f}% of the mission</b> - comparable "
+            "to either transit leg. It is not a cheap add-on at the end, and mission "
+            "planning should budget for it accordingly.", "info")]
+
+        E += [P("Operational margin", "h2")]
+        E += [table(["Metric", "Value"],
+                    [["Mean speed", Paragraph(f"{mis['mean_v']:.2f} m/s (peak {mis['peak_v']:.2f})", S["cellr"])],
+                     ["Mean power", Paragraph(f"{mis['mean_p']:.0f} W (peak {mis['peak_p']:.0f})", S["cellr"])],
+                     ["Energy per metre flown", Paragraph(f"{mis['wh']/mis['dist']*1000:.0f} mWh/m", S["cellr"])],
+                     ["Usable energy consumed", Paragraph(f"{100*mis['wh']/usable:.1f} %", S["cellr"])],
+                     [Paragraph("<b>Round trips per charge</b>", S["cellb"]),
+                      Paragraph(f"<b>{trips:.1f}</b>", S["cellr"])]],
+                    [95 * mm, 70 * mm], ["LEFT", "RIGHT"])]
+
+        E += [Spacer(1, 2 * mm), P(
+            f"<b>Endurance is not the binding constraint for this task.</b> The hover "
+            f"tests give about {hover['gate_min']:.0f} minutes; this mission takes one. "
+            f"One pack supports roughly {trips:.0f} round trips, which reframes the "
+            "problem: for factory survey work the limit is mission planning and "
+            "turnaround, not battery capacity.")]
+
+        E += [Spacer(1, 2 * mm), callout(
+            "What this mission does NOT establish",
+            "<b>No obstacle avoidance was tested.</b> The waypoints are pre-planned and "
+            "collision-free by construction - the aircraft flew a known-good path, it "
+            "did not perceive the racks and decide to avoid them. Likewise the scan leg "
+            "measures what a mapping pass <i>costs</i> in time and energy; it does not "
+            "produce a map. Both gaps need the depth pipeline, which needs CUDA "
+            "hardware - see the next section.", "warn")]
+    else:
+        E += [P("Mission data not found - run "
+                "<font face='Courier'>scripts/run_scenario.sh "
+                "scenarios/factory_mission.yaml</font>.")]
+
+    E += [PageBreak()]
+
+    # ---------------- 7 compute architecture
+    cp = read_compute()
+    E += [P("7. Cloud versus edge compute", "h1")]
+    if cp:
+        E += [P("Where should perception and navigation run - on the aircraft, or on "
+                "a server it streams to? The question is not which is faster in "
+                "general, but three specific ones: <b>can the link carry it, can it "
+                "stop in time, and what happens when the link drops?</b>")]
+
+        E += [Spacer(1, 1 * mm), callout(
+            "Verdict: split the workload",
+            "Edge and cloud are not competing options - they solve different halves of "
+            "the problem. <b>Depth, visual-inertial odometry, obstacle avoidance and "
+            "local planning must run onboard.</b> Map merging, global optimisation and "
+            "distribution to the other vehicles belong off-board. A CUDA-capable board "
+            "is required either way.", "good")]
+
+        E += [P("Bandwidth: what offload would have to push off the aircraft", "h2")]
+        srows = [[s["stream"], Paragraph(f"{s['raw_mbps']:.0f}", S["cellr"]),
+                  Paragraph(f"{s['comp_mbps']:.1f}", S["cellr"])]
+                 for s in cp["streams"]]
+        srows.append([Paragraph("<b>TOTAL</b>", S["cellb"]),
+                      Paragraph(f"<b>{cp['total_raw_mbps']:.0f}</b>", S["cellr"]),
+                      Paragraph(f"<b>{cp['total_compressed_mbps']:.0f}</b>", S["cellr"])])
+        E += [table(["Stream", "Raw (Mbps)", "Compressed (Mbps)"], srows,
+                    [95 * mm, 35 * mm, 35 * mm], ["LEFT", "RIGHT", "RIGHT"])]
+        E += [Paragraph("Depth compresses only about 8x - it is high-entropy, and lossy "
+                        "compression destroys exactly the geometry the obstacle "
+                        "avoidance depends on. That stream dominates the budget.",
+                        S["small"])]
+
+        E += [P("What the link actually delivers", "h2")]
+        brows = []
+        for r in cp["bandwidth"]:
+            v = r["verdict"]
+            cell = (Paragraph(f"<font color='#1B7F43'><b>{v}</b></font>", S["cellr"])
+                    if v == "OK" else
+                    Paragraph(f"<font color='#9B1C1C'><b>{v}</b></font>", S["cellr"]))
+            brows.append([r["condition"],
+                          Paragraph(f"{r['goodput_mbps']:.0f}", S["cellr"]), cell])
+        E += [table(["Condition (ALFA AWUS036ACM, 802.11ac)", "Goodput (Mbps)",
+                     "Verdict"], brows,
+                    [92 * mm, 32 * mm, 41 * mm], ["LEFT", "RIGHT", "RIGHT"])]
+        E += [Spacer(1, 2 * mm), callout(
+            "The link is worst exactly where the mission matters most",
+            f"The mapping pass happens <b>inside the room, behind a wall, at the "
+            f"furthest point from base</b>. Offload needs about "
+            f"{cp['total_compressed_mbps']:.0f} Mbps; there, the link delivers roughly "
+            "11 Mbps.", "bad")]
+
+        E += [P("Latency: can it stop in time?", "h2")]
+        rrows = []
+        for r in cp["reaction"]:
+            v = r["verdict"]
+            col = {"SAFE": "#1B7F43", "ACCEPTABLE": "#B45309",
+                   "UNSAFE": "#9B1C1C"}.get(v, "#1E293B")
+            rrows.append([
+                Paragraph(f"<b>{r['arch']}</b>", S["cell"]),
+                Paragraph(f"{r['latency_ms']:.0f}", S["cellr"]),
+                Paragraph(f"{r['reaction_m']:.2f}", S["cellr"]),
+                Paragraph(f"{r['stop_m']:.2f}", S["cellr"]),
+                Paragraph(f"<b>{r['total_m']:.2f}</b>", S["cellr"]),
+                Paragraph(f"{cp['max_safe_speed'][r['arch']]:.2f}", S["cellr"]),
+                Paragraph(f"<font color='{col}'><b>{v}</b></font>", S["cellr"])])
+        E += [table(["Architecture", "Latency (ms)", "React (m)", "Stop (m)",
+                     "Total (m)", "Max safe (m/s)", "Verdict"], rrows,
+                    [38 * mm, 21 * mm, 19 * mm, 18 * mm, 19 * mm, 24 * mm, 26 * mm],
+                    ["LEFT"] + ["RIGHT"] * 6)]
+        E += [Paragraph(f"At the measured mission speed of {cp['speed_ms']:.2f} m/s, "
+                        "braking at 5.7 m/s2. Corridor clearance is 1.25 m from "
+                        "centreline to the nearest rack or pillar. Note that moving the "
+                        "server on-premise saves only ~39 ms: the bottleneck is not "
+                        "network distance but that 150 Mbps does not fit down an 11 Mbps "
+                        "pipe, so bandwidth failure shows up as latency.", S["small"])]
+
+        E += [P("Availability: what a dropout costs", "h2")]
+        sp = cp["speed_ms"]
+        E += [table(["Link dropout", "Distance flown blind"],
+                    [[f"{d} ms", Paragraph(f"{sp*d/1000:.2f} m", S["cellr"])]
+                     for d in (200, 500, 1000)],
+                    [95 * mm, 70 * mm], ["LEFT", "RIGHT"])]
+        E += [Spacer(1, 2 * mm), callout(
+            "The strongest of the three arguments",
+            "An edge architecture is simply unaffected by a dropout: perception and "
+            "control never leave the aircraft. In a steel-racked factory, "
+            "multi-hundred-millisecond dropouts from shadowing and multipath are "
+            "routine rather than exceptional. <b>This is a safety property rather than "
+            "a performance one, and no amount of link engineering removes it.</b> A "
+            "better radio raises the bandwidth ceiling and shaves latency; it does not "
+            "make a dropout safe.", "bad")]
+
+        E += [PageBreak()]
+        E += [P("Why edge compute is what makes the map sharing work", "h2")]
+        E += [P("The goal is for this drone to map a room and send that map to the "
+                "other vehicles being designed. That requirement is the clearest "
+                "argument for the split architecture:")]
+        E += [table(["", "Size", "Can it leave the aircraft?"],
+                    [["Raw stereo + depth, continuous",
+                      Paragraph(f"<b>{cp['total_raw_mbps']:.0f} Mbps</b>", S["cellr"]),
+                      Paragraph("<font color='#9B1C1C'><b>No, at any range</b></font>", S["cell"])],
+                     ["Finished occupancy map of the room, per scan",
+                      Paragraph("<b>~ a few hundred KB</b>", S["cellr"]),
+                      Paragraph("<font color='#1B7F43'><b>Yes, over almost any link</b></font>", S["cell"])]],
+                    [78 * mm, 32 * mm, 55 * mm], ["LEFT", "RIGHT", "LEFT"])]
+        E += [Spacer(1, 2 * mm),
+              P("Processing on the aircraft compresses the link requirement by roughly "
+                "<b>four orders of magnitude</b>, turning an impossible stream into a "
+                "trivial one. Edge compute is not an alternative to sharing the map - "
+                "it is the precondition for it. The map is also the right thing to "
+                "share: other vehicles need the result, not the sensor feed.")]
+
+        E += [P("Power is not the deciding factor", "h2")]
+        prows = [[k, Paragraph(f"{v:.1f}", S["cellr"])]
+                 for k, v in cp["power_w"].items()]
+        E += [table(["Architecture", "Total power (W)"], prows,
+                    [110 * mm, 55 * mm], ["LEFT", "RIGHT"])]
+        E += [Paragraph("The difference between the two realistic architectures is "
+                        "about 8.5 W - roughly 1.3% of the 630 W hover draw, or 15 "
+                        "seconds of flight time. Well inside the noise in the mass "
+                        "estimates.", S["small"])]
+
+        E += [P("Recommended architecture", "h2")]
+        E += [Paragraph(
+            "ON THE AIRCRAFT (Jetson Orin NX)          OFF-BOARD (server or cloud)<br/>"
+            "------------------------------            ---------------------------<br/>"
+            "ZED depth + visual-inertial odom   -----&gt; finished map (few hundred KB)<br/>"
+            "local occupancy map                       once per scan<br/>"
+            "obstacle avoidance + local planner &lt;----- mission assignments,<br/>"
+            "flight control (PX4)                      global map, fleet coordination<br/>"
+            "<br/>"
+            "must survive total link loss              may be seconds late",
+            S["mono"])]
+
+        E += [Spacer(1, 3 * mm), callout(
+            "Limits of this analysis",
+            "<b>Verification level L0.</b> No measurement on the real link, the real "
+            "boards, or in the real building. Throughput figures are measured-order "
+            "estimates for 802.11ac, not site survey data. A survey would change the "
+            "numbers - access-point placement could raise the in-room figure "
+            "substantially - but it would not change the dropout argument. Dropping to "
+            "480p15 would cut the offload bandwidth roughly 4x and make the numbers "
+            "much closer, at the cost of obstacle-detection range and precision.",
+            "info")]
+    else:
+        E += [P("Compute analysis not found - run "
+                "<font face='Courier'>tools/compute_tradeoff.py</font>.")]
+
+    E += [PageBreak()]
+
+    # ---------------- 8 next steps
+    E += [P("8. Recommended actions", "h1")]
     E += [table(
         ["Priority", "Action", "Cost", "Benefit"],
         [["1", Paragraph("<b>Weigh the aircraft</b> and fill in the measured column in "

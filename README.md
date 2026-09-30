@@ -196,6 +196,17 @@ docs/                     documentation, 00–07
 out/                      results
 ```
 
+## Report
+
+A formatted PDF covering everything below is generated from live project data by
+`tools/gen_report.py`:
+
+**[out/Drone_sim_v1.1_Report.pdf](out/Drone_sim_v1.1_Report.pdf)** (11 pages)
+
+```bash
+python3 tools/gen_report.py --out out/Drone_sim_v1.1_Report.pdf
+```
+
 ## Documentation
 
 | Doc | Contents |
