@@ -9,6 +9,8 @@ out/runs/*/wind.log
 log/
 
 # Generated models and airframes — reproduce with tools/gen_model.py.
+# The v1 report PDF is a deliverable; keep it.
+!out/*.pdf
 out/generated/
 
 # Scratch / isolation scenarios and their runs
