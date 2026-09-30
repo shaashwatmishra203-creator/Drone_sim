@@ -41,6 +41,22 @@ HEAD = """<?xml version="1.0" ?>
       <shadows>true</shadows>
     </scene>
 
+    <!--
+      IMPORTANT: in Gazebo, declaring ANY <plugin> in a world REPLACES the
+      default system set rather than adding to it. PX4's stock worlds declare
+      none, so they inherit the defaults; the moment this world declares one,
+      it must declare them ALL.
+
+      Getting this wrong is silent and confusing. A version of this file that
+      declared only WindEffects lost Physics, SceneBroadcaster and Sensors. The
+      world still loaded and still published /world/factory/clock, but the
+      /world/factory/scene/info service never appeared, and PX4 sat printing
+      "Waiting for Gazebo world..." until it timed out. There is no error
+      message anywhere pointing at the cause.
+
+      WindEffects is why this world declares plugins at all: PX4's stock worlds
+      do not include it, and the wind scenarios need it.
+    -->
     <plugin filename="gz-sim-physics-system"
             name="gz::sim::systems::Physics"/>
     <plugin filename="gz-sim-user-commands-system"
@@ -61,7 +77,6 @@ HEAD = """<?xml version="1.0" ?>
             name="gz::sim::systems::Sensors">
       <render_engine>ogre2</render_engine>
     </plugin>
-    <!-- Wind is applied per scenario over gz transport. -->
     <plugin filename="gz-sim-wind-effects-system"
             name="gz::sim::systems::WindEffects">
       <force_approximation_scaling_factor>1</force_approximation_scaling_factor>
@@ -143,19 +158,70 @@ def box(name, x, y, z, sx, sy, sz, rgb=(0.45, 0.35, 0.2), collide=True):
                       r=r * 0.7, g=g * 0.7, b=b * 0.7, r2=r, g2=g, b2=b)
 
 
-# Obstacle course: alternating racks that force lateral movement, then pillars.
-# Gap between a rack edge and the corridor centre is ~3 m; the airframe is 0.5 m.
-RACKS = [
-    # (x, y_centre, length_y)  — racks run across the corridor, offset alternately
-    (8.0, 3.2, 5.0),
-    (12.0, -3.2, 5.0),
-    (16.0, 3.2, 5.0),
-    (20.0, -3.2, 5.0),
+# --- Obstacle course -------------------------------------------------------
+# A first attempt used racks standing off to the side of the flight path plus
+# thin centreline pillars. Measurement showed nothing came within a metre of
+# the airframe: a drone with no perception at all would have flown it. It
+# tested waypoint following, not obstacle navigation.
+#
+# This version is a genuine slalom. The corridor is walled, and each gate is a
+# full-height barrier across it with ONE gap, alternating side to side. There
+# is no way through except the gap, and no way over it.
+CORRIDOR_HALF = 6.0          # side walls at y = +/- 6
+CORRIDOR_X0, CORRIDOR_X1 = 3.0, 24.0
+BARRIER_H = 4.0              # taller than the 2.5 m cruise altitude
+GATE_GAP = 2.5               # gap width against a 0.5 m airframe
+GATES = [                    # (x, gap centre y)
+    (8.0, 2.4),
+    (12.0, -2.4),
+    (16.0, 2.4),
+    (20.0, -2.4),
 ]
-PILLARS = [(10.0, 0.0), (14.0, 0.0), (18.0, 0.0), (22.0, 0.0)]
 
 ROOM_CX, ROOM_CY, ROOM_HALF, ROOM_H = 32.0, 0.0, 6.0, 4.0
 WALL_T = 0.3
+
+
+def obstacle_list():
+    """Every collidable box: (name, cx, cy, cz, sx, sy, sz).
+
+    Exposed so tools/check_clearance.py measures against the SAME geometry the
+    world is built from, rather than a second hand-maintained copy that can
+    silently drift.
+    """
+    out = []
+    h, t = BARRIER_H, 0.4
+    # corridor side walls
+    L = CORRIDOR_X1 - CORRIDOR_X0
+    cx = (CORRIDOR_X0 + CORRIDOR_X1) / 2.0
+    out.append(("corridor_wall_left", cx, CORRIDOR_HALF, h / 2, L, t, h))
+    out.append(("corridor_wall_right", cx, -CORRIDOR_HALF, h / 2, L, t, h))
+    # gates: a barrier across the corridor with one gap
+    for i, (x, gy) in enumerate(GATES):
+        lo, hi = gy - GATE_GAP / 2.0, gy + GATE_GAP / 2.0
+        a_len = hi_len = 0.0
+        # panel from the right wall up to the gap
+        a_len = lo - (-CORRIDOR_HALF)
+        if a_len > 0.1:
+            out.append((f"gate{i}_lower", x, (-CORRIDOR_HALF + lo) / 2.0,
+                        h / 2, t, a_len, h))
+        # panel from the gap up to the left wall
+        hi_len = CORRIDOR_HALF - hi
+        if hi_len > 0.1:
+            out.append((f"gate{i}_upper", x, (hi + CORRIDOR_HALF) / 2.0,
+                        h / 2, t, hi_len, h))
+    cx, cy, h, H = ROOM_CX, ROOM_CY, ROOM_HALF, ROOM_H
+    out.append(("room_wall_far", cx + h, cy, H / 2, WALL_T, 2 * h, H))
+    out.append(("room_wall_left", cx, cy + h, H / 2, 2 * h, WALL_T, H))
+    out.append(("room_wall_right", cx, cy - h, H / 2, 2 * h, WALL_T, H))
+    for sgn in (+1, -1):
+        out.append((f"room_wall_near_{'p' if sgn > 0 else 'm'}",
+                    cx - h, cy + sgn * (h / 2 + 1.0), H / 2,
+                    WALL_T, h - 2.0, H))
+    out.append(("room_crate_a", cx - 2.0, cy + 2.5, 0.75, 1.6, 1.6, 1.5))
+    out.append(("room_crate_b", cx + 2.5, cy - 2.0, 1.0, 2.0, 1.2, 2.0))
+    out.append(("room_machine", cx + 1.0, cy + 3.0, 1.1, 2.4, 1.8, 2.2))
+    return out
 
 
 def build():
@@ -168,15 +234,14 @@ def build():
     parts.append(box("launch_base", 0, 0, 0.01, 2.4, 2.4, 0.02,
                      rgb=(0.15, 0.45, 0.75), collide=False))
 
-    # storage racks
-    for i, (x, y, ly) in enumerate(RACKS):
-        parts.append(box(f"rack_{i}", x, y, 1.5, 0.8, ly, 3.0,
-                         rgb=(0.55, 0.42, 0.25)))
-
-    # narrow pillars on the centreline — these are what force the slalom
-    for i, (x, y) in enumerate(PILLARS):
-        parts.append(box(f"pillar_{i}", x, y, 2.0, 0.45, 0.45, 4.0,
-                         rgb=(0.6, 0.6, 0.62)))
+    # corridor and gates — generated from obstacle_list() so the world and the
+    # clearance checker can never describe different geometry
+    palette = {"corridor": (0.55, 0.56, 0.58), "gate": (0.62, 0.45, 0.22)}
+    for name, x, y, z, sx, sy, sz in obstacle_list():
+        if name.startswith("corridor"):
+            parts.append(box(name, x, y, z, sx, sy, sz, rgb=palette["corridor"]))
+        elif name.startswith("gate"):
+            parts.append(box(name, x, y, z, sx, sy, sz, rgb=palette["gate"]))
 
     # the room to be scanned: four walls, open on the -x face
     cx, cy, h, H = ROOM_CX, ROOM_CY, ROOM_HALF, ROOM_H
@@ -211,6 +276,8 @@ if __name__ == "__main__":
     with open(a.out, "w") as f:
         f.write(build())
     print(f"wrote {a.out}")
-    print(f"  racks: {len(RACKS)}  pillars: {len(PILLARS)}")
+    print(f"  corridor: y +/-{CORRIDOR_HALF} m, x {CORRIDOR_X0}-{CORRIDOR_X1} m")
+    print(f"  gates: {len(GATES)}, {GATE_GAP} m gap each, "
+          f"alternating y = {[g[1] for g in GATES]}")
     print(f"  room centred at ({ROOM_CX}, {ROOM_CY}), "
           f"{2*ROOM_HALF} x {2*ROOM_HALF} m, {ROOM_H} m tall")

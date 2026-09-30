@@ -17,6 +17,22 @@
       <shadows>true</shadows>
     </scene>
 
+    <!--
+      IMPORTANT: in Gazebo, declaring ANY <plugin> in a world REPLACES the
+      default system set rather than adding to it. PX4's stock worlds declare
+      none, so they inherit the defaults; the moment this world declares one,
+      it must declare them ALL.
+
+      Getting this wrong is silent and confusing. A version of this file that
+      declared only WindEffects lost Physics, SceneBroadcaster and Sensors. The
+      world still loaded and still published /world/factory/clock, but the
+      /world/factory/scene/info service never appeared, and PX4 sat printing
+      "Waiting for Gazebo world..." until it timed out. There is no error
+      message anywhere pointing at the cause.
+
+      WindEffects is why this world declares plugins at all: PX4's stock worlds
+      do not include it, and the wind scenarios need it.
+    -->
     <plugin filename="gz-sim-physics-system"
             name="gz::sim::systems::Physics"/>
     <plugin filename="gz-sim-user-commands-system"
@@ -37,7 +53,6 @@
             name="gz::sim::systems::Sensors">
       <render_engine>ogre2</render_engine>
     </plugin>
-    <!-- Wind is applied per scenario over gz transport. -->
     <plugin filename="gz-sim-wind-effects-system"
             name="gz::sim::systems::WindEffects">
       <force_approximation_scaling_factor>1</force_approximation_scaling_factor>
@@ -95,137 +110,171 @@
       </link>
     </model>
 
-    <model name="rack_0">
+    <model name="corridor_wall_left">
       <static>true</static>
-      <pose>8.0 3.2 1.5 0 0 0</pose>
+      <pose>13.5 6.0 2.0 0 0 0</pose>
       <link name="link">
         <collision name="collision">
-          <geometry><box><size>0.8 5.0 3.0</size></box></geometry>
+          <geometry><box><size>21.0 0.4 4.0</size></box></geometry>
         </collision>
         <visual name="visual">
-          <geometry><box><size>0.8 5.0 3.0</size></box></geometry>
+          <geometry><box><size>21.0 0.4 4.0</size></box></geometry>
           <material>
-            <ambient>0.385 0.294 0.175 1</ambient>
-            <diffuse>0.55 0.42 0.25 1</diffuse>
+            <ambient>0.385 0.392 0.40599999999999997 1</ambient>
+            <diffuse>0.55 0.56 0.58 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
 
-    <model name="rack_1">
+    <model name="corridor_wall_right">
       <static>true</static>
-      <pose>12.0 -3.2 1.5 0 0 0</pose>
+      <pose>13.5 -6.0 2.0 0 0 0</pose>
       <link name="link">
         <collision name="collision">
-          <geometry><box><size>0.8 5.0 3.0</size></box></geometry>
+          <geometry><box><size>21.0 0.4 4.0</size></box></geometry>
         </collision>
         <visual name="visual">
-          <geometry><box><size>0.8 5.0 3.0</size></box></geometry>
+          <geometry><box><size>21.0 0.4 4.0</size></box></geometry>
           <material>
-            <ambient>0.385 0.294 0.175 1</ambient>
-            <diffuse>0.55 0.42 0.25 1</diffuse>
+            <ambient>0.385 0.392 0.40599999999999997 1</ambient>
+            <diffuse>0.55 0.56 0.58 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
 
-    <model name="rack_2">
+    <model name="gate0_lower">
       <static>true</static>
-      <pose>16.0 3.2 1.5 0 0 0</pose>
+      <pose>8.0 -2.425 2.0 0 0 0</pose>
       <link name="link">
         <collision name="collision">
-          <geometry><box><size>0.8 5.0 3.0</size></box></geometry>
+          <geometry><box><size>0.4 7.15 4.0</size></box></geometry>
         </collision>
         <visual name="visual">
-          <geometry><box><size>0.8 5.0 3.0</size></box></geometry>
+          <geometry><box><size>0.4 7.15 4.0</size></box></geometry>
           <material>
-            <ambient>0.385 0.294 0.175 1</ambient>
-            <diffuse>0.55 0.42 0.25 1</diffuse>
+            <ambient>0.434 0.315 0.154 1</ambient>
+            <diffuse>0.62 0.45 0.22 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
 
-    <model name="rack_3">
+    <model name="gate0_upper">
       <static>true</static>
-      <pose>20.0 -3.2 1.5 0 0 0</pose>
+      <pose>8.0 4.825 2.0 0 0 0</pose>
       <link name="link">
         <collision name="collision">
-          <geometry><box><size>0.8 5.0 3.0</size></box></geometry>
+          <geometry><box><size>0.4 2.35 4.0</size></box></geometry>
         </collision>
         <visual name="visual">
-          <geometry><box><size>0.8 5.0 3.0</size></box></geometry>
+          <geometry><box><size>0.4 2.35 4.0</size></box></geometry>
           <material>
-            <ambient>0.385 0.294 0.175 1</ambient>
-            <diffuse>0.55 0.42 0.25 1</diffuse>
+            <ambient>0.434 0.315 0.154 1</ambient>
+            <diffuse>0.62 0.45 0.22 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
 
-    <model name="pillar_0">
+    <model name="gate1_lower">
       <static>true</static>
-      <pose>10.0 0.0 2.0 0 0 0</pose>
+      <pose>12.0 -4.825 2.0 0 0 0</pose>
       <link name="link">
         <collision name="collision">
-          <geometry><box><size>0.45 0.45 4.0</size></box></geometry>
+          <geometry><box><size>0.4 2.35 4.0</size></box></geometry>
         </collision>
         <visual name="visual">
-          <geometry><box><size>0.45 0.45 4.0</size></box></geometry>
+          <geometry><box><size>0.4 2.35 4.0</size></box></geometry>
           <material>
-            <ambient>0.42 0.42 0.434 1</ambient>
-            <diffuse>0.6 0.6 0.62 1</diffuse>
+            <ambient>0.434 0.315 0.154 1</ambient>
+            <diffuse>0.62 0.45 0.22 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
 
-    <model name="pillar_1">
+    <model name="gate1_upper">
       <static>true</static>
-      <pose>14.0 0.0 2.0 0 0 0</pose>
+      <pose>12.0 2.425 2.0 0 0 0</pose>
       <link name="link">
         <collision name="collision">
-          <geometry><box><size>0.45 0.45 4.0</size></box></geometry>
+          <geometry><box><size>0.4 7.15 4.0</size></box></geometry>
         </collision>
         <visual name="visual">
-          <geometry><box><size>0.45 0.45 4.0</size></box></geometry>
+          <geometry><box><size>0.4 7.15 4.0</size></box></geometry>
           <material>
-            <ambient>0.42 0.42 0.434 1</ambient>
-            <diffuse>0.6 0.6 0.62 1</diffuse>
+            <ambient>0.434 0.315 0.154 1</ambient>
+            <diffuse>0.62 0.45 0.22 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
 
-    <model name="pillar_2">
+    <model name="gate2_lower">
       <static>true</static>
-      <pose>18.0 0.0 2.0 0 0 0</pose>
+      <pose>16.0 -2.425 2.0 0 0 0</pose>
       <link name="link">
         <collision name="collision">
-          <geometry><box><size>0.45 0.45 4.0</size></box></geometry>
+          <geometry><box><size>0.4 7.15 4.0</size></box></geometry>
         </collision>
         <visual name="visual">
-          <geometry><box><size>0.45 0.45 4.0</size></box></geometry>
+          <geometry><box><size>0.4 7.15 4.0</size></box></geometry>
           <material>
-            <ambient>0.42 0.42 0.434 1</ambient>
-            <diffuse>0.6 0.6 0.62 1</diffuse>
+            <ambient>0.434 0.315 0.154 1</ambient>
+            <diffuse>0.62 0.45 0.22 1</diffuse>
           </material>
         </visual>
       </link>
     </model>
 
-    <model name="pillar_3">
+    <model name="gate2_upper">
       <static>true</static>
-      <pose>22.0 0.0 2.0 0 0 0</pose>
+      <pose>16.0 4.825 2.0 0 0 0</pose>
       <link name="link">
         <collision name="collision">
-          <geometry><box><size>0.45 0.45 4.0</size></box></geometry>
+          <geometry><box><size>0.4 2.35 4.0</size></box></geometry>
         </collision>
         <visual name="visual">
-          <geometry><box><size>0.45 0.45 4.0</size></box></geometry>
+          <geometry><box><size>0.4 2.35 4.0</size></box></geometry>
           <material>
-            <ambient>0.42 0.42 0.434 1</ambient>
-            <diffuse>0.6 0.6 0.62 1</diffuse>
+            <ambient>0.434 0.315 0.154 1</ambient>
+            <diffuse>0.62 0.45 0.22 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="gate3_lower">
+      <static>true</static>
+      <pose>20.0 -4.825 2.0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.4 2.35 4.0</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.4 2.35 4.0</size></box></geometry>
+          <material>
+            <ambient>0.434 0.315 0.154 1</ambient>
+            <diffuse>0.62 0.45 0.22 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="gate3_upper">
+      <static>true</static>
+      <pose>20.0 2.425 2.0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.4 7.15 4.0</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.4 7.15 4.0</size></box></geometry>
+          <material>
+            <ambient>0.434 0.315 0.154 1</ambient>
+            <diffuse>0.62 0.45 0.22 1</diffuse>
           </material>
         </visual>
       </link>

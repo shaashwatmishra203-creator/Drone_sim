@@ -51,14 +51,15 @@ return to base and land:
 
 | | |
 |---|---:|
-| Airborne time | **62.2 s** |
-| Path flown | 108.6 m at 1.76 m/s mean |
-| Energy used | **10.9 Wh** of 107 Wh usable |
-| Pack remaining on touchdown | **92.2%** |
-| Round trips per charge | **9.8** |
+| Airborne time | **82.4 s** |
+| Path flown | 122.3 m at 1.50 m/s mean |
+| Energy used | **14.3 Wh** of 107 Wh usable |
+| Pack remaining on touchdown | **89.8%** |
+| Round trips per charge | **7.5** |
 
-The mapping pass is 30% of the mission - scanning is a third of the flight, not
-a cheap add-on at the end. Full detail in
+The course is four full-height gates with a single 2.5 m gap each, in a walled
+corridor - no way over or around. Measured closest approach 0.50 m, with 11 of
+18 obstacles inside 1 m of the hull. Full detail in
 [docs/08-factory-mission.md](docs/08-factory-mission.md).
 
 ## Cloud vs edge compute

@@ -112,14 +112,21 @@ def main(path):
         print(f"  ENDURANCE         {project(p):7.2f} min  "
               f"(PROJECTED at {p:.0f} W steady draw; run did not reach the gate)")
 
-    # position hold quality, meaningful for the wind scenarios
-    if ref and abs(spd) < 2.0:
-        xs, ys = col(ref, "x"), col(ref, "y")
-        if xs and ys:
+    # Position-hold quality, meaningful only when the aircraft is holding a
+    # point. On a traversing mission the "spread" is just the length of the
+    # course, which is meaningless - so only report it when the path stays
+    # within a small area.
+    xs, ys = col(ref, "x"), col(ref, "y")
+    if xs and ys:
+        span = max(max(xs) - min(xs), max(ys) - min(ys))
+        if span < 5.0:
             mx, my = mean(xs), mean(ys)
             err = [math.hypot(x - mx, y - my) for x, y in zip(xs, ys)]
             print(f"  pos-hold RMS      {math.sqrt(mean([e*e for e in err])):7.2f} m"
                   f"   max {max(err):.2f} m")
+        else:
+            print(f"  (traversing run, {span:.0f} m span — position-hold RMS "
+                  f"not meaningful)")
 
 
 if __name__ == "__main__":
