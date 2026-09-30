@@ -1,0 +1,66 @@
+name: factory_mission
+description: >
+  The representative mission: launch from base, fly a slalom obstacle course
+  through a factory-like environment, scan a room at the far end (the mapping
+  pass whose data would be shared with the other vehicles), then return to
+  base and land. Flown at low speed, as a survey would be.
+
+  Everything here is measured: leg-by-leg flight time, energy per leg, and how
+  much battery reserve is left on touchdown.
+world: factory
+# Light wind — an indoor factory is not still, but it is not open sky either.
+wind: {mean_ms: [1.5, 0.5, 0.0], gust_ms: 0.8}
+until_empty: false
+max_duration_s: 600
+
+profile:
+  type: factory_mission
+  altitude_m: 2.5
+  accept_radius_m: 1.2
+  base: [0.0, 0.0]
+
+  # Outbound: thread between the racks (y = +/-3.2) and the centreline pillars.
+  # Gaps are ~3 m against a 0.5 m airframe.
+  outbound:
+    - [ 4.0,  0.0, 2.5]     # clear of the base pad
+    - [ 8.0, -2.0, 2.5]     # around rack 0 (at y=+3.2)
+    - [10.0, -1.6, 2.5]     # past pillar 0
+    - [12.0,  2.0, 2.5]     # around rack 1 (at y=-3.2)
+    - [14.0,  1.6, 2.5]     # past pillar 1
+    - [16.0, -2.0, 2.5]     # around rack 2
+    - [18.0, -1.6, 2.5]     # past pillar 2
+    - [20.0,  2.0, 2.5]     # around rack 3
+    - [22.0,  1.6, 2.5]     # past pillar 3
+    - [26.0,  0.0, 2.5]     # line up with the doorway
+    - [30.0,  0.0, 2.5]     # enter the room
+
+  # Scan: lawnmower sweep inside the 12 x 12 m room with a continuous yaw
+  # sweep, so the cameras cover walls, floor and the objects inside.
+  scan:
+    altitude_m: 2.2
+    accept_radius_m: 1.2
+    yaw_rate_rad_s: 0.35
+    pattern:
+      - [29.0, -4.0, 2.2]
+      - [35.0, -4.0, 2.2]
+      - [35.0, -1.3, 2.2]
+      - [29.0, -1.3, 2.2]
+      - [29.0,  1.3, 2.2]
+      - [35.0,  1.3, 2.2]
+      - [35.0,  4.0, 2.2]
+      - [29.0,  4.0, 2.2]
+
+  # Inbound: back out of the room and retrace the course to base.
+  inbound:
+    - [30.0,  0.0, 2.5]
+    - [26.0,  0.0, 2.5]
+    - [22.0,  1.6, 2.5]
+    - [20.0,  2.0, 2.5]
+    - [18.0, -1.6, 2.5]
+    - [16.0, -2.0, 2.5]
+    - [14.0,  1.6, 2.5]
+    - [12.0,  2.0, 2.5]
+    - [10.0, -1.6, 2.5]
+    - [ 8.0, -2.0, 2.5]
+    - [ 4.0,  0.0, 2.5]
+    - [ 0.0,  0.0, 2.5]     # over the base pad

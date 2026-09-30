@@ -44,6 +44,34 @@ Wind is expensive: 6 m/s with 3 m/s gusts drove hover power from 570 W to
 699 W (**+23%**) and cut endurance to ~9.2 min, with position-hold error
 rising from 0.02 m to 0.93 m RMS.
 
+## Factory navigation mission
+
+Launch from base, slalom through an obstacle course, scan a 12 x 12 m room,
+return to base and land:
+
+| | |
+|---|---:|
+| Airborne time | **62.2 s** |
+| Path flown | 108.6 m at 1.76 m/s mean |
+| Energy used | **10.9 Wh** of 107 Wh usable |
+| Pack remaining on touchdown | **92.2%** |
+| Round trips per charge | **9.8** |
+
+The mapping pass is 30% of the mission - scanning is a third of the flight, not
+a cheap add-on at the end. Full detail in
+[docs/08-factory-mission.md](docs/08-factory-mission.md).
+
+## Cloud vs edge compute
+
+Perception and navigation must run **onboard**; map sharing belongs off-board.
+Offload needs ~150 Mbps but the link delivers ~11 Mbps inside the room behind a
+wall, latency rises from 69 ms to 578 ms, and a dropout blinds the aircraft
+entirely. Raw stereo is 2654 Mbps and cannot leave the aircraft; the finished
+map is a few hundred KB and travels freely - so edge compute is the
+precondition for sharing maps with your other vehicles, not an alternative to
+it. Full analysis in
+[docs/09-compute-architecture.md](docs/09-compute-architecture.md).
+
 ## Headline findings
 
 1. **The 9-inch propellers have ~1% rpm margin.** ~15,900 rpm at full throttle
@@ -180,6 +208,8 @@ out/                      results
 | [05-results](docs/05-results.md) | Per-scenario results and cross-checks |
 | [06-findings](docs/06-findings.md) | Verdict and prioritized recommendations |
 | [07-worklog](docs/07-worklog.md) | What was run, what broke, what was decided |
+| [08-factory-mission](docs/08-factory-mission.md) | Obstacle course, room scan, return to base |
+| [09-compute-architecture](docs/09-compute-architecture.md) | Cloud vs edge compute for navigation |
 
 `01` and `02` are regenerated from the config — edit `config/airframe.yaml`,
 not those files.

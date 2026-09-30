@@ -1,0 +1,91 @@
+{
+  "speed_ms": 1.76,
+  "max_range_m": 32.0,
+  "streams": [
+    {
+      "stream": "ZED 2 stereo (720p30, YUV422)",
+      "raw_mbps": 884.736,
+      "comp_mbps": 19.6608
+    },
+    {
+      "stream": "ZED Mini stereo (720p30, YUV422)",
+      "raw_mbps": 884.736,
+      "comp_mbps": 19.6608
+    },
+    {
+      "stream": "Depth map (720p30, float32)",
+      "raw_mbps": 884.736,
+      "comp_mbps": 110.592
+    }
+  ],
+  "total_raw_mbps": 2654.208,
+  "total_compressed_mbps": 149.9136,
+  "bandwidth": [
+    {
+      "condition": "At base, line of sight (5 m)",
+      "goodput_mbps": 390.0,
+      "verdict": "OK"
+    },
+    {
+      "condition": "Mid obstacle course (16 m), steel racking",
+      "goodput_mbps": 104.76846942990117,
+      "verdict": "INSUFFICIENT"
+    },
+    {
+      "condition": "Room doorway (30 m), racking",
+      "goodput_mbps": 59.52753944880748,
+      "verdict": "INSUFFICIENT"
+    },
+    {
+      "condition": "Inside room (32 m), 1 wall + racking",
+      "goodput_mbps": 11.299916916244644,
+      "verdict": "INSUFFICIENT"
+    },
+    {
+      "condition": "Inside room, 2 walls (far corner)",
+      "goodput_mbps": 2.140625,
+      "verdict": "INSUFFICIENT"
+    }
+  ],
+  "latency_ms": {
+    "Edge (onboard)": 69.0,
+    "Cloud (regional DC)": 578.2262603379138,
+    "On-premise server": 539.2262603379138
+  },
+  "reaction": [
+    {
+      "arch": "Edge (onboard)",
+      "latency_ms": 69.0,
+      "reaction_m": 0.12143999999999999,
+      "stop_m": 0.27354910094300067,
+      "total_m": 0.39498910094300066,
+      "verdict": "SAFE"
+    },
+    {
+      "arch": "Cloud (regional DC)",
+      "latency_ms": 578.2262603379138,
+      "reaction_m": 1.0176782181947284,
+      "stop_m": 0.27354910094300067,
+      "total_m": 1.291227319137729,
+      "verdict": "UNSAFE"
+    },
+    {
+      "arch": "On-premise server",
+      "latency_ms": 539.2262603379138,
+      "reaction_m": 0.9490382181947283,
+      "stop_m": 0.27354910094300067,
+      "total_m": 1.222587319137729,
+      "verdict": "ACCEPTABLE"
+    }
+  ],
+  "max_safe_speed": {
+    "Edge (onboard)": 3.391830327581802,
+    "Cloud (regional DC)": 1.7134135351342785,
+    "On-premise server": 1.7921399616736922
+  },
+  "power_w": {
+    "Edge, Orin NX (map upload only)": 26.5,
+    "Cloud offload, Pi 5 + full streaming": 18.0,
+    "Cloud offload, Orin NX + streaming": 31.0
+  }
+}
