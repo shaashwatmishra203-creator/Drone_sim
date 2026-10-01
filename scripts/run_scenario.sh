@@ -83,14 +83,28 @@ export PX4_GZ_MODEL_POSE="0,0,0.2,0,0,0"
 # headless, which is much faster and is what the batch uses.
 export HEADLESS=1
 if [ "${GUI:-0}" = "1" ]; then
-  echo "GUI mode: a Gazebo window will open once the server is up"
+  echo "GUI mode: a Gazebo window will open once the scene is ready"
   (
-    for i in $(seq 1 90); do
-      gz topic -l 2>/dev/null | grep -q . && break
+    # Wait for the SCENE to exist, not merely for the server to publish topics.
+    # Launching the GUI against a half-built scene segfaults inside the WSL
+    # D3D12 translation layer. scene/info is the same gate PX4 itself waits on.
+    for i in $(seq 1 120); do
+      W=$(gz topic -l 2>/dev/null | grep -m1 -e "^/world/.*/clock" \
+            | sed 's#/world/##; s#/clock##')
+      if [ -n "$W" ] && gz service -i --service "/world/$W/scene/info" 2>&1 \
+           | grep -q "Service providers"; then
+        break
+      fi
       sleep 1
     done
-    sleep 2
+    sleep 3
     gz sim -g >$OUT/gz_gui.log 2>&1
+    # The renderer can still lose the race on a loaded machine; ogre1 is
+    # lighter and has not been seen to fail here.
+    if ! pgrep -f "gz sim -g" >/dev/null; then
+      echo "GUI died, retrying with ogre1" >>$OUT/gz_gui.log
+      gz sim -g --render-engine ogre >>$OUT/gz_gui.log 2>&1
+    fi
   ) &
   GUI_PID=$!
 fi

@@ -67,12 +67,22 @@ export GZ_SIM_RESOURCE_PATH=$PX4/Tools/simulation/gz/models:$PX4/Tools/simulatio
 # and HEADLESS is not wired into its gz launcher at all. So we start the GUI
 # ourselves once the server is up. `gz sim -g` attaches to the running server.
 (
-  for i in $(seq 1 90); do
-    gz topic -l 2>/dev/null | grep -q . && break
+  # Wait for the SCENE, not just for topics. Launching against a half-built
+  # scene segfaults inside the WSL D3D12 layer.
+  for i in $(seq 1 120); do
+    W=$(gz topic -l 2>/dev/null | grep -m1 -e "^/world/.*/clock" \
+          | sed 's#/world/##; s#/clock##')
+    if [ -n "$W" ] && gz service -i --service "/world/$W/scene/info" 2>&1 \
+         | grep -q "Service providers"; then
+      break
+    fi
     sleep 1
   done
-  sleep 2
+  sleep 3
   gz sim -g >/tmp/gz_gui.log 2>&1
+  if ! pgrep -f "gz sim -g" >/dev/null; then
+    gz sim -g --render-engine ogre >>/tmp/gz_gui.log 2>&1
+  fi
 ) &
 GUI_PID=$!
 cleanup() {
