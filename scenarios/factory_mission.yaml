@@ -13,6 +13,21 @@ wind: {mean_ms: [1.5, 0.5, 0.0], gust_ms: 0.8}
 until_empty: false
 max_duration_s: 600
 
+# Survey flight must be deliberate. Left at PX4's defaults the position
+# controller accelerates to ~12 m/s between waypoints; one run peaked at
+# 11.5 m/s, clipped gate 0 and tumbled ("Imbalanced propeller detected" in the
+# PX4 log is its collision signature). A 2.5 m gate against a 0.5 m airframe
+# needs a speed the controller can actually stop from.
+px4_params:
+  MPC_XY_VEL_MAX: 2.5      # m/s horizontal ceiling
+  MPC_XY_CRUISE: 2.0       # m/s target between waypoints
+  MPC_ACC_HOR: 1.5         # m/s2 horizontal acceleration
+  MPC_ACC_HOR_MAX: 2.0
+  MPC_JERK_AUTO: 4.0
+  MPC_Z_VEL_MAX_UP: 1.5
+  MPC_Z_VEL_MAX_DN: 1.0
+  MPC_TKO_SPEED: 1.0
+
 profile:
   type: factory_mission
   altitude_m: 2.5

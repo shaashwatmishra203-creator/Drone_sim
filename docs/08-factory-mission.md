@@ -65,24 +65,24 @@ Current parts list — 9×4.5 props, Pi 5 mass and power, estimated 3.12 kg AUW.
 
 | | |
 |---|---:|
-| **Airborne time** | **82.4 s (1.37 min)** |
-| Mission legs | 77.5 s |
-| Path flown | 122.3 m |
-| Mean speed | 1.50 m/s (peak 3.37) |
-| Mean power | 624.9 W (peak 1864) |
-| **Energy used** | **14.30 Wh** of 107 Wh usable |
-| Pack remaining on touchdown | **89.8%** |
-| Energy per metre | 116.9 mWh/m |
+| **Airborne time** | **92.8 s (1.55 min)** |
+| Mission legs | 89.5 s |
+| Path flown | 121.6 m |
+| Mean speed | 1.35 m/s (peak 2.25, capped) |
+| Mean power | 615.9 W (peak 1597) |
+| **Energy used** | **15.84 Wh** of 107 Wh usable |
+| Pack remaining on touchdown | **88.6%** |
+| Energy per metre | 130.2 mWh/m |
 
 ### Leg breakdown
 
 | Leg | Time (s) | Share |
 |---|---:|---:|
-| Outbound (4 gates) | 23.8 | 30.7% |
-| Scan (mapping pass) | 19.2 | 24.8% |
-| Inbound (4 gates) | 33.3 | 43.0% |
-| Land | 1.2 | 1.5% |
-| **Total** | **77.5** | |
+| Outbound (4 gates) | 28.5 | 31.8% |
+| Scan (mapping pass) | 25.1 | 28.0% |
+| Inbound (4 gates) | 34.7 | 38.8% |
+| Land | 1.2 | 1.3% |
+| **Total** | **89.5** | |
 
 The mapping pass is about **a quarter of the mission** — comparable to a
 transit leg, not a cheap add-on at the end.
@@ -91,12 +91,12 @@ transit leg, not a cheap add-on at the end.
 
 | | |
 |---|---:|
-| Usable energy consumed | 13.4% |
-| Reserve above the DoD gate | 87.2% |
-| **Round trips per charge** | **7.5** |
+| Usable energy consumed | 14.9% |
+| Reserve above the DoD gate | 85.8% |
+| **Round trips per charge** | **6.7** |
 
 **Endurance is not the binding constraint for this task.** The hover tests give
-about 11 minutes; this mission takes 1.4. One pack supports roughly seven and a
+about 11 minutes; this mission takes 1.5. One pack supports roughly seven and a
 half round trips.
 
 ### Measured clearance
@@ -107,7 +107,7 @@ measurement rather than an impression.
 
 | Obstacle | Closest approach | Gap to hull |
 |---|---:|---:|
-| gate2_lower | **0.50 m** | 0.15 m |
+| gate1_upper | **0.36 m** | 0.01 m |
 | gate0_upper | 0.76 m | 0.41 m |
 | room_machine | 0.88 m | 0.53 m |
 | room_crate_b | 0.91 m | 0.56 m |
@@ -116,9 +116,9 @@ measurement rather than an impression.
 | corridor walls | 2.78 / 3.25 m | never a factor |
 
 - **11 of 18 obstacles came within 1 m of the airframe hull.**
-- **908 path points had two obstacles within 2.5 m simultaneously** — the
+- **1026 path points had two obstacles within 2.5 m simultaneously** — the
   aircraft was genuinely between things, not curving around scenery.
-- **Closest approach 0.50 m, no penetrations.**
+- **Closest approach 0.36 m, no penetrations, zero collision events in the PX4 log.**
 
 ---
 
@@ -163,6 +163,31 @@ anywhere pointed at the cause.
 **If a world declares plugins at all, it must declare them all.** `factory.sdf`
 declares plugins only because it needs `WindEffects`, which PX4's stock worlds
 do not include.
+
+### 3. Nothing limited the aircraft's speed
+
+Left at PX4's defaults the position controller accelerates toward
+`MPC_XY_VEL_MAX`, about 12 m/s. One run peaked at **11.5 m/s**, clipped gate 0
+and tumbled; `Imbalanced propeller detected` in the PX4 log is its collision
+signature. Earlier runs had simply been lucky.
+
+Scenarios can now carry a `px4_params` block, applied after boot. The mission
+caps horizontal speed at 2.5 m/s with 1.5 m/s² acceleration — a 2.5 m gate
+needs a speed the controller can actually stop from. Measured peak is now
+2.25 m/s and collision events are zero.
+
+### 4. A stray logger from an interrupted run corrupted the next one
+
+`flight_logger` writes to a path derived from the scenario name, so a logger
+left alive by an interrupted run keeps writing to the **same file** as the next
+run. The two interleave. One mission read as 1295 s airborne and 201 Wh when
+the real flight was 90 s and 16 Wh.
+
+The run script now kills the ROS nodes by name as well as by PID, and the
+logger closes itself on `/drone_eval/mission_done`. That second part matters
+independently: headless SITL runs well above real time, so the few seconds
+between the mission ending and teardown were minutes of simulated hovering,
+recorded as real energy.
 
 ### Also: the launch pad must be visual-only
 

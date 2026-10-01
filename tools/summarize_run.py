@@ -14,6 +14,10 @@ import sys
 
 import yaml
 
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from runio import read_rows
+
 CONFIG = os.path.expanduser("~/drone_sim/config/airframe.yaml")
 
 
@@ -54,7 +58,7 @@ def f(x, d=float("nan")):
 
 
 def main(path):
-    rows = list(csv.DictReader(open(path)))
+    rows = read_rows(path, verbose=True)
     if not rows:
         print("  (empty)")
         return

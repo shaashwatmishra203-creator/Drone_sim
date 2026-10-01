@@ -79,7 +79,25 @@ export GZ_SIM_RESOURCE_PATH=$PX4/Tools/simulation/gz/models:$PX4/Tools/simulatio
     sleep 1
   done
   sleep 3
-  gz sim -g >/tmp/gz_gui.log 2>&1
+  gz sim -g >/tmp/gz_gui.log 2>&1 &
+  GZGUI=$!
+
+  # PX4 requests camera-follow during its own boot, before this GUI exists, so
+  # that request is lost. Re-issue it once the GUI is up, or the camera sits at
+  # the world origin looking at nothing.
+  for i in $(seq 1 40); do
+    sleep 1
+    gz service -l 2>/dev/null | grep -q "^/gui/follow$" || continue
+    gz service -s /gui/follow --reqtype gz.msgs.StringMsg \
+      --reptype gz.msgs.Boolean --timeout 2000 \
+      --req "data: \"${MODEL}_0\"" >/dev/null 2>&1
+    gz service -s /gui/follow/offset --reqtype gz.msgs.Vector3d \
+      --reptype gz.msgs.Boolean --timeout 2000 \
+      --req "x: -6, y: -4, z: 4" >/dev/null 2>&1
+    break
+  done
+
+  wait $GZGUI
   if ! pgrep -f "gz sim -g" >/dev/null; then
     gz sim -g --render-engine ogre >>/tmp/gz_gui.log 2>&1
   fi

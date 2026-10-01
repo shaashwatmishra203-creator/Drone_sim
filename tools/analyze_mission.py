@@ -19,6 +19,10 @@ import sys
 
 import yaml
 
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from runio import read_rows
+
 ROOT = os.path.expanduser("~/drone_sim")
 
 
@@ -46,7 +50,7 @@ def leg_times(runner_log):
 
 def main(run_dir):
     csv_path = os.path.join(run_dir, "flight_log.csv")
-    rows = list(csv.DictReader(open(csv_path)))
+    rows = read_rows(csv_path, verbose=True)
     legs, total = leg_times(os.path.join(run_dir, "runner.log"))
 
     cfg = yaml.safe_load(open(f"{ROOT}/config/airframe.yaml"))

@@ -168,6 +168,11 @@ def box(name, x, y, z, sx, sy, sz, rgb=(0.45, 0.35, 0.2), collide=True):
 # full-height barrier across it with ONE gap, alternating side to side. There
 # is no way through except the gap, and no way over it.
 CORRIDOR_HALF = 6.0          # side walls at y = +/- 6
+# The corridor starts AHEAD of the launch base, at x = 3. An attempt to extend
+# it back to x = -4 so the base sat inside the walls made the aircraft collide
+# repeatedly; the known-good geometry is this one, so it stays. The base being
+# just outside the entrance is also physically sensible - a launch pad sits
+# outside the work area, and the aircraft flies in.
 CORRIDOR_X0, CORRIDOR_X1 = 3.0, 24.0
 BARRIER_H = 4.0              # taller than the 2.5 m cruise altitude
 GATE_GAP = 2.5               # gap width against a 0.5 m airframe

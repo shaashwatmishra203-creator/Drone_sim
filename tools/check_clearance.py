@@ -19,6 +19,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from runio import read_rows  # noqa: E402
 from gen_world import obstacle_list          # noqa: E402
 
 ROOT = os.path.expanduser("~/drone_sim")
@@ -37,7 +38,7 @@ def box_distance(p, box):
 
 def main(run_dir):
     p = os.path.join(run_dir, "flight_log.csv")
-    rows = list(csv.DictReader(open(p)))
+    rows = read_rows(p, verbose=True)
 
     def fl(x):
         try:

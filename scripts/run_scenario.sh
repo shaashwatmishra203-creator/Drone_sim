@@ -11,6 +11,11 @@
 # NOTE: no `set -u` — ROS 2's setup.bash references unbound variables and
 # would abort the run before anything starts.
 SC=${1:?usage: run_scenario.sh <scenario.yaml> [prop] [payload]}
+# Resolve to an absolute path: the ROS nodes run with their own working
+# directory, so a relative path here makes mission_runner exit with
+# "scenario not found" and the aircraft silently never arms.
+SC=$(readlink -f "$SC") || { echo "cannot resolve scenario path: $1"; exit 2; }
+[ -f "$SC" ] || { echo "scenario not found: $SC"; exit 2; }
 PX4_PID=""; LOGGER_PID=""; RUNNER_PID=""; WIND_PID=""; GUI_PID=""
 PROP=${2:-9x4.5}
 PAYLOAD=${3:-pi5}
@@ -48,11 +53,21 @@ cleanup() {
   pkill -f "gz sim -g" 2>/dev/null
   pkill -f MicroXRCEAgent 2>/dev/null
   pkill -f "gz sim" 2>/dev/null
+  # by name as well — a PID kill misses anything respawned or detached
+  pkill -f "drone_eval/flight_logger" 2>/dev/null
+  pkill -f "drone_eval/mission_runner" 2>/dev/null
   sleep 1
 }
 trap cleanup EXIT
+# Kill the ROS nodes by name too, not just by PID at exit. A logger left over
+# from an interrupted run keeps writing to the SAME csv path as the new run,
+# and the two interleave: one run looked like 1295 s airborne and 201 Wh when
+# the real mission was 90 s and 16 Wh.
 pkill -f "bin/px4" 2>/dev/null; pkill -f "gz sim" 2>/dev/null
-pkill -f MicroXRCEAgent 2>/dev/null; sleep 1
+pkill -f MicroXRCEAgent 2>/dev/null
+pkill -f "drone_eval/flight_logger" 2>/dev/null
+pkill -f "drone_eval/mission_runner" 2>/dev/null
+sleep 2
 
 echo "=============================================================="
 echo " scenario : $NAME"
@@ -98,7 +113,26 @@ if [ "${GUI:-0}" = "1" ]; then
       sleep 1
     done
     sleep 3
-    gz sim -g >$OUT/gz_gui.log 2>&1
+    gz sim -g >$OUT/gz_gui.log 2>&1 &
+    GZGUI=$!
+
+    # PX4 asks the GUI to follow the vehicle during ITS boot, which is before
+    # this GUI exists, so that request is lost and the camera stays parked at
+    # the world origin looking at nothing. Re-issue it once the GUI is up.
+    for i in $(seq 1 40); do
+      sleep 1
+      gz service -l 2>/dev/null | grep -q "^/gui/follow$" || continue
+      gz service -s /gui/follow --reqtype gz.msgs.StringMsg \
+        --reptype gz.msgs.Boolean --timeout 2000 \
+        --req "data: \"${MODEL}_0\"" >/dev/null 2>&1
+      gz service -s /gui/follow/offset --reqtype gz.msgs.Vector3d \
+        --reptype gz.msgs.Boolean --timeout 2000 \
+        --req "x: -6, y: -4, z: 4" >/dev/null 2>&1
+      echo "camera following ${MODEL}_0" >>$OUT/gz_gui.log
+      break
+    done
+
+    wait $GZGUI
     # The renderer can still lose the race on a loaded machine; ogre1 is
     # lighter and has not been seen to fail here.
     if ! pgrep -f "gz sim -g" >/dev/null; then
@@ -121,6 +155,22 @@ if ! grep -q "Ready for takeoff" $OUT/px4.log; then
   echo "PX4 failed to become ready:"; tail -20 $OUT/px4.log; exit 1
 fi
 echo "PX4 ready."
+
+# Per-scenario PX4 parameters. Without a speed cap the position controller
+# accelerates to MPC_XY_VEL_MAX (~12 m/s by default) between waypoints, which
+# is far too fast to thread a 2.5 m gate: one run peaked at 11.5 m/s, clipped
+# gate 0 and tumbled. Survey flight should be deliberate and repeatable.
+PARAMS=$(python3 -c "
+import yaml
+p = yaml.safe_load(open('$SC')).get('px4_params', {}) or {}
+print(' '.join(f'{k}={v}' for k, v in p.items()))")
+if [ -n "$PARAMS" ]; then
+  echo "applying scenario params: $PARAMS"
+  for kv in $PARAMS; do
+    $PX4/build/px4_sitl_default/bin/px4-param set "${kv%%=*}" "${kv##*=}" \
+      >/dev/null 2>&1
+  done
+fi
 
 # Wind is applied through gz transport so it is scriptable per scenario.
 #
