@@ -22,6 +22,8 @@ setup(
             'flight_logger = drone_eval.flight_logger:main',
             'mission_runner = drone_eval.mission_runner:main',
             'camera_bridge = drone_eval.camera_bridge:main',
+            'camera_mapper = drone_eval.camera_mapper:main',
+            'state_estimator = drone_eval.state_estimator:main',
         ],
     },
 )

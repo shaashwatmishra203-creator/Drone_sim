@@ -16,7 +16,7 @@ SC=${1:?usage: run_scenario.sh <scenario.yaml> [prop] [payload]}
 # "scenario not found" and the aircraft silently never arms.
 SC=$(readlink -f "$SC") || { echo "cannot resolve scenario path: $1"; exit 2; }
 [ -f "$SC" ] || { echo "scenario not found: $SC"; exit 2; }
-PX4_PID=""; LOGGER_PID=""; RUNNER_PID=""; WIND_PID=""; GUI_PID=""; MAPPER_PID=""
+PX4_PID=""; EST_PID=""; LOGGER_PID=""; RUNNER_PID=""; WIND_PID=""; GUI_PID=""; MAPPER_PID=""
 PROP=${2:-9x4.5}
 PAYLOAD=${3:-pi5}
 
@@ -49,7 +49,7 @@ CSV=$OUT/flight_log.csv
 
 cleanup() {
   kill $WIND_PID $GUI_PID 2>/dev/null
-  kill $LOGGER_PID $RUNNER_PID $MAPPER_PID $PX4_PID 2>/dev/null
+  kill $LOGGER_PID $RUNNER_PID $MAPPER_PID $EST_PID $PX4_PID 2>/dev/null
   pkill -f "gz sim -g" 2>/dev/null
   pkill -f MicroXRCEAgent 2>/dev/null
   pkill -f "gz sim" 2>/dev/null
@@ -249,6 +249,13 @@ ros2 run drone_eval camera_mapper --ros-args \
   -p out_json:=$OUT/camera_map.json >$OUT/mapper.log 2>&1 &
 MAPPER_PID=$!
 sleep 2
+
+echo "starting state_estimator (camera + IMU fusion)..."
+ros2 run drone_eval state_estimator --ros-args \
+  -p world_tools:=$DS/tools \
+  -p out_json:=$OUT/state_estimate.json >$OUT/estimator.log 2>&1 &
+EST_PID=$!
+sleep 1
 
 echo "starting flight_logger..."
 ros2 run drone_eval flight_logger --ros-args \
