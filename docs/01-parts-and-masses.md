@@ -1,6 +1,6 @@
 # 01 — Parts and Mass Register
 
-*Generated from `config/airframe.yaml` on 2026-09-30. Do not edit by hand — edit the config and re-run `tools/gen_docs.py`.*
+*Generated from `config/airframe.yaml` on 2026-10-03. Do not edit by hand — edit the config and re-run `tools/gen_docs.py`.*
 
 > **Verification level: L0/L1 — analytical model and software test only.**
 > These figures describe a *model* of the aircraft. They do not establish
@@ -9,9 +9,9 @@
 
 ## Mass status
 
-- **All-up weight (AUW, pi5 variant, parts-list prop): 3.117 kg**
-- Still estimated: **2.740 kg (88% of AUW)** across 8 line items
-- Centre of gravity: x=+2.6 mm, y=-1.6 mm, z=+18.7 mm (FLU, from frame-plate centre)
+- **All-up weight (AUW, pi5 variant, parts-list prop): 2.825 kg**
+- Still estimated: **2.680 kg (95% of AUW)** across 8 line items
+- Centre of gravity: x=-2.6 mm, y=+0.0 mm, z=+20.1 mm (FLU, from frame-plate centre)
 
 Endurance moves about **2 minutes per 500 g**, so every estimated row below is directly a source of error in the flight time. Weigh the bold ones first.
 
@@ -23,16 +23,15 @@ Endurance moves about **2 minutes per 500 g**, so every estimated row below is d
 | Ovonic 22.2V 6S 50C 6000mAh (XT90 female) | 1 | 830 | 830 | **ESTIMATED** | — | typical 6S 6000mAh LiPo; WEIGH THIS — largest single mass |
 | HobbyWing XRotor 3115 900KV | 4 | 195 | 780 | **ESTIMATED** | — | typical 31xx-class outrunner; CONFIRM from vendor datasheet |
 | Frame, PETG-CF printed, + nylon legs | 1 | 550 | 550 | **ESTIMATED** | — | 500 mm class printed frame estimate — DERIVE FROM CAD VOLUME |
-| 3-DoF gimbal + gimbal camera | 1 | 210 | 210 | **ESTIMATED** | 5.0 | unidentified lab unit — WEIGH AND IDENTIFY |
-| Stereolabs ZED 2 | 1 | 180 | 180 | vendor spec | 2.0 | ZED 2 = 166 g body, +cable |
-| ALFA AWUS036ACM dual-band USB adapter + antennas | 1 | 170 | 170 | **ESTIMATED** | 3.0 | adapter ~130 g + 2 antennas; CONFIRM |
+| 3-DoF gimbal + gimbal camera (lab unit, unidentified) | 1 | 210 | 210 | **ESTIMATED** | 5.0 | unidentified lab unit — WEIGH AND IDENTIFY. Carried as mass and power only; it is not the navigation sensor. |
+| ALFA AWUS036ACM AC1200 USB 3.0 + 2x 5dBi antennas | 1 | 145 | 145 | **ESTIMATED** | 3.0 | adapter ~105 g + 2x 5dBi antennas ~20 g each; CONFIRM on a scale |
 | Wiring, XT90, standoffs, fasteners, straps | 1 | 120 | 120 | **ESTIMATED** | — | build allowance |
-| Raspberry Pi 5 (8 GB) + active cooler + 5V regulator | 1 | 100 | 100 | vendor spec | 12.0 | Pi 5 = 46 g, cooler 25 g, regulator ~30 g |
-| Stereolabs ZED Mini | 1 | 62 | 62 | vendor spec | 2.0 | ZED Mini = 62.9 g |
-| propeller (see prop_options) | 4 | 10 | 40 | **ESTIMATED** | — | HQProp 9x4.5 nylon composite, typical |
-| GPS / compass module + mast | 1 | 40 | 40 | **ESTIMATED** | 0.5 | typical M8N/M9N puck plus mast |
-| SpeedyBee F405 V5 stack (FC + 4-in-1 ESC, 30x30) | 1 | 35 | 35 | vendor spec | 2.0 | SpeedyBee F405 V5 product page |
-| **TOTAL** | | | **3117** | | **26.5** | |
+| Raspberry Pi 5 (8 GB) + active cooler + 5V regulator | 1 | 100 | 100 | vendor spec | 12.0 | Pi 5 = 46 g, cooler 25 g, regulator ~30 g. SPECIFIED BRAIN. |
+| HQProp 9x4.5 nylon composite | 4 | 10 | 40 | **ESTIMATED** | — | HQProp 9x4.5 nylon composite, typical |
+| SpeedyBee F405 V5 stack (FC + 4-in-1 ESC, 30x30, 2-6S) | 1 | 35 | 35 | vendor spec | 2.0 | SpeedyBee F405 V5 Standard, Betaflight-configurable |
+| Arducam Camera Module 3 (IMX708, 12MP, 75 deg DFOV, autofocus) | 1 | 10 | 10 | vendor spec | 0.5 | Pi Camera Module 3 board ~4 g + 15-22 pin FFC cable. THE mapping / detection / navigation sensor. CSI to the Pi 5. |
+| Standard IMU breakout (ICM-42688-P class) + cable | 1 | 5 | 5 | **ESTIMATED** | 0.1 | 6-axis MEMS IMU breakout; the FC carries its own, this is the dedicated one for the navigation stack on the compute board |
+| **TOTAL** | | | **2825** | | **22.6** | |
 
 
 ## Compute variants
@@ -65,8 +64,8 @@ Endurance moves about **2 minutes per 500 g**, so every estimated row below is d
 - **Ovonic 22.2V 6S 50C 6000mAh (XT90 female)** — assumed 830 g. typical 6S 6000mAh LiPo; WEIGH THIS — largest single mass
 - **HobbyWing XRotor 3115 900KV** — assumed 780 g. typical 31xx-class outrunner; CONFIRM from vendor datasheet
 - **Frame, PETG-CF printed, + nylon legs** — assumed 550 g. 500 mm class printed frame estimate — DERIVE FROM CAD VOLUME
-- **3-DoF gimbal + gimbal camera** — assumed 210 g. unidentified lab unit — WEIGH AND IDENTIFY
-- **ALFA AWUS036ACM dual-band USB adapter + antennas** — assumed 170 g. adapter ~130 g + 2 antennas; CONFIRM
+- **3-DoF gimbal + gimbal camera (lab unit, unidentified)** — assumed 210 g. unidentified lab unit — WEIGH AND IDENTIFY. Carried as mass and power only; it is not the navigation sensor.
+- **ALFA AWUS036ACM AC1200 USB 3.0 + 2x 5dBi antennas** — assumed 145 g. adapter ~105 g + 2x 5dBi antennas ~20 g each; CONFIRM on a scale
 - **Wiring, XT90, standoffs, fasteners, straps** — assumed 120 g. build allowance
-- **propeller (see prop_options)** — assumed 40 g. HQProp 9x4.5 nylon composite, typical
-- **GPS / compass module + mast** — assumed 40 g. typical M8N/M9N puck plus mast
+- **HQProp 9x4.5 nylon composite** — assumed 40 g. HQProp 9x4.5 nylon composite, typical
+- **Standard IMU breakout (ICM-42688-P class) + cable** — assumed 5 g. 6-axis MEMS IMU breakout; the FC carries its own, this is the dedicated one for the navigation stack on the compute board

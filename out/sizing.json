@@ -4,35 +4,35 @@
     "prop": "9x4.5",
     "in_parts_list": true,
     "rho": 1.2249781262066513,
-    "auw_kg": 3.1169999999999995,
+    "auw_kg": 2.8249999999999997,
     "cg_m": [
-      0.002614693615656079,
-      -0.001591273660571062,
-      0.018671799807507227
+      -0.002619469026548673,
+      0.0,
+      0.020079646017699116
     ],
     "inertia": {
-      "ixx": 0.03417491478384664,
-      "iyy": 0.03801754774823548,
-      "izz": 0.05817537252967596
+      "ixx": 0.03220847166297935,
+      "iyy": 0.03432458759218289,
+      "izz": 0.05535957426253687
     },
-    "avionics_w": 26.5,
+    "avionics_w": 22.6,
     "disc_area_m2": 0.16417322322758926,
-    "disc_loading_kgm2": 18.986043757446243,
+    "disc_loading_kgm2": 17.20743458927996,
     "pack_wh": 136.07999999999998,
     "v_nominal": 22.68,
     "hover": {
-      "rpm": 8568.885965553034,
-      "throttle": 0.28943860792557974,
-      "rpm_fraction": 0.537994988755081,
-      "thrust_per_motor_n": 7.641832012499998,
-      "thrust_per_motor_g": 779.2499999999999,
-      "power_w": 600.7988003516544,
-      "prop_power_w": 574.2988003516544,
-      "current_a": 28.628892050611476,
-      "minutes": 10.716666666666667,
+      "rpm": 8157.6522548798785,
+      "throttle": 0.26232405113563134,
+      "rpm_fraction": 0.5121758010055057,
+      "thrust_per_motor_n": 6.925946562499999,
+      "thrust_per_motor_g": 706.2499999999999,
+      "power_w": 518.1190825332013,
+      "prop_power_w": 495.51908253320136,
+      "current_a": 24.549489789075984,
+      "minutes": 12.5,
       "ok": true,
-      "tip_speed_ms": 102.56500644754266,
-      "tip_mach": 0.3013958461579273
+      "tip_speed_ms": 97.64275770293388,
+      "tip_mach": 0.2869314067085921
     },
     "max": {
       "rpm": 15927.445691234809,
@@ -44,274 +44,274 @@
       "tip_speed_ms": 190.64305168506831,
       "tip_mach": 0.560220545651097
     },
-    "twr": 3.4549641016001544,
+    "twr": 3.8120789751106834,
     "best_endurance": {
-      "v_ms": 9.5,
-      "power_w": 560.9934690496575,
-      "minutes": 11.533333333333333,
-      "range_km": 6.574
+      "v_ms": 9.0,
+      "power_w": 483.7790843716987,
+      "minutes": 13.433333333333334,
+      "range_km": 7.254
     },
     "best_range": {
-      "v_ms": 17.5,
-      "power_w": 696.4278530817238,
-      "minutes": 9.2,
-      "range_km": 9.66
+      "v_ms": 17.0,
+      "power_w": 612.6093608698003,
+      "minutes": 10.533333333333333,
+      "range_km": 10.744
     },
     "max_speed_ms": 20.0,
     "cruise": [
       {
         "v_ms": 0.0,
-        "power_w": 600.7988003516544,
-        "minutes": 10.733333333333333,
+        "power_w": 518.1190825332013,
+        "minutes": 12.5,
         "range_km": 0.0
       },
       {
         "v_ms": 0.5,
-        "power_w": 600.5307417434242,
-        "minutes": 10.733333333333333,
-        "range_km": 0.322
+        "power_w": 517.864177354943,
+        "minutes": 12.5,
+        "range_km": 0.375
       },
       {
         "v_ms": 1.0,
-        "power_w": 599.7511619422471,
-        "minutes": 10.766666666666667,
-        "range_km": 0.646
+        "power_w": 517.1241404535007,
+        "minutes": 12.533333333333333,
+        "range_km": 0.752
       },
       {
         "v_ms": 1.5,
-        "power_w": 598.4994271407637,
-        "minutes": 10.766666666666667,
-        "range_km": 0.9690000000000001
+        "power_w": 515.9385906600447,
+        "minutes": 12.566666666666666,
+        "range_km": 1.131
       },
       {
         "v_ms": 2.0,
-        "power_w": 596.8182793524016,
-        "minutes": 10.8,
-        "range_km": 1.296
+        "power_w": 514.350706500842,
+        "minutes": 12.6,
+        "range_km": 1.512
       },
       {
         "v_ms": 2.5,
-        "power_w": 594.7539791017274,
-        "minutes": 10.833333333333334,
-        "range_km": 1.6250000000000002
+        "power_w": 512.407389954057,
+        "minutes": 12.666666666666666,
+        "range_km": 1.8999999999999997
       },
       {
         "v_ms": 3.0,
-        "power_w": 592.356489853581,
-        "minutes": 10.9,
-        "range_km": 1.9620000000000002
+        "power_w": 510.159475891687,
+        "minutes": 12.7,
+        "range_km": 2.2859999999999996
       },
       {
         "v_ms": 3.5,
-        "power_w": 589.679687300566,
-        "minutes": 10.933333333333334,
-        "range_km": 2.296
+        "power_w": 507.66196546390455,
+        "minutes": 12.766666666666667,
+        "range_km": 2.681
       },
       {
         "v_ms": 4.0,
-        "power_w": 586.781570683684,
-        "minutes": 11.0,
-        "range_km": 2.64
+        "power_w": 504.9742533885951,
+        "minutes": 12.833333333333334,
+        "range_km": 3.08
       },
       {
         "v_ms": 4.5,
-        "power_w": 583.7244457575888,
-        "minutes": 11.066666666666666,
-        "range_km": 2.988
+        "power_w": 502.1603104254881,
+        "minutes": 12.933333333333334,
+        "range_km": 3.492
       },
       {
         "v_ms": 5.0,
-        "power_w": 580.5750433381761,
-        "minutes": 11.133333333333333,
-        "range_km": 3.34
+        "power_w": 499.288774546099,
+        "minutes": 13.0,
+        "range_km": 3.9
       },
       {
         "v_ms": 5.5,
-        "power_w": 577.4045320533578,
-        "minutes": 11.2,
-        "range_km": 3.6959999999999997
+        "power_w": 496.43289950656026,
+        "minutes": 13.066666666666666,
+        "range_km": 4.312
       },
       {
         "v_ms": 6.0,
-        "power_w": 574.2883827092754,
-        "minutes": 11.233333333333333,
-        "range_km": 4.044
+        "power_w": 493.6703103080227,
+        "minutes": 13.133333333333333,
+        "range_km": 4.728
       },
       {
         "v_ms": 6.5,
-        "power_w": 571.3060456299127,
-        "minutes": 11.3,
-        "range_km": 4.407
+        "power_w": 491.08252403089307,
+        "minutes": 13.233333333333333,
+        "range_km": 5.161
       },
       {
         "v_ms": 7.0,
-        "power_w": 568.5404133049791,
-        "minutes": 11.366666666666667,
-        "range_km": 4.774
+        "power_w": 488.7542134854995,
+        "minutes": 13.266666666666667,
+        "range_km": 5.572
       },
       {
         "v_ms": 7.5,
-        "power_w": 566.077059259984,
-        "minutes": 11.4,
-        "range_km": 5.13
+        "power_w": 486.77221970739583,
+        "minutes": 13.333333333333334,
+        "range_km": 6.0
       },
       {
         "v_ms": 8.0,
-        "power_w": 564.0032690942766,
-        "minutes": 11.466666666666667,
-        "range_km": 5.504
+        "power_w": 485.2243542583101,
+        "minutes": 13.366666666666667,
+        "range_km": 6.416
       },
       {
         "v_ms": 8.5,
-        "power_w": 562.4069078315691,
-        "minutes": 11.5,
-        "range_km": 5.865
+        "power_w": 484.19806729101947,
+        "minutes": 13.4,
+        "range_km": 6.834
       },
       {
         "v_ms": 9.0,
-        "power_w": 561.3751939492183,
-        "minutes": 11.5,
-        "range_km": 6.21
+        "power_w": 483.7790843716987,
+        "minutes": 13.433333333333334,
+        "range_km": 7.254
       },
       {
         "v_ms": 9.5,
-        "power_w": 560.9934690496575,
-        "minutes": 11.533333333333333,
-        "range_km": 6.574
+        "power_w": 484.05012678245896,
+        "minutes": 13.4,
+        "range_km": 7.638
       },
       {
         "v_ms": 10.0,
-        "power_w": 561.344057637615,
-        "minutes": 11.5,
-        "range_km": 6.9
+        "power_w": 485.0898225051218,
+        "minutes": 13.4,
+        "range_km": 8.04
       },
       {
         "v_ms": 10.5,
-        "power_w": 562.5053032804014,
-        "minutes": 11.5,
-        "range_km": 7.245
-      },
-      {
-        "v_ms": 11.0,
-        "power_w": 564.5508453408291,
-        "minutes": 11.433333333333334,
-        "range_km": 7.546
-      },
-      {
-        "v_ms": 11.5,
-        "power_w": 567.5491700443179,
-        "minutes": 11.4,
-        "range_km": 7.866
-      },
-      {
-        "v_ms": 12.0,
-        "power_w": 571.5634381047698,
-        "minutes": 11.3,
-        "range_km": 8.136000000000001
-      },
-      {
-        "v_ms": 12.5,
-        "power_w": 576.6515627923195,
-        "minutes": 11.2,
+        "power_w": 486.97188948845195,
+        "minutes": 13.333333333333334,
         "range_km": 8.4
       },
       {
+        "v_ms": 11.0,
+        "power_w": 489.764635187468,
+        "minutes": 13.266666666666667,
+        "range_km": 8.756
+      },
+      {
+        "v_ms": 11.5,
+        "power_w": 493.5307755434989,
+        "minutes": 13.133333333333333,
+        "range_km": 9.062
+      },
+      {
+        "v_ms": 12.0,
+        "power_w": 498.32754108709264,
+        "minutes": 13.033333333333333,
+        "range_km": 9.384
+      },
+      {
+        "v_ms": 12.5,
+        "power_w": 504.2070134832728,
+        "minutes": 12.866666666666667,
+        "range_km": 9.65
+      },
+      {
         "v_ms": 13.0,
-        "power_w": 582.8664928103759,
-        "minutes": 11.066666666666666,
-        "range_km": 8.632
+        "power_w": 511.2166244250822,
+        "minutes": 12.666666666666666,
+        "range_km": 9.88
       },
       {
         "v_ms": 13.5,
-        "power_w": 590.2566443628897,
-        "minutes": 10.933333333333334,
-        "range_km": 8.856
+        "power_w": 519.3997495003929,
+        "minutes": 12.466666666666667,
+        "range_km": 10.098
       },
       {
         "v_ms": 14.0,
-        "power_w": 598.8664262786614,
-        "minutes": 10.766666666666667,
-        "range_km": 9.044
+        "power_w": 528.7963375999806,
+        "minutes": 12.233333333333333,
+        "range_km": 10.276
       },
       {
         "v_ms": 14.5,
-        "power_w": 608.7368071617157,
-        "minutes": 10.6,
-        "range_km": 9.222
+        "power_w": 539.443530461633,
+        "minutes": 12.0,
+        "range_km": 10.44
       },
       {
         "v_ms": 15.0,
-        "power_w": 619.9058842473119,
-        "minutes": 10.4,
-        "range_km": 9.36
+        "power_w": 551.3762398031615,
+        "minutes": 11.733333333333333,
+        "range_km": 10.56
       },
       {
         "v_ms": 15.5,
-        "power_w": 632.4094234899487,
-        "minutes": 10.166666666666666,
-        "range_km": 9.454999999999998
+        "power_w": 564.6276635221427,
+        "minutes": 11.433333333333334,
+        "range_km": 10.633
       },
       {
         "v_ms": 16.0,
-        "power_w": 646.281352168963,
-        "minutes": 9.966666666666667,
-        "range_km": 9.568
+        "power_w": 579.2297315429746,
+        "minutes": 11.133333333333333,
+        "range_km": 10.688
       },
       {
         "v_ms": 16.5,
-        "power_w": 661.5541929788449,
-        "minutes": 9.7,
-        "range_km": 9.602999999999998
+        "power_w": 595.2134805084031,
+        "minutes": 10.833333333333334,
+        "range_km": 10.725
       },
       {
         "v_ms": 17.0,
-        "power_w": 678.2594364906952,
-        "minutes": 9.466666666666667,
-        "range_km": 9.656
+        "power_w": 612.6093608698003,
+        "minutes": 10.533333333333333,
+        "range_km": 10.744
       },
       {
         "v_ms": 17.5,
-        "power_w": 696.4278530817238,
-        "minutes": 9.2,
-        "range_km": 9.66
+        "power_w": 631.4474827614235,
+        "minutes": 10.2,
+        "range_km": 10.71
       },
       {
         "v_ms": 18.0,
-        "power_w": 716.0897484429267,
-        "minutes": 8.933333333333334,
-        "range_km": 9.648
+        "power_w": 651.7578089509852,
+        "minutes": 9.866666666666667,
+        "range_km": 10.656000000000002
       },
       {
         "v_ms": 18.5,
-        "power_w": 737.2751690453798,
-        "minutes": 8.666666666666666,
-        "range_km": 9.619999999999997
+        "power_w": 673.5703027298812,
+        "minutes": 9.533333333333333,
+        "range_km": 10.582
       },
       {
         "v_ms": 19.0,
-        "power_w": 760.014063928987,
-        "minutes": 8.4,
-        "range_km": 9.576
+        "power_w": 696.9150387476797,
+        "minutes": 9.2,
+        "range_km": 10.487999999999998
       },
       {
         "v_ms": 19.5,
-        "power_w": 784.3364097216645,
-        "minutes": 8.133333333333333,
-        "range_km": 9.516
+        "power_w": 721.8222834780989,
+        "minutes": 8.866666666666667,
+        "range_km": 10.374
       },
       {
         "v_ms": 20.0,
-        "power_w": 810.272304814187,
-        "minutes": 7.866666666666666,
-        "range_km": 9.439999999999998
+        "power_w": 748.3225518036554,
+        "minutes": 8.533333333333333,
+        "range_km": 10.24
       }
     ],
     "checks": {
       "prop_rpm_hover": {
-        "value": 8568.885965553034,
+        "value": 8157.6522548798785,
         "limit": 16111,
         "pass": true,
-        "margin_pct": 46.813444444460096
+        "margin_pct": 49.36594714865695
       },
       "prop_rpm_max": {
         "value": 15927.445691234809,
@@ -320,12 +320,12 @@
         "margin_pct": 1.1393104634423146
       },
       "thrust_to_weight": {
-        "value": 3.4549641016001544,
+        "value": 3.8120789751106834,
         "limit": 2.0,
         "pass": true
       },
       "hover_thrust_fraction": {
-        "value": 0.28943860792557974,
+        "value": 0.26232405113563134,
         "limit": 0.5,
         "pass": true
       }
@@ -365,7 +365,7 @@
       },
       {
         "id": "prop",
-        "name": "propeller (see prop_options)",
+        "name": "HQProp 9x4.5 nylon composite",
         "qty": 4,
         "unit_kg": 0.01,
         "total_kg": 0.04,
@@ -414,12 +414,12 @@
       },
       {
         "id": "fc_stack",
-        "name": "SpeedyBee F405 V5 stack (FC + 4-in-1 ESC, 30x30)",
+        "name": "SpeedyBee F405 V5 stack (FC + 4-in-1 ESC, 30x30, 2-6S)",
         "qty": 1,
         "unit_kg": 0.035,
         "total_kg": 0.035,
         "confidence": "vendor",
-        "source": "SpeedyBee F405 V5 product page",
+        "source": "SpeedyBee F405 V5 Standard, Betaflight-configurable",
         "power_w": 2.0,
         "positions": [
           [
@@ -430,30 +430,47 @@
         ]
       },
       {
-        "id": "gps",
-        "name": "GPS / compass module + mast",
+        "id": "imu",
+        "name": "Standard IMU breakout (ICM-42688-P class) + cable",
         "qty": 1,
-        "unit_kg": 0.04,
-        "total_kg": 0.04,
+        "unit_kg": 0.005,
+        "total_kg": 0.005,
         "confidence": "estimated",
-        "source": "typical M8N/M9N puck plus mast",
+        "source": "6-axis MEMS IMU breakout; the FC carries its own, this is the dedicated one for the navigation stack on the compute board",
+        "power_w": 0.1,
+        "positions": [
+          [
+            0.0,
+            0.0,
+            0.015
+          ]
+        ]
+      },
+      {
+        "id": "nav_camera",
+        "name": "Arducam Camera Module 3 (IMX708, 12MP, 75 deg DFOV, autofocus)",
+        "qty": 1,
+        "unit_kg": 0.01,
+        "total_kg": 0.01,
+        "confidence": "vendor",
+        "source": "Pi Camera Module 3 board ~4 g + 15-22 pin FFC cable. THE mapping / detection / navigation sensor. CSI to the Pi 5.",
         "power_w": 0.5,
         "positions": [
           [
-            -0.06,
+            0.09,
             0.0,
-            0.15
+            -0.025
           ]
         ]
       },
       {
         "id": "wifi",
-        "name": "ALFA AWUS036ACM dual-band USB adapter + antennas",
+        "name": "ALFA AWUS036ACM AC1200 USB 3.0 + 2x 5dBi antennas",
         "qty": 1,
-        "unit_kg": 0.17,
-        "total_kg": 0.17,
+        "unit_kg": 0.145,
+        "total_kg": 0.145,
         "confidence": "estimated",
-        "source": "adapter ~130 g + 2 antennas; CONFIRM",
+        "source": "adapter ~105 g + 2x 5dBi antennas ~20 g each; CONFIRM on a scale",
         "power_w": 3.0,
         "positions": [
           [
@@ -464,47 +481,13 @@
         ]
       },
       {
-        "id": "zed2",
-        "name": "Stereolabs ZED 2",
-        "qty": 1,
-        "unit_kg": 0.18,
-        "total_kg": 0.18,
-        "confidence": "vendor",
-        "source": "ZED 2 = 166 g body, +cable",
-        "power_w": 2.0,
-        "positions": [
-          [
-            0.09,
-            0.0,
-            -0.03
-          ]
-        ]
-      },
-      {
-        "id": "zed_mini",
-        "name": "Stereolabs ZED Mini",
-        "qty": 1,
-        "unit_kg": 0.062,
-        "total_kg": 0.062,
-        "confidence": "vendor",
-        "source": "ZED Mini = 62.9 g",
-        "power_w": 2.0,
-        "positions": [
-          [
-            0.075,
-            -0.08,
-            -0.025
-          ]
-        ]
-      },
-      {
         "id": "gimbal",
-        "name": "3-DoF gimbal + gimbal camera",
+        "name": "3-DoF gimbal + gimbal camera (lab unit, unidentified)",
         "qty": 1,
         "unit_kg": 0.21,
         "total_kg": 0.21,
         "confidence": "estimated",
-        "source": "unidentified lab unit \u2014 WEIGH AND IDENTIFY",
+        "source": "unidentified lab unit \u2014 WEIGH AND IDENTIFY. Carried as mass and power only; it is not the navigation sensor.",
         "power_w": 5.0,
         "positions": [
           [
@@ -555,7 +538,7 @@
         "unit_kg": 0.1,
         "total_kg": 0.1,
         "confidence": "vendor",
-        "source": "Pi 5 = 46 g, cooler 25 g, regulator ~30 g",
+        "source": "Pi 5 = 46 g, cooler 25 g, regulator ~30 g. SPECIFIED BRAIN.",
         "power_w": 12.0,
         "positions": [
           [
@@ -572,35 +555,35 @@
     "prop": "11x4.5",
     "in_parts_list": false,
     "rho": 1.2249781262066513,
-    "auw_kg": 3.1329999999999996,
+    "auw_kg": 2.8409999999999997,
     "cg_m": [
-      0.002601340568145547,
-      -0.0015831471433131186,
-      0.018806255984679228
+      -0.00260471664906723,
+      0.0,
+      0.020219992960225273
     ],
     "inertia": {
-      "ixx": 0.034688605904218524,
-      "iyy": 0.03853610738841897,
-      "izz": 0.05917748833120543
+      "ixx": 0.03272096875439985,
+      "iyy": 0.03484199385119675,
+      "izz": 0.05636165009679688
     },
-    "avionics_w": 26.5,
+    "avionics_w": 22.6,
     "disc_area_m2": 0.24524641988318885,
-    "disc_loading_kgm2": 12.774906159658727,
+    "disc_loading_kgm2": 11.584266964439976,
     "pack_wh": 136.07999999999998,
     "v_nominal": 22.68,
     "hover": {
-      "rpm": 5939.5038743284,
-      "throttle": 0.3318692437627576,
-      "rpm_fraction": 0.576080935080096,
-      "thrust_per_motor_n": 7.681058612499998,
-      "thrust_per_motor_g": 783.2499999999999,
-      "power_w": 469.4548144224917,
-      "prop_power_w": 442.9548144224917,
-      "current_a": 22.16826918431038,
-      "minutes": 13.833333333333334,
+      "rpm": 5655.950362611577,
+      "throttle": 0.30093856416533493,
+      "rpm_fraction": 0.5485786763676974,
+      "thrust_per_motor_n": 6.965173162499999,
+      "thrust_per_motor_g": 710.2499999999999,
+      "power_w": 405.09493148132515,
+      "prop_power_w": 382.4949314813251,
+      "current_a": 19.04646669686887,
+      "minutes": 16.1,
       "ok": true,
-      "tip_speed_ms": 86.89107975789608,
-      "tip_mach": 0.25533670219775517
+      "tip_speed_ms": 82.74287625074645,
+      "tip_mach": 0.2431468593909681
     },
     "max": {
       "rpm": 10310.189962288192,
@@ -612,274 +595,274 @@
       "tip_speed_ms": 150.8313753618927,
       "tip_mach": 0.4432306064116741
     },
-    "twr": 3.013234937537228,
+    "twr": 3.3229373668793154,
     "best_endurance": {
-      "v_ms": 9.5,
-      "power_w": 420.6546876278777,
-      "minutes": 15.5,
-      "range_km": 8.835
+      "v_ms": 8.5,
+      "power_w": 363.2813884232453,
+      "minutes": 18.0,
+      "range_km": 9.18
     },
     "best_range": {
-      "v_ms": 16.0,
-      "power_w": 514.5029160716203,
-      "minutes": 12.6,
-      "range_km": 12.096
+      "v_ms": 15.5,
+      "power_w": 451.46135019287914,
+      "minutes": 14.4,
+      "range_km": 13.392000000000001
     },
     "max_speed_ms": 20.0,
     "cruise": [
       {
         "v_ms": 0.0,
-        "power_w": 469.4548144224917,
-        "minutes": 13.833333333333334,
+        "power_w": 405.09493148132515,
+        "minutes": 16.1,
         "range_km": 0.0
       },
       {
         "v_ms": 0.5,
-        "power_w": 469.12511143795234,
-        "minutes": 13.866666666666667,
-        "range_km": 0.416
+        "power_w": 404.7812646664953,
+        "minutes": 16.1,
+        "range_km": 0.48300000000000004
       },
       {
         "v_ms": 1.0,
-        "power_w": 468.1616679460379,
-        "minutes": 13.866666666666667,
-        "range_km": 0.832
+        "power_w": 403.8660664323598,
+        "minutes": 16.166666666666668,
+        "range_km": 0.9700000000000001
       },
       {
         "v_ms": 1.5,
-        "power_w": 466.6071134131375,
-        "minutes": 13.933333333333334,
-        "range_km": 1.254
+        "power_w": 402.3923898709991,
+        "minutes": 16.2,
+        "range_km": 1.4579999999999997
       },
       {
         "v_ms": 2.0,
-        "power_w": 464.509805655491,
-        "minutes": 14.0,
-        "range_km": 1.68
+        "power_w": 400.40934073440917,
+        "minutes": 16.3,
+        "range_km": 1.956
       },
       {
         "v_ms": 2.5,
-        "power_w": 461.92421652341034,
-        "minutes": 14.066666666666666,
-        "range_km": 2.11
+        "power_w": 397.9725175749373,
+        "minutes": 16.4,
+        "range_km": 2.46
       },
       {
         "v_ms": 3.0,
-        "power_w": 458.91140877700235,
-        "minutes": 14.166666666666666,
-        "range_km": 2.55
+        "power_w": 395.14454623184236,
+        "minutes": 16.533333333333335,
+        "range_km": 2.9760000000000004
       },
       {
         "v_ms": 3.5,
-        "power_w": 455.5395336547858,
-        "minutes": 14.266666666666667,
-        "range_km": 2.996
+        "power_w": 391.99561774062965,
+        "minutes": 16.666666666666668,
+        "range_km": 3.5
       },
       {
         "v_ms": 4.0,
-        "power_w": 451.88425287268876,
-        "minutes": 14.4,
-        "range_km": 3.456
+        "power_w": 388.6039050546488,
+        "minutes": 16.8,
+        "range_km": 4.032
       },
       {
         "v_ms": 4.5,
-        "power_w": 448.02896360089943,
-        "minutes": 14.533333333333333,
-        "range_km": 3.9240000000000004
+        "power_w": 385.0557049327871,
+        "minutes": 16.966666666666665,
+        "range_km": 4.581
       },
       {
         "v_ms": 5.0,
-        "power_w": 444.06469030906715,
-        "minutes": 14.666666666666666,
-        "range_km": 4.4
+        "power_w": 381.44513890322287,
+        "minutes": 17.133333333333333,
+        "range_km": 5.139999999999999
       },
       {
         "v_ms": 5.5,
-        "power_w": 440.0895120389881,
-        "minutes": 14.8,
-        "range_km": 4.884
+        "power_w": 377.87326558239175,
+        "minutes": 17.3,
+        "range_km": 5.709
       },
       {
         "v_ms": 6.0,
-        "power_w": 436.2074286198512,
-        "minutes": 14.933333333333334,
-        "range_km": 5.376
+        "power_w": 374.446519398264,
+        "minutes": 17.466666666666665,
+        "range_km": 6.287999999999999
       },
       {
         "v_ms": 6.5,
-        "power_w": 432.5266386278632,
-        "minutes": 15.066666666666666,
-        "range_km": 5.876
+        "power_w": 371.27449741426443,
+        "minutes": 17.6,
+        "range_km": 6.864
       },
       {
         "v_ms": 7.0,
-        "power_w": 429.1573008815885,
-        "minutes": 15.166666666666666,
-        "range_km": 6.369999999999999
+        "power_w": 368.4672501780122,
+        "minutes": 17.733333333333334,
+        "range_km": 7.448
       },
       {
         "v_ms": 7.5,
-        "power_w": 426.2089577668542,
-        "minutes": 15.3,
-        "range_km": 6.885
+        "power_w": 366.13235817413766,
+        "minutes": 17.866666666666667,
+        "range_km": 8.04
       },
       {
         "v_ms": 8.0,
-        "power_w": 423.7878846076209,
-        "minutes": 15.366666666666667,
-        "range_km": 7.376
+        "power_w": 364.3721476059994,
+        "minutes": 17.933333333333334,
+        "range_km": 8.608
       },
       {
         "v_ms": 8.5,
-        "power_w": 421.99466307023414,
-        "minutes": 15.433333333333334,
-        "range_km": 7.871
+        "power_w": 363.2813884232453,
+        "minutes": 18.0,
+        "range_km": 9.18
       },
       {
         "v_ms": 9.0,
-        "power_w": 420.922245610824,
-        "minutes": 15.466666666666667,
-        "range_km": 8.352
+        "power_w": 362.94572376290483,
+        "minutes": 18.0,
+        "range_km": 9.72
       },
       {
         "v_ms": 9.5,
-        "power_w": 420.6546876278777,
-        "minutes": 15.5,
-        "range_km": 8.835
+        "power_w": 363.44093364760846,
+        "minutes": 18.0,
+        "range_km": 10.26
       },
       {
         "v_ms": 10.0,
-        "power_w": 421.2666048233365,
-        "minutes": 15.466666666666667,
-        "range_km": 9.28
+        "power_w": 364.8329868392055,
+        "minutes": 17.933333333333334,
+        "range_km": 10.76
       },
       {
         "v_ms": 10.5,
-        "power_w": 422.82329887660904,
-        "minutes": 15.4,
-        "range_km": 9.702000000000002
+        "power_w": 367.17872359223264,
+        "minutes": 17.8,
+        "range_km": 11.214
       },
       {
         "v_ms": 11.0,
-        "power_w": 425.3814131029793,
-        "minutes": 15.3,
-        "range_km": 10.098
+        "power_w": 370.52695883195366,
+        "minutes": 17.633333333333333,
+        "range_km": 11.638
       },
       {
         "v_ms": 11.5,
-        "power_w": 428.98994255246356,
-        "minutes": 15.2,
-        "range_km": 10.487999999999998
+        "power_w": 374.9197959783515,
+        "minutes": 17.433333333333334,
+        "range_km": 12.029
       },
       {
         "v_ms": 12.0,
-        "power_w": 433.69142562755553,
-        "minutes": 15.0,
-        "range_km": 10.8
+        "power_w": 380.39397875504727,
+        "minutes": 17.166666666666668,
+        "range_km": 12.36
       },
       {
         "v_ms": 12.5,
-        "power_w": 439.5231739467716,
-        "minutes": 14.8,
-        "range_km": 11.1
+        "power_w": 386.98215952989824,
+        "minutes": 16.866666666666667,
+        "range_km": 12.65
       },
       {
         "v_ms": 13.0,
-        "power_w": 446.5184372332721,
-        "minutes": 14.566666666666666,
-        "range_km": 11.362
+        "power_w": 394.71401446414984,
+        "minutes": 16.533333333333335,
+        "range_km": 12.896000000000003
       },
       {
         "v_ms": 13.5,
-        "power_w": 454.70744151384287,
-        "minutes": 14.3,
-        "range_km": 11.583
+        "power_w": 403.61717551781265,
+        "minutes": 16.166666666666668,
+        "range_km": 13.095000000000002
       },
       {
         "v_ms": 14.0,
-        "power_w": 464.11827116392175,
-        "minutes": 14.0,
-        "range_km": 11.76
+        "power_w": 413.71797875055603,
+        "minutes": 15.766666666666667,
+        "range_km": 13.244
       },
       {
         "v_ms": 14.5,
-        "power_w": 474.77759056849334,
-        "minutes": 13.7,
-        "range_km": 11.918999999999999
+        "power_w": 425.0420439961325,
+        "minutes": 15.333333333333334,
+        "range_km": 13.34
       },
       {
         "v_ms": 15.0,
-        "power_w": 486.71121503186845,
-        "minutes": 13.333333333333334,
-        "range_km": 12.0
+        "power_w": 437.6147099565866,
+        "minutes": 14.866666666666667,
+        "range_km": 13.38
       },
       {
         "v_ms": 15.5,
-        "power_w": 499.94454953113956,
-        "minutes": 12.966666666666667,
-        "range_km": 12.059
+        "power_w": 451.46135019287914,
+        "minutes": 14.4,
+        "range_km": 13.392000000000001
       },
       {
         "v_ms": 16.0,
-        "power_w": 514.5029160716203,
-        "minutes": 12.6,
-        "range_km": 12.096
+        "power_w": 466.60759469262297,
+        "minutes": 13.933333333333334,
+        "range_km": 13.376
       },
       {
         "v_ms": 16.5,
-        "power_w": 530.4117907074296,
-        "minutes": 12.2,
-        "range_km": 12.077999999999998
+        "power_w": 483.07947819651525,
+        "minutes": 13.433333333333334,
+        "range_km": 13.299
       },
       {
         "v_ms": 17.0,
-        "power_w": 547.6969688114615,
-        "minutes": 11.8,
-        "range_km": 12.036000000000001
+        "power_w": 500.9035336009557,
+        "minutes": 12.966666666666667,
+        "range_km": 13.226
       },
       {
         "v_ms": 17.5,
-        "power_w": 566.3846752451199,
-        "minutes": 11.4,
-        "range_km": 11.97
+        "power_w": 520.1068445927289,
+        "minutes": 12.466666666666667,
+        "range_km": 13.09
       },
       {
         "v_ms": 18.0,
-        "power_w": 586.5016325567466,
-        "minutes": 11.0,
-        "range_km": 11.88
+        "power_w": 540.7170689317325,
+        "minutes": 11.966666666666667,
+        "range_km": 12.924
       },
       {
         "v_ms": 18.5,
-        "power_w": 608.0750981078795,
-        "minutes": 10.6,
-        "range_km": 11.766
+        "power_w": 562.7624410145719,
+        "minutes": 11.5,
+        "range_km": 12.765
       },
       {
         "v_ms": 19.0,
-        "power_w": 631.1328785604944,
-        "minutes": 10.2,
-        "range_km": 11.627999999999998
+        "power_w": 586.2717603691026,
+        "minutes": 11.0,
+        "range_km": 12.54
       },
       {
         "v_ms": 19.5,
-        "power_w": 655.7033283926609,
-        "minutes": 9.8,
-        "range_km": 11.466000000000001
+        "power_w": 611.274370631147,
+        "minutes": 10.533333333333333,
+        "range_km": 12.324
       },
       {
         "v_ms": 20.0,
-        "power_w": 681.8153370977329,
-        "minutes": 9.4,
-        "range_km": 11.28
+        "power_w": 637.80013292645,
+        "minutes": 10.1,
+        "range_km": 12.12
       }
     ],
     "checks": {
       "prop_rpm_hover": {
-        "value": 5939.5038743284,
+        "value": 5655.950362611577,
         "limit": 13182,
         "pass": true,
-        "margin_pct": 54.942316231767556
+        "margin_pct": 57.09338216802021
       },
       "prop_rpm_max": {
         "value": 10310.189962288192,
@@ -888,12 +871,12 @@
         "margin_pct": 21.785844619267245
       },
       "thrust_to_weight": {
-        "value": 3.013234937537228,
+        "value": 3.3229373668793154,
         "limit": 2.0,
         "pass": true
       },
       "hover_thrust_fraction": {
-        "value": 0.3318692437627576,
+        "value": 0.30093856416533493,
         "limit": 0.5,
         "pass": true
       }
@@ -933,7 +916,7 @@
       },
       {
         "id": "prop",
-        "name": "propeller (see prop_options)",
+        "name": "HQProp 9x4.5 nylon composite",
         "qty": 4,
         "unit_kg": 0.014,
         "total_kg": 0.056,
@@ -982,12 +965,12 @@
       },
       {
         "id": "fc_stack",
-        "name": "SpeedyBee F405 V5 stack (FC + 4-in-1 ESC, 30x30)",
+        "name": "SpeedyBee F405 V5 stack (FC + 4-in-1 ESC, 30x30, 2-6S)",
         "qty": 1,
         "unit_kg": 0.035,
         "total_kg": 0.035,
         "confidence": "vendor",
-        "source": "SpeedyBee F405 V5 product page",
+        "source": "SpeedyBee F405 V5 Standard, Betaflight-configurable",
         "power_w": 2.0,
         "positions": [
           [
@@ -998,30 +981,47 @@
         ]
       },
       {
-        "id": "gps",
-        "name": "GPS / compass module + mast",
+        "id": "imu",
+        "name": "Standard IMU breakout (ICM-42688-P class) + cable",
         "qty": 1,
-        "unit_kg": 0.04,
-        "total_kg": 0.04,
+        "unit_kg": 0.005,
+        "total_kg": 0.005,
         "confidence": "estimated",
-        "source": "typical M8N/M9N puck plus mast",
+        "source": "6-axis MEMS IMU breakout; the FC carries its own, this is the dedicated one for the navigation stack on the compute board",
+        "power_w": 0.1,
+        "positions": [
+          [
+            0.0,
+            0.0,
+            0.015
+          ]
+        ]
+      },
+      {
+        "id": "nav_camera",
+        "name": "Arducam Camera Module 3 (IMX708, 12MP, 75 deg DFOV, autofocus)",
+        "qty": 1,
+        "unit_kg": 0.01,
+        "total_kg": 0.01,
+        "confidence": "vendor",
+        "source": "Pi Camera Module 3 board ~4 g + 15-22 pin FFC cable. THE mapping / detection / navigation sensor. CSI to the Pi 5.",
         "power_w": 0.5,
         "positions": [
           [
-            -0.06,
+            0.09,
             0.0,
-            0.15
+            -0.025
           ]
         ]
       },
       {
         "id": "wifi",
-        "name": "ALFA AWUS036ACM dual-band USB adapter + antennas",
+        "name": "ALFA AWUS036ACM AC1200 USB 3.0 + 2x 5dBi antennas",
         "qty": 1,
-        "unit_kg": 0.17,
-        "total_kg": 0.17,
+        "unit_kg": 0.145,
+        "total_kg": 0.145,
         "confidence": "estimated",
-        "source": "adapter ~130 g + 2 antennas; CONFIRM",
+        "source": "adapter ~105 g + 2x 5dBi antennas ~20 g each; CONFIRM on a scale",
         "power_w": 3.0,
         "positions": [
           [
@@ -1032,47 +1032,13 @@
         ]
       },
       {
-        "id": "zed2",
-        "name": "Stereolabs ZED 2",
-        "qty": 1,
-        "unit_kg": 0.18,
-        "total_kg": 0.18,
-        "confidence": "vendor",
-        "source": "ZED 2 = 166 g body, +cable",
-        "power_w": 2.0,
-        "positions": [
-          [
-            0.09,
-            0.0,
-            -0.03
-          ]
-        ]
-      },
-      {
-        "id": "zed_mini",
-        "name": "Stereolabs ZED Mini",
-        "qty": 1,
-        "unit_kg": 0.062,
-        "total_kg": 0.062,
-        "confidence": "vendor",
-        "source": "ZED Mini = 62.9 g",
-        "power_w": 2.0,
-        "positions": [
-          [
-            0.075,
-            -0.08,
-            -0.025
-          ]
-        ]
-      },
-      {
         "id": "gimbal",
-        "name": "3-DoF gimbal + gimbal camera",
+        "name": "3-DoF gimbal + gimbal camera (lab unit, unidentified)",
         "qty": 1,
         "unit_kg": 0.21,
         "total_kg": 0.21,
         "confidence": "estimated",
-        "source": "unidentified lab unit \u2014 WEIGH AND IDENTIFY",
+        "source": "unidentified lab unit \u2014 WEIGH AND IDENTIFY. Carried as mass and power only; it is not the navigation sensor.",
         "power_w": 5.0,
         "positions": [
           [
@@ -1123,7 +1089,7 @@
         "unit_kg": 0.1,
         "total_kg": 0.1,
         "confidence": "vendor",
-        "source": "Pi 5 = 46 g, cooler 25 g, regulator ~30 g",
+        "source": "Pi 5 = 46 g, cooler 25 g, regulator ~30 g. SPECIFIED BRAIN.",
         "power_w": 12.0,
         "positions": [
           [
@@ -1140,35 +1106,35 @@
     "prop": "13x4.4",
     "in_parts_list": false,
     "rho": 1.2249781262066513,
-    "auw_kg": 3.1569999999999996,
+    "auw_kg": 2.8649999999999998,
     "cg_m": [
-      0.0025815647766867273,
-      -0.0015711118150142543,
-      0.019005384859043403
+      -0.0025828970331588136,
+      0.0,
+      0.020427574171029677
     ],
     "inertia": {
-      "ixx": 0.03545893211052159,
-      "iyy": 0.03931373507219405,
-      "izz": 0.06068065919913419
+      "ixx": 0.03348950747164048,
+      "iyy": 0.03561789403359511,
+      "izz": 0.0578647615619546
     },
-    "avionics_w": 26.5,
+    "avionics_w": 22.6,
     "disc_area_m2": 0.34253425586990843,
-    "disc_loading_kgm2": 9.216596430574235,
+    "disc_loading_kgm2": 8.364126947606964,
     "pack_wh": 136.07999999999998,
     "v_nominal": 22.68,
     "hover": {
-      "rpm": 4418.629023365607,
-      "throttle": 0.36295124762435554,
-      "rpm_fraction": 0.6024543531458258,
-      "thrust_per_motor_n": 7.739898512499998,
-      "thrust_per_motor_g": 789.2499999999999,
-      "power_w": 388.12493830507117,
-      "prop_power_w": 361.62493830507117,
-      "current_a": 18.226951307010175,
-      "minutes": 16.816666666666666,
+      "rpm": 4209.326011346737,
+      "throttle": 0.32938084397965744,
+      "rpm_fraction": 0.5739171054949116,
+      "thrust_per_motor_n": 7.024013062499999,
+      "thrust_per_motor_g": 716.2499999999999,
+      "power_w": 335.2320073740997,
+      "prop_power_w": 312.63200737409966,
+      "current_a": 15.687431346116417,
+      "minutes": 19.533333333333335,
       "ok": true,
-      "tip_speed_ms": 76.39470040802134,
-      "tip_mach": 0.22449221395245764
+      "tip_speed_ms": 72.77601216487504,
+      "tip_mach": 0.213858396017852
     },
     "max": {
       "rpm": 7334.37977548494,
@@ -1180,274 +1146,274 @@
       "tip_speed_ms": 126.80579036256007,
       "tip_mach": 0.37262941628727614
     },
-    "twr": 2.7551909699866144,
+    "twr": 3.0359992643098574,
     "best_endurance": {
-      "v_ms": 9.0,
-      "power_w": 334.0808605805018,
-      "minutes": 19.6,
-      "range_km": 10.584
+      "v_ms": 8.5,
+      "power_w": 288.54402999800806,
+      "minutes": 22.766666666666666,
+      "range_km": 11.611
     },
     "best_range": {
-      "v_ms": 15.0,
-      "power_w": 408.67540819943895,
-      "minutes": 15.966666666666667,
-      "range_km": 14.37
+      "v_ms": 14.5,
+      "power_w": 358.1520473715652,
+      "minutes": 18.266666666666666,
+      "range_km": 15.892
     },
     "max_speed_ms": 20.0,
     "cruise": [
       {
         "v_ms": 0.0,
-        "power_w": 388.12493830507117,
-        "minutes": 16.833333333333332,
+        "power_w": 335.2320073740997,
+        "minutes": 19.533333333333335,
         "range_km": 0.0
       },
       {
         "v_ms": 0.5,
-        "power_w": 387.7328176972922,
-        "minutes": 16.833333333333332,
-        "range_km": 0.5049999999999999
+        "power_w": 334.8587672059615,
+        "minutes": 19.566666666666666,
+        "range_km": 0.587
       },
       {
         "v_ms": 1.0,
-        "power_w": 386.58369166809547,
-        "minutes": 16.9,
-        "range_km": 1.0139999999999998
+        "power_w": 333.7664983113575,
+        "minutes": 19.633333333333333,
+        "range_km": 1.178
       },
       {
         "v_ms": 1.5,
-        "power_w": 384.7250116554124,
-        "minutes": 16.966666666666665,
-        "range_km": 1.5269999999999997
+        "power_w": 332.0033292883297,
+        "minutes": 19.733333333333334,
+        "range_km": 1.776
       },
       {
         "v_ms": 2.0,
-        "power_w": 382.21352299366725,
-        "minutes": 17.1,
-        "range_km": 2.052
+        "power_w": 329.62722678486153,
+        "minutes": 19.866666666666667,
+        "range_km": 2.384
       },
       {
         "v_ms": 2.5,
-        "power_w": 379.1161108937845,
-        "minutes": 17.233333333333334,
-        "range_km": 2.585
+        "power_w": 326.7069526781642,
+        "minutes": 20.066666666666666,
+        "range_km": 3.01
       },
       {
         "v_ms": 3.0,
-        "power_w": 375.51077827059595,
-        "minutes": 17.4,
-        "range_km": 3.1319999999999997
+        "power_w": 323.3231378768904,
+        "minutes": 20.266666666666666,
+        "range_km": 3.648
       },
       {
         "v_ms": 3.5,
-        "power_w": 371.48752506991514,
-        "minutes": 17.6,
-        "range_km": 3.6960000000000006
+        "power_w": 319.5691751842038,
+        "minutes": 20.5,
+        "range_km": 4.305
       },
       {
         "v_ms": 4.0,
-        "power_w": 367.1488198632693,
-        "minutes": 17.8,
-        "range_km": 4.272
+        "power_w": 315.55153994426973,
+        "minutes": 20.766666666666666,
+        "range_km": 4.984
       },
       {
         "v_ms": 4.5,
-        "power_w": 362.60930646673086,
-        "minutes": 18.033333333333335,
-        "range_km": 4.869
+        "power_w": 311.3891035186384,
+        "minutes": 21.066666666666666,
+        "range_km": 5.688
       },
       {
         "v_ms": 5.0,
-        "power_w": 357.99441069007946,
-        "minutes": 18.266666666666666,
-        "range_km": 5.48
+        "power_w": 307.21107397174706,
+        "minutes": 21.366666666666667,
+        "range_km": 6.410000000000001
       },
       {
         "v_ms": 5.5,
-        "power_w": 353.43764595432566,
-        "minutes": 18.5,
-        "range_km": 6.105
+        "power_w": 303.153423175097,
+        "minutes": 21.633333333333333,
+        "range_km": 7.139
       },
       {
         "v_ms": 6.0,
-        "power_w": 349.076671242722,
-        "minutes": 18.733333333333334,
-        "range_km": 6.744
+        "power_w": 299.35402787963346,
+        "minutes": 21.933333333333334,
+        "range_km": 7.896
       },
       {
         "v_ms": 6.5,
-        "power_w": 345.0484762084208,
-        "minutes": 18.966666666666665,
-        "range_km": 7.396999999999999
+        "power_w": 295.94715406441367,
+        "minutes": 22.166666666666668,
+        "range_km": 8.645
       },
       {
         "v_ms": 7.0,
-        "power_w": 341.4843511050078,
-        "minutes": 19.166666666666668,
-        "range_km": 8.05
+        "power_w": 293.0581808081785,
+        "minutes": 22.4,
+        "range_km": 9.407999999999998
       },
       {
         "v_ms": 7.5,
-        "power_w": 338.505413324644,
-        "minutes": 19.333333333333332,
-        "range_km": 8.7
+        "power_w": 290.79944739440873,
+        "minutes": 22.566666666666666,
+        "range_km": 10.155
       },
       {
         "v_ms": 8.0,
-        "power_w": 336.2193491737876,
-        "minutes": 19.466666666666665,
-        "range_km": 9.344
+        "power_w": 289.26780855664265,
+        "minutes": 22.7,
+        "range_km": 10.896
       },
       {
         "v_ms": 8.5,
-        "power_w": 334.7187253480134,
-        "minutes": 19.566666666666666,
-        "range_km": 9.979
+        "power_w": 288.54402999800806,
+        "minutes": 22.766666666666666,
+        "range_km": 11.611
       },
       {
         "v_ms": 9.0,
-        "power_w": 334.0808605805018,
-        "minutes": 19.6,
-        "range_km": 10.584
+        "power_w": 288.69374499391586,
+        "minutes": 22.733333333333334,
+        "range_km": 12.276000000000002
       },
       {
         "v_ms": 9.5,
-        "power_w": 334.36895470141957,
-        "minutes": 19.6,
-        "range_km": 11.172000000000002
+        "power_w": 289.76945816346324,
+        "minutes": 22.666666666666668,
+        "range_km": 12.92
       },
       {
         "v_ms": 10.0,
-        "power_w": 335.63402792351275,
-        "minutes": 19.5,
-        "range_km": 11.7
+        "power_w": 291.8130468165241,
+        "minutes": 22.5,
+        "range_km": 13.5
       },
       {
         "v_ms": 10.5,
-        "power_w": 337.9172232029834,
-        "minutes": 19.366666666666667,
-        "range_km": 12.201
+        "power_w": 294.8583132160035,
+        "minutes": 22.266666666666666,
+        "range_km": 14.027999999999999
       },
       {
         "v_ms": 11.0,
-        "power_w": 341.2521183393084,
-        "minutes": 19.2,
-        "range_km": 12.672
+        "power_w": 298.9332988321529,
+        "minutes": 21.966666666666665,
+        "range_km": 14.498
       },
       {
         "v_ms": 11.5,
-        "power_w": 345.6668196695178,
-        "minutes": 18.933333333333334,
-        "range_km": 13.064
+        "power_w": 304.0622185834321,
+        "minutes": 21.566666666666666,
+        "range_km": 14.881
       },
       {
         "v_ms": 12.0,
-        "power_w": 351.18572482552173,
-        "minutes": 18.633333333333333,
-        "range_km": 13.416
+        "power_w": 310.2669810195559,
+        "minutes": 21.133333333333333,
+        "range_km": 15.216
       },
       {
         "v_ms": 12.5,
-        "power_w": 357.83092610942583,
-        "minutes": 18.266666666666666,
-        "range_km": 13.699999999999998
+        "power_w": 317.5683244419094,
+        "minutes": 20.633333333333333,
+        "range_km": 15.475000000000001
       },
       {
         "v_ms": 13.0,
-        "power_w": 365.62327750336124,
-        "minutes": 17.866666666666667,
-        "range_km": 13.936
+        "power_w": 325.9866284067951,
+        "minutes": 20.1,
+        "range_km": 15.678
       },
       {
         "v_ms": 13.5,
-        "power_w": 374.5831730554255,
-        "minutes": 17.433333333333334,
-        "range_km": 14.121
+        "power_w": 335.5424680804683,
+        "minutes": 19.533333333333335,
+        "range_km": 15.822000000000005
       },
       {
         "v_ms": 14.0,
-        "power_w": 384.7310924832915,
-        "minutes": 16.966666666666665,
-        "range_km": 14.251999999999999
+        "power_w": 346.2569736796956,
+        "minutes": 18.9,
+        "range_km": 15.875999999999998
       },
       {
         "v_ms": 14.5,
-        "power_w": 396.0879666373341,
-        "minutes": 16.466666666666665,
-        "range_km": 14.326
+        "power_w": 358.1520473715652,
+        "minutes": 18.266666666666666,
+        "range_km": 15.892
       },
       {
         "v_ms": 15.0,
-        "power_w": 408.67540819943895,
-        "minutes": 15.966666666666667,
-        "range_km": 14.37
+        "power_w": 371.25047959824866,
+        "minutes": 17.6,
+        "range_km": 15.84
       },
       {
         "v_ms": 15.5,
-        "power_w": 422.5158449612398,
-        "minutes": 15.433333333333334,
-        "range_km": 14.353
+        "power_w": 385.5759961279818,
+        "minutes": 16.933333333333334,
+        "range_km": 15.748000000000001
       },
       {
         "v_ms": 16.0,
-        "power_w": 437.6325841036802,
-        "minutes": 14.866666666666667,
-        "range_km": 14.272
+        "power_w": 401.1532591545821,
+        "minutes": 16.266666666666666,
+        "range_km": 15.616
       },
       {
         "v_ms": 16.5,
-        "power_w": 454.0498292287446,
-        "minutes": 14.333333333333334,
-        "range_km": 14.19
+        "power_w": 418.0078390586075,
+        "minutes": 15.6,
+        "range_km": 15.443999999999999
       },
       {
         "v_ms": 17.0,
-        "power_w": 471.7926660068648,
-        "minutes": 13.766666666666667,
-        "range_km": 14.042000000000002
+        "power_w": 436.16616863131026,
+        "minutes": 14.933333333333334,
+        "range_km": 15.232
       },
       {
         "v_ms": 17.5,
-        "power_w": 490.8870280204203,
-        "minutes": 13.233333333333333,
-        "range_km": 13.894999999999998
+        "power_w": 455.6554875068712,
+        "minutes": 14.266666666666667,
+        "range_km": 14.980000000000002
       },
       {
         "v_ms": 18.0,
-        "power_w": 511.35965058015336,
-        "minutes": 12.666666666666666,
-        "range_km": 13.68
+        "power_w": 476.5037825818508,
+        "minutes": 13.633333333333333,
+        "range_km": 14.723999999999998
       },
       {
         "v_ms": 18.5,
-        "power_w": 533.2380185407026,
-        "minutes": 12.133333333333333,
-        "range_km": 13.468
+        "power_w": 498.7397276799747,
+        "minutes": 13.0,
+        "range_km": 14.43
       },
       {
         "v_ms": 19.0,
-        "power_w": 556.55031161632,
-        "minutes": 11.633333333333333,
-        "range_km": 13.262
+        "power_w": 522.392624808709,
+        "minutes": 12.4,
+        "range_km": 14.136
       },
       {
         "v_ms": 19.5,
-        "power_w": 581.325349835367,
-        "minutes": 11.1,
-        "range_km": 12.987
+        "power_w": 547.4923483306264,
+        "minutes": 11.8,
+        "range_km": 13.806000000000001
       },
       {
         "v_ms": 20.0,
-        "power_w": 607.592540719055,
-        "minutes": 10.6,
-        "range_km": 12.72
+        "power_w": 574.0692927839726,
+        "minutes": 11.266666666666667,
+        "range_km": 13.52
       }
     ],
     "checks": {
       "prop_rpm_hover": {
-        "value": 4418.629023365607,
+        "value": 4209.326011346737,
         "limit": 11154,
         "pass": true,
-        "margin_pct": 60.385251718077754
+        "margin_pct": 62.26173559846928
       },
       "prop_rpm_max": {
         "value": 7334.37977548494,
@@ -1456,12 +1422,12 @@
         "margin_pct": 34.24439864187789
       },
       "thrust_to_weight": {
-        "value": 2.7551909699866144,
+        "value": 3.0359992643098574,
         "limit": 2.0,
         "pass": true
       },
       "hover_thrust_fraction": {
-        "value": 0.36295124762435554,
+        "value": 0.32938084397965744,
         "limit": 0.5,
         "pass": true
       }
@@ -1501,7 +1467,7 @@
       },
       {
         "id": "prop",
-        "name": "propeller (see prop_options)",
+        "name": "HQProp 9x4.5 nylon composite",
         "qty": 4,
         "unit_kg": 0.02,
         "total_kg": 0.08,
@@ -1550,12 +1516,12 @@
       },
       {
         "id": "fc_stack",
-        "name": "SpeedyBee F405 V5 stack (FC + 4-in-1 ESC, 30x30)",
+        "name": "SpeedyBee F405 V5 stack (FC + 4-in-1 ESC, 30x30, 2-6S)",
         "qty": 1,
         "unit_kg": 0.035,
         "total_kg": 0.035,
         "confidence": "vendor",
-        "source": "SpeedyBee F405 V5 product page",
+        "source": "SpeedyBee F405 V5 Standard, Betaflight-configurable",
         "power_w": 2.0,
         "positions": [
           [
@@ -1566,30 +1532,47 @@
         ]
       },
       {
-        "id": "gps",
-        "name": "GPS / compass module + mast",
+        "id": "imu",
+        "name": "Standard IMU breakout (ICM-42688-P class) + cable",
         "qty": 1,
-        "unit_kg": 0.04,
-        "total_kg": 0.04,
+        "unit_kg": 0.005,
+        "total_kg": 0.005,
         "confidence": "estimated",
-        "source": "typical M8N/M9N puck plus mast",
+        "source": "6-axis MEMS IMU breakout; the FC carries its own, this is the dedicated one for the navigation stack on the compute board",
+        "power_w": 0.1,
+        "positions": [
+          [
+            0.0,
+            0.0,
+            0.015
+          ]
+        ]
+      },
+      {
+        "id": "nav_camera",
+        "name": "Arducam Camera Module 3 (IMX708, 12MP, 75 deg DFOV, autofocus)",
+        "qty": 1,
+        "unit_kg": 0.01,
+        "total_kg": 0.01,
+        "confidence": "vendor",
+        "source": "Pi Camera Module 3 board ~4 g + 15-22 pin FFC cable. THE mapping / detection / navigation sensor. CSI to the Pi 5.",
         "power_w": 0.5,
         "positions": [
           [
-            -0.06,
+            0.09,
             0.0,
-            0.15
+            -0.025
           ]
         ]
       },
       {
         "id": "wifi",
-        "name": "ALFA AWUS036ACM dual-band USB adapter + antennas",
+        "name": "ALFA AWUS036ACM AC1200 USB 3.0 + 2x 5dBi antennas",
         "qty": 1,
-        "unit_kg": 0.17,
-        "total_kg": 0.17,
+        "unit_kg": 0.145,
+        "total_kg": 0.145,
         "confidence": "estimated",
-        "source": "adapter ~130 g + 2 antennas; CONFIRM",
+        "source": "adapter ~105 g + 2x 5dBi antennas ~20 g each; CONFIRM on a scale",
         "power_w": 3.0,
         "positions": [
           [
@@ -1600,47 +1583,13 @@
         ]
       },
       {
-        "id": "zed2",
-        "name": "Stereolabs ZED 2",
-        "qty": 1,
-        "unit_kg": 0.18,
-        "total_kg": 0.18,
-        "confidence": "vendor",
-        "source": "ZED 2 = 166 g body, +cable",
-        "power_w": 2.0,
-        "positions": [
-          [
-            0.09,
-            0.0,
-            -0.03
-          ]
-        ]
-      },
-      {
-        "id": "zed_mini",
-        "name": "Stereolabs ZED Mini",
-        "qty": 1,
-        "unit_kg": 0.062,
-        "total_kg": 0.062,
-        "confidence": "vendor",
-        "source": "ZED Mini = 62.9 g",
-        "power_w": 2.0,
-        "positions": [
-          [
-            0.075,
-            -0.08,
-            -0.025
-          ]
-        ]
-      },
-      {
         "id": "gimbal",
-        "name": "3-DoF gimbal + gimbal camera",
+        "name": "3-DoF gimbal + gimbal camera (lab unit, unidentified)",
         "qty": 1,
         "unit_kg": 0.21,
         "total_kg": 0.21,
         "confidence": "estimated",
-        "source": "unidentified lab unit \u2014 WEIGH AND IDENTIFY",
+        "source": "unidentified lab unit \u2014 WEIGH AND IDENTIFY. Carried as mass and power only; it is not the navigation sensor.",
         "power_w": 5.0,
         "positions": [
           [
@@ -1691,7 +1640,7 @@
         "unit_kg": 0.1,
         "total_kg": 0.1,
         "confidence": "vendor",
-        "source": "Pi 5 = 46 g, cooler 25 g, regulator ~30 g",
+        "source": "Pi 5 = 46 g, cooler 25 g, regulator ~30 g. SPECIFIED BRAIN.",
         "power_w": 12.0,
         "positions": [
           [
@@ -1708,35 +1657,35 @@
     "prop": "9x4.5",
     "in_parts_list": true,
     "rho": 1.2249781262066513,
-    "auw_kg": 3.1969999999999996,
+    "auw_kg": 2.905,
     "cg_m": [
-      0.0017985611510791361,
-      -0.0015514544885830467,
-      0.019487019080387868
+      -0.0033734939759036144,
+      0.0,
+      0.02093803786574871
     ],
     "inertia": {
-      "ixx": 0.034315103080361786,
-      "iyy": 0.038264506568006465,
-      "izz": 0.05836787139245125
+      "ixx": 0.0323412667634825,
+      "iyy": 0.03453970652251863,
+      "izz": 0.05552723142570279
     },
-    "avionics_w": 39.5,
+    "avionics_w": 35.6,
     "disc_area_m2": 0.16417322322758926,
-    "disc_loading_kgm2": 19.473333940505498,
+    "disc_loading_kgm2": 17.694724772339217,
     "pack_wh": 136.07999999999998,
     "v_nominal": 22.68,
     "hover": {
-      "rpm": 8678.152552589923,
-      "throttle": 0.29686725362145605,
-      "rpm_fraction": 0.5448552593317385,
-      "thrust_per_motor_n": 7.837965012499999,
-      "thrust_per_motor_g": 799.2499999999999,
-      "power_w": 636.0497390673414,
-      "prop_power_w": 596.5497390673414,
-      "current_a": 30.384254976815704,
-      "minutes": 10.1,
+      "rpm": 8272.35246752204,
+      "throttle": 0.2697526968315076,
+      "rpm_fraction": 0.5193772201699912,
+      "thrust_per_motor_n": 7.122079562499999,
+      "thrust_per_motor_g": 726.25,
+      "power_w": 552.316001395279,
+      "prop_power_w": 516.716001395279,
+      "current_a": 26.23171029246271,
+      "minutes": 11.7,
       "ok": true,
-      "tip_speed_ms": 103.87286936566193,
-      "tip_mach": 0.3052391106836965
+      "tip_speed_ms": 99.01565822891473,
+      "tip_mach": 0.2909657896823824
     },
     "max": {
       "rpm": 15927.445691234809,
@@ -1748,274 +1697,274 @@
       "tip_speed_ms": 190.64305168506831,
       "tip_mach": 0.560220545651097
     },
-    "twr": 3.368508947353044,
+    "twr": 3.7070991754518694,
     "best_endurance": {
-      "v_ms": 9.0,
-      "power_w": 595.2855332340907,
-      "minutes": 10.833333333333334,
-      "range_km": 5.85
+      "v_ms": 8.5,
+      "power_w": 517.1424287606511,
+      "minutes": 12.533333333333333,
+      "range_km": 6.392
     },
     "best_range": {
-      "v_ms": 18.0,
-      "power_w": 746.3557945520081,
-      "minutes": 8.566666666666666,
-      "range_km": 9.252
+      "v_ms": 17.0,
+      "power_w": 642.1111522214918,
+      "minutes": 10.033333333333333,
+      "range_km": 10.234
     },
     "max_speed_ms": 20.0,
     "cruise": [
       {
         "v_ms": 0.0,
-        "power_w": 636.0497390673414,
-        "minutes": 10.133333333333333,
+        "power_w": 552.316001395279,
+        "minutes": 11.7,
         "range_km": 0.0
       },
       {
         "v_ms": 0.5,
-        "power_w": 635.7781856445796,
-        "minutes": 10.133333333333333,
-        "range_km": 0.304
+        "power_w": 552.0574274288863,
+        "minutes": 11.7,
+        "range_km": 0.351
       },
       {
         "v_ms": 1.0,
-        "power_w": 634.9881007788165,
-        "minutes": 10.133333333333333,
-        "range_km": 0.608
+        "power_w": 551.3063602875704,
+        "minutes": 11.733333333333333,
+        "range_km": 0.704
       },
       {
         "v_ms": 1.5,
-        "power_w": 633.7187876693731,
-        "minutes": 10.166666666666666,
-        "range_km": 0.915
+        "power_w": 550.1023457394274,
+        "minutes": 11.766666666666667,
+        "range_km": 1.0590000000000002
       },
       {
         "v_ms": 2.0,
-        "power_w": 632.0128797008952,
-        "minutes": 10.2,
-        "range_km": 1.224
+        "power_w": 548.4884359300847,
+        "minutes": 11.8,
+        "range_km": 1.416
       },
       {
         "v_ms": 2.5,
-        "power_w": 629.9164781354532,
-        "minutes": 10.233333333333333,
-        "range_km": 1.535
+        "power_w": 546.5113468794814,
+        "minutes": 11.833333333333334,
+        "range_km": 1.7750000000000001
       },
       {
         "v_ms": 3.0,
-        "power_w": 627.4793305167082,
-        "minutes": 10.266666666666667,
-        "range_km": 1.8480000000000003
+        "power_w": 544.2216605452061,
+        "minutes": 11.9,
+        "range_km": 2.142
       },
       {
         "v_ms": 3.5,
-        "power_w": 624.7550340073461,
-        "minutes": 10.3,
-        "range_km": 2.1630000000000003
+        "power_w": 541.6740512583065,
+        "minutes": 11.933333333333334,
+        "range_km": 2.506
       },
       {
         "v_ms": 4.0,
-        "power_w": 621.8012422985656,
-        "minutes": 10.366666666666667,
-        "range_km": 2.488
+        "power_w": 538.9275086392015,
+        "minutes": 12.0,
+        "range_km": 2.88
       },
       {
         "v_ms": 4.5,
-        "power_w": 618.6798476899676,
-        "minutes": 10.4,
-        "range_km": 2.8080000000000003
+        "power_w": 536.0455209866019,
+        "minutes": 12.066666666666666,
+        "range_km": 3.258
       },
       {
         "v_ms": 5.0,
-        "power_w": 615.4571044840172,
-        "minutes": 10.466666666666667,
-        "range_km": 3.14
+        "power_w": 533.0961757362847,
+        "minutes": 12.133333333333333,
+        "range_km": 3.64
       },
       {
         "v_ms": 5.5,
-        "power_w": 612.2036546724221,
-        "minutes": 10.533333333333333,
-        "range_km": 3.476
+        "power_w": 530.1521287144517,
+        "minutes": 12.2,
+        "range_km": 4.026
       },
       {
         "v_ms": 6.0,
-        "power_w": 608.9944153233744,
-        "minutes": 10.6,
-        "range_km": 3.8159999999999994
+        "power_w": 527.2903939070299,
+        "minutes": 12.3,
+        "range_km": 4.428000000000001
       },
       {
         "v_ms": 6.5,
-        "power_w": 605.9082901110695,
-        "minutes": 10.633333333333333,
-        "range_km": 4.147
+        "power_w": 524.591912770809,
+        "minutes": 12.333333333333334,
+        "range_km": 4.81
       },
       {
         "v_ms": 7.0,
-        "power_w": 603.0276768397514,
-        "minutes": 10.7,
-        "range_km": 4.493999999999999
+        "power_w": 522.140878465608,
+        "minutes": 12.4,
+        "range_km": 5.208
       },
       {
         "v_ms": 7.5,
-        "power_w": 600.4377592923272,
-        "minutes": 10.733333333333333,
-        "range_km": 4.83
+        "power_w": 520.0238158223892,
+        "minutes": 12.466666666666667,
+        "range_km": 5.61
       },
       {
         "v_ms": 8.0,
-        "power_w": 598.225594484788,
-        "minutes": 10.766666666666667,
-        "range_km": 5.168
+        "power_w": 518.3284498438369,
+        "minutes": 12.5,
+        "range_km": 6.0
       },
       {
         "v_ms": 8.5,
-        "power_w": 596.4790327201287,
-        "minutes": 10.8,
-        "range_km": 5.508000000000001
+        "power_w": 517.1424287606511,
+        "minutes": 12.533333333333333,
+        "range_km": 6.392
       },
       {
         "v_ms": 9.0,
-        "power_w": 595.2855332340907,
-        "minutes": 10.833333333333334,
-        "range_km": 5.85
+        "power_w": 516.5519949817356,
+        "minutes": 12.533333333333333,
+        "range_km": 6.768
       },
       {
         "v_ms": 9.5,
-        "power_w": 594.7309573707524,
-        "minutes": 10.833333333333334,
-        "range_km": 6.175
+        "power_w": 516.6407116686186,
+        "minutes": 12.533333333333333,
+        "range_km": 7.144
       },
       {
         "v_ms": 10.0,
-        "power_w": 594.8984294115029,
-        "minutes": 10.833333333333334,
-        "range_km": 6.500000000000001
+        "power_w": 517.4883497172641,
+        "minutes": 12.533333333333333,
+        "range_km": 7.52
       },
       {
         "v_ms": 10.5,
-        "power_w": 595.867349911219,
-        "minutes": 10.833333333333334,
-        "range_km": 6.825
+        "power_w": 519.1700196247815,
+        "minutes": 12.466666666666667,
+        "range_km": 7.854
       },
       {
         "v_ms": 11.0,
-        "power_w": 597.7126283693475,
-        "minutes": 10.8,
-        "range_km": 7.128000000000001
+        "power_w": 521.7555996472354,
+        "minutes": 12.433333333333334,
+        "range_km": 8.206
       },
       {
         "v_ms": 11.5,
-        "power_w": 600.5041750657717,
-        "minutes": 10.733333333333333,
-        "range_km": 7.405999999999999
+        "power_w": 525.3094734638288,
+        "minutes": 12.333333333333334,
+        "range_km": 8.51
       },
       {
         "v_ms": 12.0,
-        "power_w": 604.3066616001431,
-        "minutes": 10.666666666666666,
-        "range_km": 7.68
+        "power_w": 529.89055536688,
+        "minutes": 12.233333333333333,
+        "range_km": 8.807999999999998
       },
       {
         "v_ms": 12.5,
-        "power_w": 609.1795319207181,
-        "minutes": 10.566666666666666,
-        "range_km": 7.925000000000001
+        "power_w": 535.5525547506141,
+        "minutes": 12.1,
+        "range_km": 9.075
       },
       {
         "v_ms": 13.0,
-        "power_w": 615.1772246220214,
-        "minutes": 10.466666666666667,
-        "range_km": 8.164
+        "power_w": 542.3444178027876,
+        "minutes": 11.933333333333334,
+        "range_km": 9.308
       },
       {
         "v_ms": 13.5,
-        "power_w": 622.3495557567846,
-        "minutes": 10.333333333333334,
-        "range_km": 8.37
+        "power_w": 550.310880854405,
+        "minutes": 11.766666666666667,
+        "range_km": 9.531000000000002
       },
       {
         "v_ms": 14.0,
-        "power_w": 630.7422075822799,
-        "minutes": 10.2,
-        "range_km": 8.567999999999998
+        "power_w": 559.4930763379658,
+        "minutes": 11.566666666666666,
+        "range_km": 9.716
       },
       {
         "v_ms": 14.5,
-        "power_w": 640.3972730350646,
-        "minutes": 10.033333333333333,
-        "range_km": 8.729
+        "power_w": 569.9291434005153,
+        "minutes": 11.333333333333334,
+        "range_km": 9.86
       },
       {
         "v_ms": 15.0,
-        "power_w": 651.353813863606,
-        "minutes": 9.866666666666667,
-        "range_km": 8.88
+        "power_w": 581.6548077241839,
+        "minutes": 11.1,
+        "range_km": 9.99
       },
       {
         "v_ms": 15.5,
-        "power_w": 663.6483999626511,
-        "minutes": 9.666666666666666,
-        "range_km": 8.989999999999998
+        "power_w": 594.7039086276638,
+        "minutes": 10.833333333333334,
+        "range_km": 10.075000000000001
       },
       {
         "v_ms": 16.0,
-        "power_w": 677.3156086273009,
-        "minutes": 9.466666666666667,
-        "range_km": 9.088
+        "power_w": 609.1088610401727,
+        "minutes": 10.566666666666666,
+        "range_km": 10.144
       },
       {
         "v_ms": 16.5,
-        "power_w": 692.3884703527013,
-        "minutes": 9.266666666666667,
-        "range_km": 9.174
+        "power_w": 624.901048982085,
+        "minutes": 10.3,
+        "range_km": 10.197000000000001
       },
       {
         "v_ms": 17.0,
-        "power_w": 708.898855946529,
-        "minutes": 9.033333333333333,
-        "range_km": 9.214
+        "power_w": 642.1111522214918,
+        "minutes": 10.033333333333333,
+        "range_km": 10.234
       },
       {
         "v_ms": 17.5,
-        "power_w": 726.8778044185667,
-        "minutes": 8.8,
-        "range_km": 9.24
+        "power_w": 660.7694111787577,
+        "minutes": 9.733333333333333,
+        "range_km": 10.219999999999999
       },
       {
         "v_ms": 18.0,
-        "power_w": 746.3557945520081,
-        "minutes": 8.566666666666666,
-        "range_km": 9.252
+        "power_w": 680.9058375160708,
+        "minutes": 9.433333333333334,
+        "range_km": 10.188
       },
       {
         "v_ms": 18.5,
-        "power_w": 767.3629656886974,
-        "minutes": 8.333333333333334,
-        "range_km": 9.250000000000002
+        "power_w": 702.5503778414702,
+        "minutes": 9.133333333333333,
+        "range_km": 10.138
       },
       {
         "v_ms": 19.0,
-        "power_w": 789.9292936255996,
-        "minutes": 8.066666666666666,
-        "range_km": 9.196
+        "power_w": 725.733038341144,
+        "minutes": 8.833333333333334,
+        "range_km": 10.07
       },
       {
         "v_ms": 19.5,
-        "power_w": 814.0847281084488,
-        "minutes": 7.833333333333333,
-        "range_km": 9.165
+        "power_w": 750.4839770430686,
+        "minutes": 8.5,
+        "range_km": 9.945
       },
       {
         "v_ms": 20.0,
-        "power_w": 839.8592982130284,
-        "minutes": 7.566666666666666,
-        "range_km": 9.079999999999998
+        "power_w": 776.8335703021523,
+        "minutes": 8.2,
+        "range_km": 9.84
       }
     ],
     "checks": {
       "prop_rpm_hover": {
-        "value": 8678.152552589923,
+        "value": 8272.35246752204,
         "limit": 16111,
         "pass": true,
-        "margin_pct": 46.135233364844375
+        "margin_pct": 48.65400988441413
       },
       "prop_rpm_max": {
         "value": 15927.445691234809,
@@ -2024,12 +1973,12 @@
         "margin_pct": 1.1393104634423146
       },
       "thrust_to_weight": {
-        "value": 3.368508947353044,
+        "value": 3.7070991754518694,
         "limit": 2.0,
         "pass": true
       },
       "hover_thrust_fraction": {
-        "value": 0.29686725362145605,
+        "value": 0.2697526968315076,
         "limit": 0.5,
         "pass": true
       }
@@ -2069,7 +2018,7 @@
       },
       {
         "id": "prop",
-        "name": "propeller (see prop_options)",
+        "name": "HQProp 9x4.5 nylon composite",
         "qty": 4,
         "unit_kg": 0.01,
         "total_kg": 0.04,
@@ -2118,12 +2067,12 @@
       },
       {
         "id": "fc_stack",
-        "name": "SpeedyBee F405 V5 stack (FC + 4-in-1 ESC, 30x30)",
+        "name": "SpeedyBee F405 V5 stack (FC + 4-in-1 ESC, 30x30, 2-6S)",
         "qty": 1,
         "unit_kg": 0.035,
         "total_kg": 0.035,
         "confidence": "vendor",
-        "source": "SpeedyBee F405 V5 product page",
+        "source": "SpeedyBee F405 V5 Standard, Betaflight-configurable",
         "power_w": 2.0,
         "positions": [
           [
@@ -2134,30 +2083,47 @@
         ]
       },
       {
-        "id": "gps",
-        "name": "GPS / compass module + mast",
+        "id": "imu",
+        "name": "Standard IMU breakout (ICM-42688-P class) + cable",
         "qty": 1,
-        "unit_kg": 0.04,
-        "total_kg": 0.04,
+        "unit_kg": 0.005,
+        "total_kg": 0.005,
         "confidence": "estimated",
-        "source": "typical M8N/M9N puck plus mast",
+        "source": "6-axis MEMS IMU breakout; the FC carries its own, this is the dedicated one for the navigation stack on the compute board",
+        "power_w": 0.1,
+        "positions": [
+          [
+            0.0,
+            0.0,
+            0.015
+          ]
+        ]
+      },
+      {
+        "id": "nav_camera",
+        "name": "Arducam Camera Module 3 (IMX708, 12MP, 75 deg DFOV, autofocus)",
+        "qty": 1,
+        "unit_kg": 0.01,
+        "total_kg": 0.01,
+        "confidence": "vendor",
+        "source": "Pi Camera Module 3 board ~4 g + 15-22 pin FFC cable. THE mapping / detection / navigation sensor. CSI to the Pi 5.",
         "power_w": 0.5,
         "positions": [
           [
-            -0.06,
+            0.09,
             0.0,
-            0.15
+            -0.025
           ]
         ]
       },
       {
         "id": "wifi",
-        "name": "ALFA AWUS036ACM dual-band USB adapter + antennas",
+        "name": "ALFA AWUS036ACM AC1200 USB 3.0 + 2x 5dBi antennas",
         "qty": 1,
-        "unit_kg": 0.17,
-        "total_kg": 0.17,
+        "unit_kg": 0.145,
+        "total_kg": 0.145,
         "confidence": "estimated",
-        "source": "adapter ~130 g + 2 antennas; CONFIRM",
+        "source": "adapter ~105 g + 2x 5dBi antennas ~20 g each; CONFIRM on a scale",
         "power_w": 3.0,
         "positions": [
           [
@@ -2168,47 +2134,13 @@
         ]
       },
       {
-        "id": "zed2",
-        "name": "Stereolabs ZED 2",
-        "qty": 1,
-        "unit_kg": 0.18,
-        "total_kg": 0.18,
-        "confidence": "vendor",
-        "source": "ZED 2 = 166 g body, +cable",
-        "power_w": 2.0,
-        "positions": [
-          [
-            0.09,
-            0.0,
-            -0.03
-          ]
-        ]
-      },
-      {
-        "id": "zed_mini",
-        "name": "Stereolabs ZED Mini",
-        "qty": 1,
-        "unit_kg": 0.062,
-        "total_kg": 0.062,
-        "confidence": "vendor",
-        "source": "ZED Mini = 62.9 g",
-        "power_w": 2.0,
-        "positions": [
-          [
-            0.075,
-            -0.08,
-            -0.025
-          ]
-        ]
-      },
-      {
         "id": "gimbal",
-        "name": "3-DoF gimbal + gimbal camera",
+        "name": "3-DoF gimbal + gimbal camera (lab unit, unidentified)",
         "qty": 1,
         "unit_kg": 0.21,
         "total_kg": 0.21,
         "confidence": "estimated",
-        "source": "unidentified lab unit \u2014 WEIGH AND IDENTIFY",
+        "source": "unidentified lab unit \u2014 WEIGH AND IDENTIFY. Carried as mass and power only; it is not the navigation sensor.",
         "power_w": 5.0,
         "positions": [
           [
@@ -2259,7 +2191,7 @@
         "unit_kg": 0.18,
         "total_kg": 0.18,
         "confidence": "estimated",
-        "source": "Orin NX module 25 g + carrier/cooler; CONFIRM carrier choice",
+        "source": "comparison variant only, not in the parts list",
         "power_w": 25.0,
         "positions": [
           [
@@ -2276,35 +2208,35 @@
     "prop": "11x4.5",
     "in_parts_list": false,
     "rho": 1.2249781262066513,
-    "auw_kg": 3.2129999999999996,
+    "auw_kg": 2.921,
     "cg_m": [
-      0.0017896047307812007,
-      -0.0015437286025521322,
-      0.019614067849361972
+      -0.0033550154056829853,
+      0.0,
+      0.02106983909619993
     ],
     "inertia": {
-      "ixx": 0.03482812080026454,
-      "iyy": 0.0387823374669312,
-      "izz": 0.059369927878929335
+      "ixx": 0.03285309633615771,
+      "iyy": 0.03505651718518201,
+      "izz": 0.05652937918235764
     },
-    "avionics_w": 39.5,
+    "avionics_w": 35.6,
     "disc_area_m2": 0.24524641988318885,
-    "disc_loading_kgm2": 13.101108678896741,
+    "disc_loading_kgm2": 11.91046948367799,
     "pack_wh": 136.07999999999998,
     "v_nominal": 22.68,
     "hover": {
-      "rpm": 6014.857396273058,
-      "throttle": 0.3403434025565721,
-      "rpm_fraction": 0.5833895804319545,
-      "thrust_per_motor_n": 7.877191612499999,
-      "thrust_per_motor_g": 803.2499999999999,
-      "power_w": 499.52869503208257,
-      "prop_power_w": 460.02869503208257,
-      "current_a": 23.639119678742603,
-      "minutes": 12.983333333333333,
+      "rpm": 5735.03075219869,
+      "throttle": 0.30941272295914934,
+      "rpm_fraction": 0.5562487959170332,
+      "thrust_per_motor_n": 7.161306162499999,
+      "thrust_per_motor_g": 730.25,
+      "power_w": 434.36420725737094,
+      "prop_power_w": 398.7642072573709,
+      "current_a": 20.46220310233776,
+      "minutes": 14.983333333333333,
       "ok": true,
-      "tip_speed_ms": 87.99345278834924,
-      "tip_mach": 0.25857611750910736
+      "tip_speed_ms": 83.89977093156291,
+      "tip_mach": 0.24654649113007027
     },
     "max": {
       "rpm": 10310.189962288192,
@@ -2316,274 +2248,274 @@
       "tip_speed_ms": 150.8313753618927,
       "tip_mach": 0.4432306064116741
     },
-    "twr": 2.93820885754875,
+    "twr": 3.2319291541609503,
     "best_endurance": {
-      "v_ms": 9.5,
-      "power_w": 448.8335956735422,
-      "minutes": 14.5,
-      "range_km": 8.265
+      "v_ms": 9.0,
+      "power_w": 390.431128341289,
+      "minutes": 16.733333333333334,
+      "range_km": 9.036000000000001
     },
     "best_range": {
-      "v_ms": 16.0,
-      "power_w": 540.0849441680642,
-      "minutes": 12.0,
-      "range_km": 11.52
+      "v_ms": 15.5,
+      "power_w": 476.367940564633,
+      "minutes": 13.633333333333333,
+      "range_km": 12.679
     },
     "max_speed_ms": 20.0,
     "cruise": [
       {
         "v_ms": 0.0,
-        "power_w": 499.52869503208257,
-        "minutes": 13.0,
+        "power_w": 434.36420725737094,
+        "minutes": 15.0,
         "range_km": 0.0
       },
       {
         "v_ms": 0.5,
-        "power_w": 499.1947306610119,
-        "minutes": 13.0,
-        "range_km": 0.39
+        "power_w": 434.0460679943901,
+        "minutes": 15.0,
+        "range_km": 0.45
       },
       {
         "v_ms": 1.0,
-        "power_w": 498.21846886636024,
-        "minutes": 13.033333333333333,
-        "range_km": 0.782
+        "power_w": 433.1174128914066,
+        "minutes": 15.033333333333333,
+        "range_km": 0.902
       },
       {
         "v_ms": 1.5,
-        "power_w": 496.6424335576434,
-        "minutes": 13.066666666666666,
-        "range_km": 1.176
+        "power_w": 431.621172494499,
+        "minutes": 15.1,
+        "range_km": 1.359
       },
       {
         "v_ms": 2.0,
-        "power_w": 494.514796706956,
-        "minutes": 13.133333333333333,
-        "range_km": 1.576
+        "power_w": 429.60623581812973,
+        "minutes": 15.166666666666666,
+        "range_km": 1.82
       },
       {
         "v_ms": 2.5,
-        "power_w": 491.88975105634705,
-        "minutes": 13.2,
-        "range_km": 1.98
+        "power_w": 427.127874390648,
+        "minutes": 15.266666666666667,
+        "range_km": 2.2900000000000005
       },
       {
         "v_ms": 3.0,
-        "power_w": 488.82797275285924,
-        "minutes": 13.266666666666667,
-        "range_km": 2.3880000000000003
+        "power_w": 424.24825993829506,
+        "minutes": 15.366666666666667,
+        "range_km": 2.766
       },
       {
         "v_ms": 3.5,
-        "power_w": 485.39710820698673,
-        "minutes": 13.366666666666667,
-        "range_km": 2.807
+        "power_w": 421.03699123139194,
+        "minutes": 15.466666666666667,
+        "range_km": 3.248
       },
       {
         "v_ms": 4.0,
-        "power_w": 481.6721948503338,
-        "minutes": 13.466666666666667,
-        "range_km": 3.232
+        "power_w": 417.57151412682236,
+        "minutes": 15.6,
+        "range_km": 3.744
       },
       {
         "v_ms": 4.5,
-        "power_w": 477.73590160048957,
-        "minutes": 13.6,
-        "range_km": 3.6719999999999997
+        "power_w": 413.9372910696336,
+        "minutes": 15.766666666666667,
+        "range_km": 4.257
       },
       {
         "v_ms": 5.0,
-        "power_w": 473.6784604073133,
-        "minutes": 13.7,
-        "range_km": 4.11
+        "power_w": 410.22756265466046,
+        "minutes": 15.9,
+        "range_km": 4.77
       },
       {
         "v_ms": 5.5,
-        "power_w": 469.5971619148533,
-        "minutes": 13.833333333333334,
-        "range_km": 4.565000000000001
+        "power_w": 406.5425579418735,
+        "minutes": 16.033333333333335,
+        "range_km": 5.291
       },
       {
         "v_ms": 6.0,
-        "power_w": 465.5953181483521,
-        "minutes": 13.966666666666667,
-        "range_km": 5.028
+        "power_w": 402.98806302747766,
+        "minutes": 16.2,
+        "range_km": 5.831999999999999
       },
       {
         "v_ms": 6.5,
-        "power_w": 461.7806569654635,
-        "minutes": 14.066666666666666,
-        "range_km": 5.486
+        "power_w": 399.6733533087877,
+        "minutes": 16.333333333333332,
+        "range_km": 6.369999999999999
       },
       {
         "v_ms": 7.0,
-        "power_w": 458.26320249305263,
-        "minutes": 14.2,
-        "range_km": 5.9639999999999995
+        "power_w": 396.70861815071225,
+        "minutes": 16.466666666666665,
+        "range_km": 6.9159999999999995
       },
       {
         "v_ms": 7.5,
-        "power_w": 455.1527976947655,
-        "minutes": 14.3,
-        "range_km": 6.435
+        "power_w": 394.2021277447538,
+        "minutes": 16.566666666666666,
+        "range_km": 7.455
       },
       {
         "v_ms": 8.0,
-        "power_w": 452.5565099910152,
-        "minutes": 14.366666666666667,
-        "range_km": 6.896
+        "power_w": 392.25747114224737,
+        "minutes": 16.633333333333333,
+        "range_km": 7.984
       },
       {
         "v_ms": 8.5,
-        "power_w": 450.57620304224383,
-        "minutes": 14.433333333333334,
-        "range_km": 7.361
+        "power_w": 390.9711987353618,
+        "minutes": 16.7,
+        "range_km": 8.517
       },
       {
         "v_ms": 9.0,
-        "power_w": 449.30653839005106,
-        "minutes": 14.466666666666667,
-        "range_km": 7.811999999999999
+        "power_w": 390.431128341289,
+        "minutes": 16.733333333333334,
+        "range_km": 9.036000000000001
       },
       {
         "v_ms": 9.5,
-        "power_w": 448.8335956735422,
-        "minutes": 14.5,
-        "range_km": 8.265
+        "power_w": 390.7154435246778,
+        "minutes": 16.7,
+        "range_km": 9.519
       },
       {
         "v_ms": 10.0,
-        "power_w": 449.2341898655935,
-        "minutes": 14.466666666666667,
-        "range_km": 8.68
+        "power_w": 391.89257070281116,
+        "minutes": 16.666666666666668,
+        "range_km": 10.000000000000002
       },
       {
         "v_ms": 10.5,
-        "power_w": 450.5758532081952,
-        "minutes": 14.433333333333334,
-        "range_km": 9.093
+        "power_w": 394.02170622459795,
+        "minutes": 16.566666666666666,
+        "range_km": 10.437
       },
       {
         "v_ms": 11.0,
-        "power_w": 452.91736434171713,
-        "minutes": 14.366666666666667,
-        "range_km": 9.482
+        "power_w": 397.15380140439095,
+        "minutes": 16.433333333333334,
+        "range_km": 10.846
       },
       {
         "v_ms": 11.5,
-        "power_w": 456.3096620768592,
-        "minutes": 14.266666666666667,
-        "range_km": 9.844
+        "power_w": 401.33280266813443,
+        "minutes": 16.266666666666666,
+        "range_km": 11.224
       },
       {
         "v_ms": 12.0,
-        "power_w": 460.79697588644245,
-        "minutes": 14.1,
-        "range_km": 10.152
+        "power_w": 406.5969706734708,
+        "minutes": 16.033333333333335,
+        "range_km": 11.544000000000002
       },
       {
         "v_ms": 12.5,
-        "power_w": 466.41802701702215,
-        "minutes": 13.933333333333334,
-        "range_km": 10.45
+        "power_w": 412.9801490604045,
+        "minutes": 15.8,
+        "range_km": 11.85
       },
       {
         "v_ms": 13.0,
-        "power_w": 473.2071914012418,
-        "minutes": 13.733333333333333,
-        "range_km": 10.712
+        "power_w": 420.5129024307021,
+        "minutes": 15.5,
+        "range_km": 12.09
       },
       {
         "v_ms": 13.5,
-        "power_w": 481.19555450402993,
-        "minutes": 13.5,
-        "range_km": 10.935
+        "power_w": 429.22348422200497,
+        "minutes": 15.166666666666666,
+        "range_km": 12.285
       },
       {
         "v_ms": 14.0,
-        "power_w": 490.41182147824685,
-        "minutes": 13.233333333333333,
-        "range_km": 11.116
+        "power_w": 439.13862616870887,
+        "minutes": 14.833333333333334,
+        "range_km": 12.460000000000003
       },
       {
         "v_ms": 14.5,
-        "power_w": 500.88307219345177,
-        "minutes": 12.966666666666667,
-        "range_km": 11.281
+        "power_w": 450.28415960018805,
+        "minutes": 14.433333333333334,
+        "range_km": 12.557
       },
       {
         "v_ms": 15.0,
-        "power_w": 512.6353668686049,
-        "minutes": 12.633333333333333,
-        "range_km": 11.37
+        "power_w": 462.6854887488742,
+        "minutes": 14.066666666666666,
+        "range_km": 12.66
       },
       {
         "v_ms": 15.5,
-        "power_w": 525.6942173864057,
-        "minutes": 12.333333333333334,
-        "range_km": 11.470000000000002
+        "power_w": 476.367940564633,
+        "minutes": 13.633333333333333,
+        "range_km": 12.679
       },
       {
         "v_ms": 16.0,
-        "power_w": 540.0849441680642,
-        "minutes": 12.0,
-        "range_km": 11.52
+        "power_w": 491.35701476358633,
+        "minutes": 13.2,
+        "range_km": 12.672
       },
       {
         "v_ms": 16.5,
-        "power_w": 555.8329385721386,
-        "minutes": 11.633333333333333,
-        "range_km": 11.517
+        "power_w": 507.67855553525237,
+        "minutes": 12.766666666666667,
+        "range_km": 12.639
       },
       {
         "v_ms": 17.0,
-        "power_w": 572.9638494480743,
-        "minutes": 11.266666666666667,
-        "range_km": 11.492000000000003
+        "power_w": 525.3588636624443,
+        "minutes": 12.333333333333334,
+        "range_km": 12.580000000000002
       },
       {
         "v_ms": 17.5,
-        "power_w": 591.503710709665,
-        "minutes": 10.9,
-        "range_km": 11.445
+        "power_w": 544.4247638433374,
+        "minutes": 11.9,
+        "range_km": 12.495
       },
       {
         "v_ms": 18.0,
-        "power_w": 611.4790234897957,
-        "minutes": 10.533333333333333,
-        "range_km": 11.376
+        "power_w": 564.9036392856732,
+        "minutes": 11.433333333333334,
+        "range_km": 12.348
       },
       {
         "v_ms": 18.5,
-        "power_w": 632.9168042605478,
-        "minutes": 10.166666666666666,
-        "range_km": 11.284999999999998
+        "power_w": 586.8234428267734,
+        "minutes": 11.0,
+        "range_km": 12.21
       },
       {
         "v_ms": 19.0,
-        "power_w": 655.8446078397523,
-        "minutes": 9.8,
-        "range_km": 11.172000000000002
+        "power_w": 610.212691778527,
+        "minutes": 10.566666666666666,
+        "range_km": 12.046
       },
       {
         "v_ms": 19.5,
-        "power_w": 680.290532400035,
-        "minutes": 9.433333333333334,
-        "range_km": 11.037000000000003
+        "power_w": 635.100451516773,
+        "minutes": 10.133333333333333,
+        "range_km": 11.856
       },
       {
         "v_ms": 20.0,
-        "power_w": 706.2832115316072,
-        "minutes": 9.066666666666666,
-        "range_km": 10.879999999999999
+        "power_w": 661.516312123037,
+        "minutes": 9.7,
+        "range_km": 11.64
       }
     ],
     "checks": {
       "prop_rpm_hover": {
-        "value": 6014.857396273058,
+        "value": 5735.03075219869,
         "limit": 13182,
         "pass": true,
-        "margin_pct": 54.370676708594615
+        "margin_pct": 56.49347024579966
       },
       "prop_rpm_max": {
         "value": 10310.189962288192,
@@ -2592,12 +2524,12 @@
         "margin_pct": 21.785844619267245
       },
       "thrust_to_weight": {
-        "value": 2.93820885754875,
+        "value": 3.2319291541609503,
         "limit": 2.0,
         "pass": true
       },
       "hover_thrust_fraction": {
-        "value": 0.3403434025565721,
+        "value": 0.30941272295914934,
         "limit": 0.5,
         "pass": true
       }
@@ -2637,7 +2569,7 @@
       },
       {
         "id": "prop",
-        "name": "propeller (see prop_options)",
+        "name": "HQProp 9x4.5 nylon composite",
         "qty": 4,
         "unit_kg": 0.014,
         "total_kg": 0.056,
@@ -2686,12 +2618,12 @@
       },
       {
         "id": "fc_stack",
-        "name": "SpeedyBee F405 V5 stack (FC + 4-in-1 ESC, 30x30)",
+        "name": "SpeedyBee F405 V5 stack (FC + 4-in-1 ESC, 30x30, 2-6S)",
         "qty": 1,
         "unit_kg": 0.035,
         "total_kg": 0.035,
         "confidence": "vendor",
-        "source": "SpeedyBee F405 V5 product page",
+        "source": "SpeedyBee F405 V5 Standard, Betaflight-configurable",
         "power_w": 2.0,
         "positions": [
           [
@@ -2702,30 +2634,47 @@
         ]
       },
       {
-        "id": "gps",
-        "name": "GPS / compass module + mast",
+        "id": "imu",
+        "name": "Standard IMU breakout (ICM-42688-P class) + cable",
         "qty": 1,
-        "unit_kg": 0.04,
-        "total_kg": 0.04,
+        "unit_kg": 0.005,
+        "total_kg": 0.005,
         "confidence": "estimated",
-        "source": "typical M8N/M9N puck plus mast",
+        "source": "6-axis MEMS IMU breakout; the FC carries its own, this is the dedicated one for the navigation stack on the compute board",
+        "power_w": 0.1,
+        "positions": [
+          [
+            0.0,
+            0.0,
+            0.015
+          ]
+        ]
+      },
+      {
+        "id": "nav_camera",
+        "name": "Arducam Camera Module 3 (IMX708, 12MP, 75 deg DFOV, autofocus)",
+        "qty": 1,
+        "unit_kg": 0.01,
+        "total_kg": 0.01,
+        "confidence": "vendor",
+        "source": "Pi Camera Module 3 board ~4 g + 15-22 pin FFC cable. THE mapping / detection / navigation sensor. CSI to the Pi 5.",
         "power_w": 0.5,
         "positions": [
           [
-            -0.06,
+            0.09,
             0.0,
-            0.15
+            -0.025
           ]
         ]
       },
       {
         "id": "wifi",
-        "name": "ALFA AWUS036ACM dual-band USB adapter + antennas",
+        "name": "ALFA AWUS036ACM AC1200 USB 3.0 + 2x 5dBi antennas",
         "qty": 1,
-        "unit_kg": 0.17,
-        "total_kg": 0.17,
+        "unit_kg": 0.145,
+        "total_kg": 0.145,
         "confidence": "estimated",
-        "source": "adapter ~130 g + 2 antennas; CONFIRM",
+        "source": "adapter ~105 g + 2x 5dBi antennas ~20 g each; CONFIRM on a scale",
         "power_w": 3.0,
         "positions": [
           [
@@ -2736,47 +2685,13 @@
         ]
       },
       {
-        "id": "zed2",
-        "name": "Stereolabs ZED 2",
-        "qty": 1,
-        "unit_kg": 0.18,
-        "total_kg": 0.18,
-        "confidence": "vendor",
-        "source": "ZED 2 = 166 g body, +cable",
-        "power_w": 2.0,
-        "positions": [
-          [
-            0.09,
-            0.0,
-            -0.03
-          ]
-        ]
-      },
-      {
-        "id": "zed_mini",
-        "name": "Stereolabs ZED Mini",
-        "qty": 1,
-        "unit_kg": 0.062,
-        "total_kg": 0.062,
-        "confidence": "vendor",
-        "source": "ZED Mini = 62.9 g",
-        "power_w": 2.0,
-        "positions": [
-          [
-            0.075,
-            -0.08,
-            -0.025
-          ]
-        ]
-      },
-      {
         "id": "gimbal",
-        "name": "3-DoF gimbal + gimbal camera",
+        "name": "3-DoF gimbal + gimbal camera (lab unit, unidentified)",
         "qty": 1,
         "unit_kg": 0.21,
         "total_kg": 0.21,
         "confidence": "estimated",
-        "source": "unidentified lab unit \u2014 WEIGH AND IDENTIFY",
+        "source": "unidentified lab unit \u2014 WEIGH AND IDENTIFY. Carried as mass and power only; it is not the navigation sensor.",
         "power_w": 5.0,
         "positions": [
           [
@@ -2827,7 +2742,7 @@
         "unit_kg": 0.18,
         "total_kg": 0.18,
         "confidence": "estimated",
-        "source": "Orin NX module 25 g + carrier/cooler; CONFIRM carrier choice",
+        "source": "comparison variant only, not in the parts list",
         "power_w": 25.0,
         "positions": [
           [
@@ -2844,35 +2759,35 @@
     "prop": "13x4.4",
     "in_parts_list": false,
     "rho": 1.2249781262066513,
-    "auw_kg": 3.2369999999999997,
+    "auw_kg": 2.945,
     "cg_m": [
-      0.0017763361136855105,
-      -0.0015322829780661108,
-      0.01980228606734631
+      -0.0033276740237691,
+      0.0,
+      0.021264855687606117
     ],
     "inertia": {
-      "ixx": 0.03559745458951189,
-      "iyy": 0.03955889078042941,
-      "izz": 0.0608730109437751
+      "ixx": 0.033620652995897005,
+      "iyy": 0.03583154179046406,
+      "izz": 0.05803259712790039
     },
-    "avionics_w": 39.5,
+    "avionics_w": 35.6,
     "disc_area_m2": 0.34253425586990843,
-    "disc_loading_kgm2": 9.450149713578966,
+    "disc_loading_kgm2": 8.597680230611696,
     "pack_wh": 136.07999999999998,
     "v_nominal": 22.68,
     "hover": {
-      "rpm": 4474.2639374660685,
-      "throttle": 0.3721486184859167,
-      "rpm_fraction": 0.6100398499163122,
-      "thrust_per_motor_n": 7.936031512499999,
-      "thrust_per_motor_g": 809.2499999999999,
-      "power_w": 414.95729664056324,
-      "prop_power_w": 375.45729664056324,
-      "current_a": 19.52174029001874,
-      "minutes": 15.7,
+      "rpm": 4267.690336210054,
+      "throttle": 0.33857821484121864,
+      "rpm_fraction": 0.5818747415391207,
+      "thrust_per_motor_n": 7.2201460625,
+      "thrust_per_motor_g": 736.25,
+      "power_w": 361.41753105783266,
+      "prop_power_w": 325.81753105783264,
+      "current_a": 16.941573546351663,
+      "minutes": 18.083333333333332,
       "ok": true,
-      "tip_speed_ms": 77.35658532129548,
-      "tip_mach": 0.22731879318629292
+      "tip_speed_ms": 73.78508649287858,
+      "tip_mach": 0.21682364529203224
     },
     "max": {
       "rpm": 7334.37977548494,
@@ -2884,274 +2799,274 @@
       "tip_speed_ms": 126.80579036256007,
       "tip_mach": 0.37262941628727614
     },
-    "twr": 2.6870985147506152,
+    "twr": 2.9535272978769918,
     "best_endurance": {
-      "v_ms": 9.0,
-      "power_w": 358.9128328177971,
-      "minutes": 18.233333333333334,
-      "range_km": 9.846000000000002
+      "v_ms": 8.5,
+      "power_w": 312.8568647980694,
+      "minutes": 20.966666666666665,
+      "range_km": 10.692999999999998
     },
     "best_range": {
-      "v_ms": 15.5,
-      "power_w": 444.96896660056234,
-      "minutes": 14.633333333333333,
-      "range_km": 13.609
+      "v_ms": 15.0,
+      "power_w": 393.2012140820756,
+      "minutes": 16.6,
+      "range_km": 14.940000000000001
     },
     "max_speed_ms": 20.0,
     "cruise": [
       {
         "v_ms": 0.0,
-        "power_w": 414.95729664056324,
-        "minutes": 15.7,
+        "power_w": 361.41753105783266,
+        "minutes": 18.1,
         "range_km": 0.0
       },
       {
         "v_ms": 0.5,
-        "power_w": 414.5601576884908,
-        "minutes": 15.733333333333333,
-        "range_km": 0.472
+        "power_w": 361.039025882783,
+        "minutes": 18.1,
+        "range_km": 0.543
       },
       {
         "v_ms": 1.0,
-        "power_w": 413.3959227576371,
-        "minutes": 15.766666666666667,
-        "range_km": 0.946
+        "power_w": 359.9308996294464,
+        "minutes": 18.166666666666668,
+        "range_km": 1.09
       },
       {
         "v_ms": 1.5,
-        "power_w": 411.5118745842777,
-        "minutes": 15.833333333333334,
-        "range_km": 1.425
+        "power_w": 358.14108493919974,
+        "minutes": 18.266666666666666,
+        "range_km": 1.644
       },
       {
         "v_ms": 2.0,
-        "power_w": 408.9644553720896,
-        "minutes": 15.933333333333334,
-        "range_km": 1.912
+        "power_w": 355.7271943472609,
+        "minutes": 18.4,
+        "range_km": 2.208
       },
       {
         "v_ms": 2.5,
-        "power_w": 405.8200858592595,
-        "minutes": 16.066666666666666,
-        "range_km": 2.41
+        "power_w": 352.7574447390561,
+        "minutes": 18.533333333333335,
+        "range_km": 2.78
       },
       {
         "v_ms": 3.0,
-        "power_w": 402.1561186178467,
-        "minutes": 16.233333333333334,
-        "range_km": 2.922
+        "power_w": 349.3117039365749,
+        "minutes": 18.733333333333334,
+        "range_km": 3.372
       },
       {
         "v_ms": 3.5,
-        "power_w": 398.0617098747987,
-        "minutes": 16.4,
-        "range_km": 3.4439999999999995
-      },
-      {
-        "v_ms": 4.0,
-        "power_w": 393.63831932270153,
-        "minutes": 16.566666666666666,
+        "power_w": 345.48238251616004,
+        "minutes": 18.933333333333334,
         "range_km": 3.976
       },
       {
+        "v_ms": 4.0,
+        "power_w": 341.37480468229563,
+        "minutes": 19.166666666666668,
+        "range_km": 4.6
+      },
+      {
         "v_ms": 4.5,
-        "power_w": 388.9994991059684,
-        "minutes": 16.8,
-        "range_km": 4.5360000000000005
+        "power_w": 337.10664621442686,
+        "minutes": 19.433333333333334,
+        "range_km": 5.247
       },
       {
         "v_ms": 5.0,
-        "power_w": 384.269647395233,
-        "minutes": 17.0,
-        "range_km": 5.1
+        "power_w": 332.80608018638577,
+        "minutes": 19.666666666666668,
+        "range_km": 5.900000000000001
       },
       {
         "v_ms": 5.5,
-        "power_w": 379.58151737244685,
-        "minutes": 17.2,
-        "range_km": 5.676
+        "power_w": 328.6084679142656,
+        "minutes": 19.933333333333334,
+        "range_km": 6.578
       },
       {
         "v_ms": 6.0,
-        "power_w": 375.07250181249384,
-        "minutes": 17.433333333333334,
-        "range_km": 6.276
+        "power_w": 324.65176427682337,
+        "minutes": 20.2,
+        "range_km": 7.271999999999999
       },
       {
         "v_ms": 6.5,
-        "power_w": 370.880013437996,
-        "minutes": 17.633333333333333,
-        "range_km": 6.877
+        "power_w": 321.07118871921693,
+        "minutes": 20.4,
+        "range_km": 7.956
       },
       {
         "v_ms": 7.0,
-        "power_w": 367.13655931531673,
-        "minutes": 17.8,
-        "range_km": 7.476000000000001
+        "power_w": 317.99398969867224,
+        "minutes": 20.6,
+        "range_km": 8.652000000000001
       },
       {
         "v_ms": 7.5,
-        "power_w": 363.96524244522504,
-        "minutes": 17.966666666666665,
-        "range_km": 8.085
+        "power_w": 315.5351628361781,
+        "minutes": 20.766666666666666,
+        "range_km": 9.345
       },
       {
         "v_ms": 8.0,
-        "power_w": 361.47634916895544,
-        "minutes": 18.1,
-        "range_km": 8.688
+        "power_w": 313.79474131594714,
+        "minutes": 20.9,
+        "range_km": 10.032
       },
       {
         "v_ms": 8.5,
-        "power_w": 359.7654168992911,
-        "minutes": 18.166666666666668,
-        "range_km": 9.265000000000002
+        "power_w": 312.8568647980694,
+        "minutes": 20.966666666666665,
+        "range_km": 10.692999999999998
       },
       {
         "v_ms": 9.0,
-        "power_w": 358.9128328177971,
-        "minutes": 18.233333333333334,
-        "range_km": 9.846000000000002
+        "power_w": 312.7904281148839,
+        "minutes": 20.966666666666665,
+        "range_km": 11.322
       },
       {
         "v_ms": 9.5,
-        "power_w": 358.9847190021831,
-        "minutes": 18.233333333333334,
-        "range_km": 10.393
+        "power_w": 313.65085211348884,
+        "minutes": 20.9,
+        "range_km": 11.912999999999998
       },
       {
         "v_ms": 10.0,
-        "power_w": 360.034693025604,
-        "minutes": 18.166666666666668,
-        "range_km": 10.900000000000002
+        "power_w": 315.48244857287534,
+        "minutes": 20.766666666666666,
+        "range_km": 12.46
       },
       {
         "v_ms": 10.5,
-        "power_w": 362.10606881679735,
-        "minutes": 18.066666666666666,
-        "range_km": 11.382
+        "power_w": 318.3209252873125,
+        "minutes": 20.6,
+        "range_km": 12.978
       },
       {
         "v_ms": 11.0,
-        "power_w": 365.2341356014104,
-        "minutes": 17.9,
-        "range_km": 11.813999999999998
+        "power_w": 322.1957189245519,
+        "minutes": 20.333333333333332,
+        "range_km": 13.42
       },
       {
         "v_ms": 11.5,
-        "power_w": 369.4482692506952,
-        "minutes": 17.7,
-        "range_km": 12.212999999999997
+        "power_w": 327.13198786114083,
+        "minutes": 20.033333333333335,
+        "range_km": 13.823000000000002
       },
       {
         "v_ms": 12.0,
-        "power_w": 374.77374368131217,
-        "minutes": 17.433333333333334,
-        "range_km": 12.552
+        "power_w": 333.1522082727575,
+        "minutes": 19.666666666666668,
+        "range_km": 14.16
       },
       {
         "v_ms": 12.5,
-        "power_w": 381.2331967018251,
-        "minutes": 17.133333333333333,
-        "range_km": 12.85
+        "power_w": 340.277388777736,
+        "minutes": 19.233333333333334,
+        "range_km": 14.425000000000002
       },
       {
         "v_ms": 13.0,
-        "power_w": 388.8477622434629,
-        "minutes": 16.8,
-        "range_km": 13.104
+        "power_w": 348.52795384952503,
+        "minutes": 18.766666666666666,
+        "range_km": 14.637999999999998
       },
       {
         "v_ms": 13.5,
-        "power_w": 397.6379092609161,
-        "minutes": 16.4,
-        "range_km": 13.283999999999999
+        "power_w": 357.9243594819378,
+        "minutes": 18.266666666666666,
+        "range_km": 14.796
       },
       {
         "v_ms": 14.0,
-        "power_w": 407.6240397899681,
-        "minutes": 16.0,
-        "range_km": 13.44
+        "power_w": 368.48750233897573,
+        "minutes": 17.733333333333334,
+        "range_km": 14.896
       },
       {
         "v_ms": 14.5,
-        "power_w": 418.82689772314546,
-        "minutes": 15.566666666666666,
-        "range_km": 13.543
+        "power_w": 380.23897547657003,
+        "minutes": 17.166666666666668,
+        "range_km": 14.935000000000002
       },
       {
         "v_ms": 15.0,
-        "power_w": 431.2678340052389,
-        "minutes": 15.1,
-        "range_km": 13.59
+        "power_w": 393.2012140820756,
+        "minutes": 16.6,
+        "range_km": 14.940000000000001
       },
       {
         "v_ms": 15.5,
-        "power_w": 444.96896660056234,
-        "minutes": 14.633333333333333,
-        "range_km": 13.609
+        "power_w": 407.3975642423766,
+        "minutes": 16.0,
+        "range_km": 14.88
       },
       {
         "v_ms": 16.0,
-        "power_w": 459.95326492545314,
-        "minutes": 14.133333333333333,
-        "range_km": 13.568
+        "power_w": 422.8522996800035,
+        "minutes": 15.4,
+        "range_km": 14.784
       },
       {
         "v_ms": 16.5,
-        "power_w": 476.2445817532291,
-        "minutes": 13.633333333333333,
-        "range_km": 13.497
+        "power_w": 439.59060447687335,
+        "minutes": 14.8,
+        "range_km": 14.652000000000001
       },
       {
         "v_ms": 17.0,
-        "power_w": 493.86764958673007,
-        "minutes": 13.133333333333333,
-        "range_km": 13.396
+        "power_w": 457.6385347428416,
+        "minutes": 14.2,
+        "range_km": 14.483999999999998
       },
       {
         "v_ms": 17.5,
-        "power_w": 512.8480540357289,
-        "minutes": 12.633333333333333,
-        "range_km": 13.264999999999999
+        "power_w": 477.02296788932756,
+        "minutes": 13.633333333333333,
+        "range_km": 14.314999999999998
       },
       {
         "v_ms": 18.0,
-        "power_w": 533.2121927531518,
-        "minutes": 12.133333333333333,
-        "range_km": 13.103999999999997
+        "power_w": 497.7715459962597,
+        "minutes": 13.033333333333333,
+        "range_km": 14.076
       },
       {
         "v_ms": 18.5,
-        "power_w": 554.9872265725254,
-        "minutes": 11.666666666666666,
-        "range_km": 12.949999999999998
+        "power_w": 519.9126170666854,
+        "minutes": 12.466666666666667,
+        "range_km": 13.838
       },
       {
         "v_ms": 19.0,
-        "power_w": 578.2010268248704,
-        "minutes": 11.166666666666666,
-        "range_km": 12.73
+        "power_w": 543.4751769173981,
+        "minutes": 11.9,
+        "range_km": 13.566
       },
       {
         "v_ms": 19.5,
-        "power_w": 602.8821218386205,
-        "minutes": 10.7,
-        "range_km": 12.518999999999998
+        "power_w": 568.4888133253095,
+        "minutes": 11.366666666666667,
+        "range_km": 13.299
       },
       {
         "v_ms": 20.0,
-        "power_w": 629.0596444835104,
-        "minutes": 10.233333333333333,
-        "range_km": 12.28
+        "power_w": 594.9836533809702,
+        "minutes": 10.833333333333334,
+        "range_km": 13.000000000000002
       }
     ],
     "checks": {
       "prop_rpm_hover": {
-        "value": 4474.2639374660685,
+        "value": 4267.690336210054,
         "limit": 11154,
         "pass": true,
-        "margin_pct": 59.88646281633433
+        "margin_pct": 61.73847645499324
       },
       "prop_rpm_max": {
         "value": 7334.37977548494,
@@ -3160,12 +3075,12 @@
         "margin_pct": 34.24439864187789
       },
       "thrust_to_weight": {
-        "value": 2.6870985147506152,
+        "value": 2.9535272978769918,
         "limit": 2.0,
         "pass": true
       },
       "hover_thrust_fraction": {
-        "value": 0.3721486184859167,
+        "value": 0.33857821484121864,
         "limit": 0.5,
         "pass": true
       }
@@ -3205,7 +3120,7 @@
       },
       {
         "id": "prop",
-        "name": "propeller (see prop_options)",
+        "name": "HQProp 9x4.5 nylon composite",
         "qty": 4,
         "unit_kg": 0.02,
         "total_kg": 0.08,
@@ -3254,12 +3169,12 @@
       },
       {
         "id": "fc_stack",
-        "name": "SpeedyBee F405 V5 stack (FC + 4-in-1 ESC, 30x30)",
+        "name": "SpeedyBee F405 V5 stack (FC + 4-in-1 ESC, 30x30, 2-6S)",
         "qty": 1,
         "unit_kg": 0.035,
         "total_kg": 0.035,
         "confidence": "vendor",
-        "source": "SpeedyBee F405 V5 product page",
+        "source": "SpeedyBee F405 V5 Standard, Betaflight-configurable",
         "power_w": 2.0,
         "positions": [
           [
@@ -3270,30 +3185,47 @@
         ]
       },
       {
-        "id": "gps",
-        "name": "GPS / compass module + mast",
+        "id": "imu",
+        "name": "Standard IMU breakout (ICM-42688-P class) + cable",
         "qty": 1,
-        "unit_kg": 0.04,
-        "total_kg": 0.04,
+        "unit_kg": 0.005,
+        "total_kg": 0.005,
         "confidence": "estimated",
-        "source": "typical M8N/M9N puck plus mast",
+        "source": "6-axis MEMS IMU breakout; the FC carries its own, this is the dedicated one for the navigation stack on the compute board",
+        "power_w": 0.1,
+        "positions": [
+          [
+            0.0,
+            0.0,
+            0.015
+          ]
+        ]
+      },
+      {
+        "id": "nav_camera",
+        "name": "Arducam Camera Module 3 (IMX708, 12MP, 75 deg DFOV, autofocus)",
+        "qty": 1,
+        "unit_kg": 0.01,
+        "total_kg": 0.01,
+        "confidence": "vendor",
+        "source": "Pi Camera Module 3 board ~4 g + 15-22 pin FFC cable. THE mapping / detection / navigation sensor. CSI to the Pi 5.",
         "power_w": 0.5,
         "positions": [
           [
-            -0.06,
+            0.09,
             0.0,
-            0.15
+            -0.025
           ]
         ]
       },
       {
         "id": "wifi",
-        "name": "ALFA AWUS036ACM dual-band USB adapter + antennas",
+        "name": "ALFA AWUS036ACM AC1200 USB 3.0 + 2x 5dBi antennas",
         "qty": 1,
-        "unit_kg": 0.17,
-        "total_kg": 0.17,
+        "unit_kg": 0.145,
+        "total_kg": 0.145,
         "confidence": "estimated",
-        "source": "adapter ~130 g + 2 antennas; CONFIRM",
+        "source": "adapter ~105 g + 2x 5dBi antennas ~20 g each; CONFIRM on a scale",
         "power_w": 3.0,
         "positions": [
           [
@@ -3304,47 +3236,13 @@
         ]
       },
       {
-        "id": "zed2",
-        "name": "Stereolabs ZED 2",
-        "qty": 1,
-        "unit_kg": 0.18,
-        "total_kg": 0.18,
-        "confidence": "vendor",
-        "source": "ZED 2 = 166 g body, +cable",
-        "power_w": 2.0,
-        "positions": [
-          [
-            0.09,
-            0.0,
-            -0.03
-          ]
-        ]
-      },
-      {
-        "id": "zed_mini",
-        "name": "Stereolabs ZED Mini",
-        "qty": 1,
-        "unit_kg": 0.062,
-        "total_kg": 0.062,
-        "confidence": "vendor",
-        "source": "ZED Mini = 62.9 g",
-        "power_w": 2.0,
-        "positions": [
-          [
-            0.075,
-            -0.08,
-            -0.025
-          ]
-        ]
-      },
-      {
         "id": "gimbal",
-        "name": "3-DoF gimbal + gimbal camera",
+        "name": "3-DoF gimbal + gimbal camera (lab unit, unidentified)",
         "qty": 1,
         "unit_kg": 0.21,
         "total_kg": 0.21,
         "confidence": "estimated",
-        "source": "unidentified lab unit \u2014 WEIGH AND IDENTIFY",
+        "source": "unidentified lab unit \u2014 WEIGH AND IDENTIFY. Carried as mass and power only; it is not the navigation sensor.",
         "power_w": 5.0,
         "positions": [
           [
@@ -3395,7 +3293,7 @@
         "unit_kg": 0.18,
         "total_kg": 0.18,
         "confidence": "estimated",
-        "source": "Orin NX module 25 g + carrier/cooler; CONFIRM carrier choice",
+        "source": "comparison variant only, not in the parts list",
         "power_w": 25.0,
         "positions": [
           [

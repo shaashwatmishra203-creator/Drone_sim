@@ -49,6 +49,15 @@ X500_MOMENT_CONSTANT = 0.016
 X500_ARM = 0.174 * math.sqrt(2.0)
 
 
+def cfg_cam_pos(cfg):
+    """Mount position of the navigation camera, taken from the component
+    register so the camera sits where its mass is accounted for."""
+    for c in cfg["components"]:
+        if c["id"] == "nav_camera":
+            return tuple(c["pos"])
+    return (0.09, 0.0, -0.025)
+
+
 def motor_constant(ct, rho, dia_m):
     return ct * rho * dia_m ** 4 / (4.0 * math.pi ** 2)
 
@@ -84,6 +93,40 @@ def patch_sdf(res, cfg, prop, model_name):
     if base.find("enable_wind") is None:
         ew = ET.SubElement(base, "enable_wind")
         ew.text = "true"
+
+    # --- navigation camera (the Arducam) ----------------------------------
+    # This is the ONLY sensor on the aircraft that can see an obstacle. The
+    # IMU, magnetometer, barometer and GPS all report where the vehicle IS;
+    # none of them report what is in front of it. It is monocular, so it gives
+    # bearing to features and not range - any depth has to be inferred.
+    cam = cfg.get("nav_camera")
+    if cam is not None:
+        s = ET.SubElement(base, "sensor")
+        s.set("name", "nav_camera")
+        s.set("type", "camera")
+        # SDF pitch is positive nose-down for a +X-facing sensor, so a positive
+        # pitch_down_deg maps straight through.
+        tilt = math.radians(float(cam.get("pitch_down_deg", 0.0)))
+        px, py, pz = cfg_cam_pos(cfg)
+        ET.SubElement(s, "pose").text = f"{px} {py} {pz} 0 {tilt:.4f} 0"
+        ET.SubElement(s, "gz_frame_id").text = "base_link"
+        ET.SubElement(s, "always_on").text = "1"
+        ET.SubElement(s, "update_rate").text = str(cam["fps"])
+        ET.SubElement(s, "topic").text = "nav_camera"
+        c = ET.SubElement(s, "camera")
+        ET.SubElement(c, "horizontal_fov").text = \
+            f"{math.radians(float(cam['hfov_deg'])):.6f}"
+        img = ET.SubElement(c, "image")
+        ET.SubElement(img, "width").text = str(cam["width"])
+        ET.SubElement(img, "height").text = str(cam["height"])
+        ET.SubElement(img, "format").text = "R8G8B8"
+        clip = ET.SubElement(c, "clip")
+        ET.SubElement(clip, "near").text = str(cam["near_clip_m"])
+        ET.SubElement(clip, "far").text = str(cam["far_clip_m"])
+        n = ET.SubElement(c, "noise")
+        ET.SubElement(n, "type").text = "gaussian"
+        ET.SubElement(n, "mean").text = "0.0"
+        ET.SubElement(n, "stddev").text = "0.005"
 
     # --- rotors: reposition to our arm length, re-mass to our prop ---------
     prop_m = prop["mass_kg"]

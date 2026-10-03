@@ -53,7 +53,7 @@ components:
     mirror: arms
 
   - id: prop
-    name: "propeller (see prop_options)"
+    name: "HQProp 9x4.5 nylon composite"
     qty: 4
     mass_kg: 0.010
     confidence: estimated
@@ -70,56 +70,50 @@ components:
     pos: [0.000, 0.000, 0.055]
 
   - id: fc_stack
-    name: "SpeedyBee F405 V5 stack (FC + 4-in-1 ESC, 30x30)"
+    name: "SpeedyBee F405 V5 stack (FC + 4-in-1 ESC, 30x30, 2-6S)"
     qty: 1
     mass_kg: 0.035
     confidence: vendor
-    source: "SpeedyBee F405 V5 product page"
+    source: "SpeedyBee F405 V5 Standard, Betaflight-configurable"
     pos: [0.000, 0.000, 0.000]
     power_w: 2.0
 
-  - id: gps
-    name: "GPS / compass module + mast"
+  - id: imu
+    name: "Standard IMU breakout (ICM-42688-P class) + cable"
     qty: 1
-    mass_kg: 0.040
+    mass_kg: 0.005
     confidence: estimated
-    source: "typical M8N/M9N puck plus mast"
-    pos: [-0.060, 0.000, 0.150]
+    source: "6-axis MEMS IMU breakout; the FC carries its own, this is the
+             dedicated one for the navigation stack on the compute board"
+    pos: [0.000, 0.000, 0.015]
+    power_w: 0.1
+
+  - id: nav_camera
+    name: "Arducam Camera Module 3 (IMX708, 12MP, 75 deg DFOV, autofocus)"
+    qty: 1
+    mass_kg: 0.010
+    confidence: vendor
+    source: "Pi Camera Module 3 board ~4 g + 15-22 pin FFC cable.
+             THE mapping / detection / navigation sensor. CSI to the Pi 5."
+    pos: [0.090, 0.000, -0.025]
     power_w: 0.5
 
   - id: wifi
-    name: "ALFA AWUS036ACM dual-band USB adapter + antennas"
+    name: "ALFA AWUS036ACM AC1200 USB 3.0 + 2x 5dBi antennas"
     qty: 1
-    mass_kg: 0.170
+    mass_kg: 0.145
     confidence: estimated
-    source: "adapter ~130 g + 2 antennas; CONFIRM"
+    source: "adapter ~105 g + 2x 5dBi antennas ~20 g each; CONFIRM on a scale"
     pos: [-0.080, 0.000, 0.090]
     power_w: 3.0
 
-  - id: zed2
-    name: "Stereolabs ZED 2"
-    qty: 1
-    mass_kg: 0.180
-    confidence: vendor
-    source: "ZED 2 = 166 g body, +cable"
-    pos: [0.090, 0.000, -0.030]
-    power_w: 2.0
-
-  - id: zed_mini
-    name: "Stereolabs ZED Mini"
-    qty: 1
-    mass_kg: 0.062
-    confidence: vendor
-    source: "ZED Mini = 62.9 g"
-    pos: [0.075, -0.080, -0.025]
-    power_w: 2.0
-
   - id: gimbal
-    name: "3-DoF gimbal + gimbal camera"
+    name: "3-DoF gimbal + gimbal camera (lab unit, unidentified)"
     qty: 1
     mass_kg: 0.210
     confidence: estimated
-    source: "unidentified lab unit — WEIGH AND IDENTIFY"
+    source: "unidentified lab unit — WEIGH AND IDENTIFY. Carried as mass and
+             power only; it is not the navigation sensor."
     pos: [0.030, 0.000, -0.090]
     power_w: 5.0
 
@@ -140,26 +134,58 @@ components:
     pos: [0.000, 0.000, 0.010]
 
 # Compute variants — swapped in as the onboard computer.
-# NOTE: the ZED SDK requires an NVIDIA CUDA GPU. The Pi 5 has none, so the
-# pi5 variant CANNOT run either ZED camera. Modelled anyway because it is the
-# currently listed part; see docs/06-findings.md.
+#
+# The Pi 5 is THE specified brain. The earlier CUDA blocker no longer applies:
+# the ZED 2 and ZED Mini have been removed from the build, and the Arducam
+# Module 3 is a plain CSI camera the Pi 5 drives natively. The Orin NX is kept
+# only as a comparison point for the compute-architecture study.
 payload_variants:
   pi5:
     name: "Raspberry Pi 5 (8 GB) + active cooler + 5V regulator"
     mass_kg: 0.100
     confidence: vendor
-    source: "Pi 5 = 46 g, cooler 25 g, regulator ~30 g"
+    source: "Pi 5 = 46 g, cooler 25 g, regulator ~30 g. SPECIFIED BRAIN."
     pos: [-0.030, 0.000, 0.040]
     power_w: 12.0
     cuda_capable: false
+    in_parts_list: true
   orin_nx:
     name: "Jetson Orin NX + carrier + cooler"
     mass_kg: 0.180
     confidence: estimated
-    source: "Orin NX module 25 g + carrier/cooler; CONFIRM carrier choice"
+    source: "comparison variant only, not in the parts list"
     pos: [-0.030, 0.000, 0.045]
     power_w: 25.0
     cuda_capable: true
+    in_parts_list: false
+
+# ---------------------------------------------------------------------------
+# NAVIGATION CAMERA — the Arducam, as it will be simulated in Gazebo.
+# A single forward RGB camera. Monocular: it gives bearing to features, not
+# range, so any depth has to be inferred (motion parallax, learned monocular
+# depth, or known-size markers). Specs below match the IMX708 module.
+# ---------------------------------------------------------------------------
+nav_camera:
+  sensor: "Sony IMX708"
+  native_mp: 12
+  # Run at a rate the Pi 5 can actually process, not the sensor maximum.
+  # 640x360 @ 15 fps is both realistic for monocular navigation on a Pi 5 and
+  # 4x cheaper to render: at 1280x720 @ 30 the WSL D3D12 path only delivered
+  # ~2.6 fps, so the requested rate was fiction.
+  width: 640
+  height: 360
+  fps: 15
+  hfov_deg: 66.0          # 75 deg diagonal -> ~66 deg horizontal at 16:9
+  dfov_deg: 75.0
+  autofocus: true
+  near_clip_m: 0.1
+  far_clip_m: 40.0
+  mount: "forward-facing, nose, slightly down-tilted"
+  # Degrees BELOW horizontal. Positive = looking down, which is what a
+  # navigation camera wants: obstacles ahead plus ground texture for motion
+  # estimation. (SDF pitch is positive nose-down for a +X-facing sensor.)
+  pitch_down_deg: 15.0
+  confidence: vendor
 
 # ---------------------------------------------------------------------------
 # PROPULSION
