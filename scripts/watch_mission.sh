@@ -68,7 +68,31 @@ fi
 if ! gz service -l 2>/dev/null | grep -q "^/gui/follow$"; then
   echo "  GUI is running but not responding yet — continuing anyway"
 else
-  echo "     window is up (pid $GUI)"
+  # A live pid proves nothing: the GUI can run headless-ish and never map a
+# window. Ask the X server whether a window called "Gazebo Sim" is actually
+# mapped, then raise it on the Windows side - under WSLg it comes up BEHIND
+# the terminal, which is what made earlier runs look like a launch failure.
+WIN=""
+for i in $(seq 1 20); do
+  if xwininfo -name "Gazebo Sim" 2>/dev/null | grep -q "IsViewable"; then WIN=yes; break; fi
+  sleep 1
+done
+if [ -z "$WIN" ]; then
+  echo "     NO WINDOW MAPPED after 20 s - the GUI process is alive but drew nothing."
+  echo "     check: $OUT/gz_gui.log"
+else
+  echo "     window is mapped and viewable (pid $GUI)"
+  # Raising the window from here is not possible: WSL interop is disabled in
+  # this distro (no WSLInterop in /proc/sys/fs/binfmt_misc), so no Windows .exe
+  # can be launched from inside WSL. Under WSLg the window opens BEHIND the
+  # terminal, which is exactly what made earlier runs look like a failure.
+  echo ""
+  echo "  >>> The window IS open, titled 'Gazebo Sim'. WSLg puts it BEHIND"
+  echo "      this terminal. ALT-TAB to it, or click it in the taskbar."
+  echo "      If you see '[WARN:COPY MODE]' in its title that is normal here"
+  echo "      - it means WSLg is compositing without GPU passthrough."
+  echo ""
+fi
 fi
 
 echo

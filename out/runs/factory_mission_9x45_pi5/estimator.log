@@ -1,21 +1,21 @@
-[INFO] [1791069200.052291318] [state_estimator]: camera+IMU fusion: accel bias 0.02 m/s2, gyro bias 0.002 rad/s, 4 gate landmarks
-[INFO] [1791069215.022998084] [state_estimator]: imu_only err   1.61 m | camera+imu err  0.04 m | fixes 40 | imu updates 1052
-[INFO] [1791069220.027397050] [state_estimator]: imu_only err   1.19 m | camera+imu err  0.40 m | fixes 88 | imu updates 2184
-[INFO] [1791069225.038285113] [state_estimator]: imu_only err   2.54 m | camera+imu err  6.51 m | fixes 112 | imu updates 3314
-[INFO] [1791069230.024036892] [state_estimator]: imu_only err   4.84 m | camera+imu err  8.44 m | fixes 124 | imu updates 4473
-[INFO] [1791069235.056891453] [state_estimator]: imu_only err   7.12 m | camera+imu err 13.01 m | fixes 136 | imu updates 5301
-[INFO] [1791069240.039518944] [state_estimator]: imu_only err  11.27 m | camera+imu err 14.39 m | fixes 154 | imu updates 6379
-[INFO] [1791069245.021985118] [state_estimator]: imu_only err  16.97 m | camera+imu err 18.04 m | fixes 197 | imu updates 7541
-[INFO] [1791069250.020327412] [state_estimator]: imu_only err  23.25 m | camera+imu err 18.18 m | fixes 247 | imu updates 8674
-[INFO] [1791069255.033440861] [state_estimator]: imu_only err  30.98 m | camera+imu err 19.36 m | fixes 266 | imu updates 9786
-[INFO] [1791069260.033404685] [state_estimator]: imu_only err  38.43 m | camera+imu err 23.21 m | fixes 266 | imu updates 10923
-[INFO] [1791069265.051355988] [state_estimator]: imu_only err  46.56 m | camera+imu err 27.32 m | fixes 266 | imu updates 12056
-[INFO] [1791069270.030532773] [state_estimator]: imu_only err  51.51 m | camera+imu err 31.68 m | fixes 266 | imu updates 12845
-[INFO] [1791069275.031033354] [state_estimator]: imu_only err  59.43 m | camera+imu err 24.09 m | fixes 270 | imu updates 13959
-[INFO] [1791069280.037423632] [state_estimator]: imu_only err  67.96 m | camera+imu err 18.09 m | fixes 316 | imu updates 15093
-[INFO] [1791069285.025968830] [state_estimator]: imu_only err  76.45 m | camera+imu err 15.09 m | fixes 342 | imu updates 16266
-[INFO] [1791069290.044641762] [state_estimator]: imu_only err  84.59 m | camera+imu err 12.88 m | fixes 389 | imu updates 17442
-[INFO] [1791069295.018000622] [state_estimator]: imu_only err  92.03 m | camera+imu err 10.36 m | fixes 405 | imu updates 18604
-[INFO] [1791069300.305514271] [state_estimator]: imu_only err  98.14 m | camera+imu err  6.17 m | fixes 413 | imu updates 19511
-[INFO] [1791069305.031518614] [state_estimator]: imu_only err 105.40 m | camera+imu err  0.12 m | fixes 454 | imu updates 20582
-[INFO] [1791069307.436234596] [state_estimator]: wrote /home/shaash/drone_sim/out/runs/factory_mission_9x45_pi5/state_estimate.json: IMU-only RMS 54.586 m, camera+IMU RMS 16.826 m (3.24x better)
+[INFO] [1791069796.707401742] [state_estimator]: camera+IMU fusion: accel bias 0.02 m/s2, gyro bias 0.002 rad/s, 4 gate landmarks
+[INFO] [1791069811.689809544] [state_estimator]: imu_only err   0.58 m | camera+imu err  0.08 m | fixes 42 | imu updates 1171
+[INFO] [1791069816.677696071] [state_estimator]: imu_only err   0.31 m | camera+imu err  0.12 m | fixes 92 | imu updates 2417
+[INFO] [1791069821.669327688] [state_estimator]: imu_only err   2.14 m | camera+imu err  6.58 m | fixes 116 | imu updates 3661
+[INFO] [1791069826.659579512] [state_estimator]: imu_only err   4.59 m | camera+imu err  8.36 m | fixes 134 | imu updates 4900
+[INFO] [1791069831.682145171] [state_estimator]: imu_only err   7.90 m | camera+imu err  8.82 m | fixes 154 | imu updates 6143
+[INFO] [1791069836.690603370] [state_estimator]: imu_only err  10.59 m | camera+imu err 10.49 m | fixes 169 | imu updates 7050
+[INFO] [1791069841.668243817] [state_estimator]: imu_only err  15.52 m | camera+imu err 15.15 m | fixes 201 | imu updates 8291
+[INFO] [1791069846.665866855] [state_estimator]: imu_only err  20.45 m | camera+imu err 18.19 m | fixes 240 | imu updates 9524
+[INFO] [1791069851.678867207] [state_estimator]: imu_only err  26.45 m | camera+imu err 20.69 m | fixes 252 | imu updates 10755
+[INFO] [1791069856.669162751] [state_estimator]: imu_only err  32.04 m | camera+imu err 25.78 m | fixes 252 | imu updates 11994
+[INFO] [1791069861.673178405] [state_estimator]: imu_only err  38.05 m | camera+imu err 31.10 m | fixes 252 | imu updates 13236
+[INFO] [1791069866.656333448] [state_estimator]: imu_only err  42.90 m | camera+imu err 38.14 m | fixes 252 | imu updates 14464
+[INFO] [1791069871.663682909] [state_estimator]: imu_only err  47.88 m | camera+imu err 43.16 m | fixes 252 | imu updates 15412
+[INFO] [1791069876.662937818] [state_estimator]: imu_only err  54.31 m | camera+imu err 50.47 m | fixes 252 | imu updates 16655
+[INFO] [1791069881.656086989] [state_estimator]: imu_only err  60.15 m | camera+imu err 58.67 m | fixes 252 | imu updates 17887
+[INFO] [1791069886.669027523] [state_estimator]: imu_only err  65.71 m | camera+imu err 68.34 m | fixes 252 | imu updates 19123
+[INFO] [1791069891.655616469] [state_estimator]: imu_only err  70.69 m | camera+imu err 78.02 m | fixes 252 | imu updates 20365
+[INFO] [1791069896.667562324] [state_estimator]: imu_only err  75.31 m | camera+imu err 88.80 m | fixes 252 | imu updates 21608
+[INFO] [1791069901.665641121] [state_estimator]: imu_only err  79.69 m | camera+imu err 99.16 m | fixes 252 | imu updates 22853
+[INFO] [1791069901.783115186] [state_estimator]: wrote /home/shaash/drone_sim/out/runs/factory_mission_9x45_pi5/state_estimate.json: IMU-only RMS 41.895 m, camera+IMU RMS 43.703 m (0.96x better)

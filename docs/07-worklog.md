@@ -122,6 +122,50 @@ down to ~9.2 min, position-hold RMS 0.93 m (max 9.75 m during the ramp).
 
 ---
 
+## Retracted: "camera + IMU fusion reduces error to 0.12 m (3.24x better RMS)"
+
+Claimed in commit `cc3938f`. **It does not reproduce.** A replay of the same
+mission against the same world gave:
+
+| | first run | replay |
+|---|---:|---:|
+| IMU-only RMS | 54.6 m | 41.9 m |
+| camera+IMU RMS | 16.8 m | **43.7 m** |
+| ratio | 3.24x better | **0.96x - worse than no fusion** |
+| landmark fixes | 454 | **252, then frozen** |
+
+The cause is a defect, not variance. Fix count climbs 42 -> 240 through the
+outbound leg, where the fused error is genuinely excellent (0.08 m against
+0.58 m for IMU alone). It then freezes at 252 for the final ~55 s while the
+mapper is still detecting gates - 19 detections, the last one at the very end
+of the run. The measurements were arriving; the estimator was rejecting them.
+
+`state_estimator.py` associates a measurement with a gate like this:
+
+    pred_x = self.fus_p[0] + rel_fwd
+    gate = min(self.gates, key=lambda g: abs(g[0] - pred_x))
+    if abs(gate[0] - pred_x) > 2.5: return
+
+The validation gate is keyed on the estimate it exists to correct. Once drift
+passes 2.5 m every measurement is rejected, which guarantees further drift:
+positive feedback with no path back. The fused track then ends up *worse* than
+raw IMU, because it carries corrupted velocity on top of the same bias.
+
+So the earlier number was a run that happened to hold lock the whole way. One
+passing run is not a result. What is actually established is narrower:
+
+**Established (L1):** with lock held, camera landmark fixes bound IMU drift to
+well under a metre (0.08 m observed at 42 fixes vs 0.58 m IMU-only).
+**Not established:** that the filter holds lock over a full mission, or that
+fusion improves end-to-end accuracy. On the evidence it currently does not.
+
+Needed before the claim can be restated: a recovery path for lost association
+(widen the gate with accumulated uncertainty rather than a fixed 2.5 m, and
+allow re-acquisition from a known gate when several consecutive measurements
+are rejected), then N>=5 runs reported as a spread, not a best case.
+
+---
+
 ## Open items
 
 - **Measured masses.** 88% of AUW is still estimated. ~2 min endurance per 500 g.
