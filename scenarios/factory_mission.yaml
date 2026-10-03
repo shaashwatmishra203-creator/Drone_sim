@@ -37,6 +37,18 @@ profile:
   accept_radius_m: 0.7
   base: [0.0, 0.0]
 
+  # Steer laterally on what the Arducam sees. The waypoints below then set only
+  # the along-course progression; the y at each gate comes from the detected
+  # gap. Falls back to the planned y whenever the measurement is stale, low
+  # confidence, or implausibly far from the plan.
+  camera_guided: true
+  gap_min_conf: 0.08
+  gap_lookahead_m: 3.0
+  gap_max_offset_m: 2.5
+  # Only steer on the camera inside the gated corridor (x = 3..24). Past it the
+  # widest "gap" is the room doorway, and steering on it clipped the door frame.
+  camera_guided_x_range: [3.0, 24.0]
+
   # Outbound: through four gates, each a full-height barrier across a walled
   # corridor with a single 2.5 m gap, alternating side to side. Each gate gets
   # a line-up point before it so the aircraft arrives square rather than

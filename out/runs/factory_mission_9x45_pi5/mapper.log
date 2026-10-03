@@ -1,0 +1,34 @@
+[INFO] [1791068426.411091087] [camera_mapper]: camera_mapper [geometric] : 66 deg FOV, 64 rays, range 1.2-12.0 m, grid 0.25 m, 18 obstacles in world
+[INFO] [1791068431.388398096] [camera_mapper]: scans 0 | returns 0 | map cells 0 | no gate mapped yet
+[INFO] [1791068436.382505370] [camera_mapper]: scans 0 | returns 0 | map cells 0 | no gate mapped yet
+[INFO] [1791068441.402119089] [camera_mapper]: scans 27 | returns 1452 | map cells 210 | gate @ x=  8.0 gap y=+2.38 w=2.25m conf=1.00
+[INFO] [1791068446.391272495] [camera_mapper]: scans 77 | returns 4452 | map cells 361 | gate @ x=  8.0 gap y=+2.38 w=2.25m conf=1.00
+[INFO] [1791068451.408779579] [camera_mapper]: scans 127 | returns 7646 | map cells 550 | gate @ x= 12.0 gap y=-2.38 w=2.25m conf=0.92
+[INFO] [1791068456.399895766] [camera_mapper]: scans 177 | returns 10846 | map cells 745 | gate @ x= 16.0 gap y=+2.25 w=2.00m conf=1.00
+[INFO] [1791068461.393209972] [camera_mapper]: scans 227 | returns 14046 | map cells 961 | gate @ x= 20.0 gap y=-2.50 w=2.00m conf=1.00
+[INFO] [1791068466.384643400] [camera_mapper]: scans 268 | returns 16370 | map cells 1127 | gate @ x= 26.0 gap y=+0.00 w=4.00m conf=1.00
+[INFO] [1791068471.384859510] [camera_mapper]: scans 318 | returns 18495 | map cells 1418 | gate @ x= 34.0 gap y=+4.00 w=3.50m conf=1.00
+[INFO] [1791068476.384700790] [camera_mapper]: scans 368 | returns 21568 | map cells 1677 | gate @ x= 38.0 gap y=-3.38 w=2.75m conf=1.00
+[INFO] [1791068481.384466734] [camera_mapper]: scans 418 | returns 24768 | map cells 1703 | gate @ x= 38.0 gap y=-2.62 w=1.25m conf=1.00
+[INFO] [1791068486.384646802] [camera_mapper]: scans 468 | returns 27968 | map cells 1878 | gate @ x= 38.0 gap y=-2.62 w=1.25m conf=1.00
+[INFO] [1791068491.395146024] [camera_mapper]: scans 518 | returns 30793 | map cells 1933 | gate @ x= 32.0 gap y=-1.88 w=7.25m conf=1.00
+[INFO] [1791068496.384028761] [camera_mapper]: scans 568 | returns 33583 | map cells 2046 | gate @ x= 32.0 gap y=-1.88 w=7.25m conf=1.00
+[INFO] [1791068501.384216723] [camera_mapper]: scans 609 | returns 36207 | map cells 2097 | gate @ x= 32.0 gap y=-1.88 w=7.25m conf=1.00
+[INFO] [1791068506.384907775] [camera_mapper]: scans 659 | returns 39270 | map cells 2183 | gate @ x= 26.0 gap y=+0.12 w=3.75m conf=1.00
+[INFO] [1791068511.406739734] [camera_mapper]: scans 709 | returns 42470 | map cells 2237 | gate @ x= 20.0 gap y=-2.38 w=1.75m conf=1.00
+[INFO] [1791068516.384868725] [camera_mapper]: scans 759 | returns 45670 | map cells 2298 | gate @ x= 20.0 gap y=-2.38 w=1.75m conf=1.00
+[INFO] [1791068521.389821716] [camera_mapper]: scans 809 | returns 48870 | map cells 2366 | gate @ x= 16.0 gap y=+2.25 w=2.00m conf=1.00
+[INFO] [1791068526.385295341] [camera_mapper]: scans 859 | returns 51048 | map cells 2434 | gate @ x= 12.0 gap y=-2.25 w=1.50m conf=1.00
+[INFO] [1791068532.108518837] [camera_mapper]: scans 907 | returns 52650 | map cells 2478 | gate @ x=  8.0 gap y=+2.25 w=2.00m conf=1.00
+[INFO] [1791068536.388404963] [camera_mapper]: scans 950 | returns 54030 | map cells 2484 | gate @ x=  8.0 gap y=+2.25 w=2.00m conf=1.00
+[INFO] [1791068541.392634305] [camera_mapper]: scans 1000 | returns 56355 | map cells 2490 | gate @ x=  8.0 gap y=+2.25 w=2.00m conf=1.00
+[INFO] [1791068546.384244855] [camera_mapper]: scans 1050 | returns 58058 | map cells 2496 | gate @ x=  8.0 gap y=+2.25 w=2.00m conf=1.00
+[INFO] [1791068551.387402026] [camera_mapper]: scans 1100 | returns 59632 | map cells 2500 | gate @ x=  8.0 gap y=+2.25 w=2.00m conf=1.00
+[INFO] [1791068556.387998823] [camera_mapper]: scans 1150 | returns 61808 | map cells 2502 | gate @ x= 12.0 gap y=-2.25 w=1.50m conf=1.00
+[INFO] [1791068561.384539847] [camera_mapper]: scans 1200 | returns 63946 | map cells 2504 | gate @ x= 12.0 gap y=-2.25 w=1.50m conf=1.00
+[INFO] [1791068566.384290054] [camera_mapper]: scans 1241 | returns 65723 | map cells 2506 | gate @ x=  8.0 gap y=+2.25 w=2.00m conf=1.00
+[INFO] [1791068571.395165758] [camera_mapper]: scans 1291 | returns 67005 | map cells 2506 | gate @ x=  8.0 gap y=+2.25 w=2.00m conf=1.00
+[INFO] [1791068576.396124527] [camera_mapper]: scans 1341 | returns 69381 | map cells 2506 | gate @ x=  8.0 gap y=+2.25 w=2.00m conf=1.00
+[INFO] [1791068581.392903191] [camera_mapper]: scans 1391 | returns 69437 | map cells 2506 | gate @ x=  8.0 gap y=+2.25 w=2.00m conf=1.00
+[INFO] [1791068582.738915065] [camera_mapper]: mission complete — saving map
+[INFO] [1791068582.766566022] [camera_mapper]: wrote /home/shaash/drone_sim/out/runs/factory_mission_9x45_pi5/camera_map.json (2154 cells, 1404 scans)

@@ -16,7 +16,7 @@ SC=${1:?usage: run_scenario.sh <scenario.yaml> [prop] [payload]}
 # "scenario not found" and the aircraft silently never arms.
 SC=$(readlink -f "$SC") || { echo "cannot resolve scenario path: $1"; exit 2; }
 [ -f "$SC" ] || { echo "scenario not found: $SC"; exit 2; }
-PX4_PID=""; LOGGER_PID=""; RUNNER_PID=""; WIND_PID=""; GUI_PID=""
+PX4_PID=""; LOGGER_PID=""; RUNNER_PID=""; WIND_PID=""; GUI_PID=""; MAPPER_PID=""
 PROP=${2:-9x4.5}
 PAYLOAD=${3:-pi5}
 
@@ -49,7 +49,7 @@ CSV=$OUT/flight_log.csv
 
 cleanup() {
   kill $WIND_PID $GUI_PID 2>/dev/null
-  kill $LOGGER_PID $RUNNER_PID $PX4_PID 2>/dev/null
+  kill $LOGGER_PID $RUNNER_PID $MAPPER_PID $PX4_PID 2>/dev/null
   pkill -f "gz sim -g" 2>/dev/null
   pkill -f MicroXRCEAgent 2>/dev/null
   pkill -f "gz sim" 2>/dev/null
@@ -218,6 +218,12 @@ fi
 set +u
 source /opt/ros/humble/setup.bash
 source $WS/install/setup.bash
+# Without this, Python block-buffers stdout when it is redirected to a file and
+# the node logs stay empty until the process exits — which is exactly when a
+# killed node never flushes them at all.
+export PYTHONUNBUFFERED=1
+export RCUTILS_LOGGING_USE_STDOUT=1
+export RCUTILS_LOGGING_BUFFERED_STREAM=0
 
 echo "=== confirming the DDS bridge actually delivers ==="
 for i in $(seq 1 20); do
@@ -235,9 +241,19 @@ fi
 # NOTE: deliberately NOT use_sim_time. Nothing publishes /clock here (that
 # would need a ros_gz bridge, which is not installed), so use_sim_time would
 # freeze both nodes at t=0. They read PX4's message timestamps instead.
+echo "starting camera_mapper (Arducam perception)..."
+ros2 run drone_eval camera_mapper --ros-args \
+  -p config:=$DS/config/airframe.yaml \
+  -p world_tools:=$DS/tools \
+  -p mode:=${PERCEPTION_MODE:-geometric} \
+  -p out_json:=$OUT/camera_map.json >$OUT/mapper.log 2>&1 &
+MAPPER_PID=$!
+sleep 2
+
 echo "starting flight_logger..."
 ros2 run drone_eval flight_logger --ros-args \
   -p config:=$DS/config/airframe.yaml \
+  -p out_json:=$OUT/thrust_power.json \
   -p prop:=$PROP -p payload:=$PAYLOAD \
   -p scenario:=$NAME -p out_csv:=$CSV >$OUT/logger.log 2>&1 &
 LOGGER_PID=$!
@@ -260,8 +276,17 @@ kill $LOGGER_PID 2>/dev/null
 sleep 1
 
 echo
+kill $MAPPER_PID 2>/dev/null
+sleep 1
+
 echo "=== runner ==="; tail -6 $OUT/runner.log
-echo "=== logger ==="; tail -6 $OUT/logger.log
+echo "=== mapper ==="; tail -4 $OUT/mapper.log
+echo "=== logger ==="; tail -4 $OUT/logger.log
+echo "=== json outputs ==="
+for f in $OUT/thrust_power.json $OUT/camera_map.json; do
+  [ -s "$f" ] && echo "  $(basename $f): $(du -h $f | cut -f1)" \
+               || echo "  $(basename $f): MISSING"
+done
 echo "=== csv ==="
 if [ -s "$CSV" ]; then
   echo "rows: $(( $(wc -l < $CSV) - 1 ))"
