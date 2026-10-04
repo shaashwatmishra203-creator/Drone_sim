@@ -1,0 +1,86 @@
+{
+  "truth_samples": 639,
+  "furthest_east_m": 3.14,
+  "hull_clearance_min_m": 2.906,
+  "closest_object": "rack_1",
+  "contact_samples": 0,
+  "landing_error_m": 0.296,
+  "final_height_m": 0.23,
+  "frame_check": [
+    {
+      "target_enu": [
+        3.0,
+        0.0
+      ],
+      "truth": [
+        2.86,
+        0.17
+      ]
+    },
+    {
+      "target_enu": [
+        3.0,
+        3.0
+      ],
+      "truth": [
+        3.1,
+        2.73
+      ]
+    },
+    {
+      "target_enu": [
+        0.0,
+        0.0
+      ],
+      "truth": [
+        0.24,
+        0.17
+      ]
+    }
+  ],
+  "mission": {
+    "status": "complete - returned to pad and landed",
+    "legs_s": {
+      "frame_check": 15.900107145309448,
+      "land": 4.400210618972778
+    },
+    "total_s": 20.300317764282227,
+    "decisions": {
+      "stale_hold": 0,
+      "stop": 0,
+      "turn_first": 0,
+      "boxed_in": 0,
+      "go": 0
+    },
+    "detection_msgs": 290,
+    "map_cells": 59
+  },
+  "link_round_trip_ms": {
+    "n": 352,
+    "median": 116.3797378540039,
+    "p95": 165.28558731079102,
+    "max": 1335.8047008514404
+  },
+  "cv": {
+    "frames_scored": 204,
+    "recall": 1.0,
+    "gt_instances": 204,
+    "precision": 0.8596491228070176,
+    "detections": 285,
+    "recall_by_class": {
+      "shelf_rack": 1.0
+    },
+    "range_err_median": 0.09123269457255014,
+    "range_err_p90": 0.19121579852232062,
+    "range_samples": 107,
+    "upper_bounds_holding": "25/70"
+  },
+  "plot": "/home/shaash/drone_sim/out/runs/hall_frame_check/hall_path.png",
+  "gates": {
+    "clearance >= 0.4 m": true,
+    "no contact": true,
+    "landed within 0.5 m": true,
+    "CV recall >= 0.90": true,
+    "range error median <= 15%": true
+  }
+}

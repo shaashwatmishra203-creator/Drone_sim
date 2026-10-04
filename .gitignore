@@ -29,3 +29,11 @@ venv/
 *.swp
 .DS_Store
 Thumbs.db
+
+# v2 factory hall
+# videos are 13 MB per run; docs/replay/frames show the same views
+out/runs/*/detections.mp4
+out/runs/hall_latest
+# run 13: two harnesses overlapped on this folder - excluded from results
+out/runs/hall_mission/
+out/runs/*/cloud_link.log

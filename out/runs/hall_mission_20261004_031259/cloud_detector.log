@@ -1,0 +1,54 @@
+[INFO] [1791098004.656793551] [cloud_detector]: cloud detector ready: classes shelf_rack(hue 112), machine(hue 66), pallet_stack(hue 2), pillar(hue 26)
+[INFO] [1791098009.646558633] [cloud_detector]: frames 31 | detection 6.6 ms/frame
+[INFO] [1791098014.653123081] [cloud_detector]: frames 80 | detection 6.5 ms/frame
+[INFO] [1791098019.646994664] [cloud_detector]: frames 127 | detection 6.9 ms/frame
+[INFO] [1791098024.646650612] [cloud_detector]: frames 176 | detection 7.4 ms/frame
+[INFO] [1791098029.646719527] [cloud_detector]: frames 224 | detection 7.5 ms/frame
+[INFO] [1791098034.646392083] [cloud_detector]: frames 272 | detection 7.9 ms/frame
+[INFO] [1791098039.646591092] [cloud_detector]: frames 320 | detection 8.0 ms/frame
+[INFO] [1791098044.646465948] [cloud_detector]: frames 361 | detection 8.3 ms/frame
+[INFO] [1791098049.646515232] [cloud_detector]: frames 409 | detection 8.5 ms/frame
+[INFO] [1791098054.646555309] [cloud_detector]: frames 456 | detection 8.0 ms/frame
+[INFO] [1791098059.646435158] [cloud_detector]: frames 504 | detection 7.7 ms/frame
+[INFO] [1791098064.646469194] [cloud_detector]: frames 552 | detection 7.6 ms/frame
+[INFO] [1791098069.646286922] [cloud_detector]: frames 601 | detection 7.2 ms/frame
+[INFO] [1791098074.646472704] [cloud_detector]: frames 649 | detection 7.1 ms/frame
+[INFO] [1791098079.646706670] [cloud_detector]: frames 687 | detection 7.3 ms/frame
+[INFO] [1791098084.646537988] [cloud_detector]: frames 736 | detection 7.5 ms/frame
+[INFO] [1791098089.646697396] [cloud_detector]: frames 784 | detection 8.0 ms/frame
+[INFO] [1791098094.646659240] [cloud_detector]: frames 833 | detection 8.4 ms/frame
+[INFO] [1791098099.649713679] [cloud_detector]: frames 881 | detection 7.9 ms/frame
+[INFO] [1791098104.646425383] [cloud_detector]: frames 929 | detection 7.2 ms/frame
+[INFO] [1791098109.646805831] [cloud_detector]: frames 970 | detection 7.1 ms/frame
+[INFO] [1791098114.646553878] [cloud_detector]: frames 1019 | detection 7.0 ms/frame
+[INFO] [1791098119.652398487] [cloud_detector]: frames 1068 | detection 6.7 ms/frame
+[INFO] [1791098124.646606401] [cloud_detector]: frames 1116 | detection 7.4 ms/frame
+[INFO] [1791098129.646657815] [cloud_detector]: frames 1165 | detection 7.2 ms/frame
+[INFO] [1791098134.646387344] [cloud_detector]: frames 1212 | detection 7.2 ms/frame
+[INFO] [1791098139.646490111] [cloud_detector]: frames 1261 | detection 8.0 ms/frame
+[INFO] [1791098144.646436218] [cloud_detector]: frames 1301 | detection 8.3 ms/frame
+[INFO] [1791098149.646525954] [cloud_detector]: frames 1349 | detection 8.4 ms/frame
+[INFO] [1791098154.655709395] [cloud_detector]: frames 1398 | detection 8.1 ms/frame
+[INFO] [1791098159.646542084] [cloud_detector]: frames 1446 | detection 7.7 ms/frame
+[INFO] [1791098164.652916553] [cloud_detector]: frames 1494 | detection 7.2 ms/frame
+[INFO] [1791098169.646976572] [cloud_detector]: frames 1542 | detection 7.1 ms/frame
+[INFO] [1791098175.220574798] [cloud_detector]: frames 1586 | detection 7.6 ms/frame
+[INFO] [1791098179.646326458] [cloud_detector]: frames 1630 | detection 7.3 ms/frame
+[INFO] [1791098184.646655046] [cloud_detector]: frames 1675 | detection 7.3 ms/frame
+Traceback (most recent call last):
+  File "/home/shaash/ws_px4/install/drone_eval/lib/drone_eval/cloud_detector", line 33, in <module>
+    sys.exit(load_entry_point('drone-eval', 'console_scripts', 'cloud_detector')())
+  File "/home/shaash/ws_px4/build/drone_eval/drone_eval/cloud_detector.py", line 215, in main
+    rclpy.spin(n)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+    raise ExternalShutdownException()
+rclpy.executors.ExternalShutdownException
+[ros2run]: Process exited with failure 1

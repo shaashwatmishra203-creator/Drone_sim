@@ -1,0 +1,50 @@
+[INFO] [1791098265.403490884] [cloud_detector]: cloud detector ready: classes shelf_rack(hue 112), machine(hue 66), pallet_stack(hue 2), pillar(hue 26)
+[INFO] [1791098270.393299899] [cloud_detector]: frames 31 | detection 7.1 ms/frame
+[INFO] [1791098275.393185090] [cloud_detector]: frames 80 | detection 7.0 ms/frame
+[INFO] [1791098280.393127662] [cloud_detector]: frames 128 | detection 7.1 ms/frame
+[INFO] [1791098285.393487923] [cloud_detector]: frames 176 | detection 7.3 ms/frame
+[INFO] [1791098290.393248236] [cloud_detector]: frames 225 | detection 7.4 ms/frame
+[INFO] [1791098295.393355574] [cloud_detector]: frames 272 | detection 7.7 ms/frame
+[INFO] [1791098300.393476775] [cloud_detector]: frames 312 | detection 7.6 ms/frame
+[INFO] [1791098305.393254495] [cloud_detector]: frames 359 | detection 7.8 ms/frame
+[INFO] [1791098310.393266289] [cloud_detector]: frames 406 | detection 7.5 ms/frame
+[INFO] [1791098315.392977835] [cloud_detector]: frames 455 | detection 7.1 ms/frame
+[INFO] [1791098320.393354942] [cloud_detector]: frames 502 | detection 7.2 ms/frame
+[INFO] [1791098325.393205662] [cloud_detector]: frames 549 | detection 7.4 ms/frame
+[INFO] [1791098330.393167416] [cloud_detector]: frames 589 | detection 7.5 ms/frame
+[INFO] [1791098335.393116533] [cloud_detector]: frames 638 | detection 7.9 ms/frame
+[INFO] [1791098340.393036787] [cloud_detector]: frames 683 | detection 7.7 ms/frame
+[INFO] [1791098345.393447012] [cloud_detector]: frames 732 | detection 7.2 ms/frame
+[INFO] [1791098350.393337276] [cloud_detector]: frames 779 | detection 6.8 ms/frame
+[INFO] [1791098355.393391626] [cloud_detector]: frames 828 | detection 7.3 ms/frame
+[INFO] [1791098360.393224504] [cloud_detector]: frames 877 | detection 7.5 ms/frame
+[INFO] [1791098365.392999057] [cloud_detector]: frames 915 | detection 7.7 ms/frame
+[INFO] [1791098370.393264683] [cloud_detector]: frames 963 | detection 7.9 ms/frame
+[INFO] [1791098375.393387373] [cloud_detector]: frames 1010 | detection 7.5 ms/frame
+[INFO] [1791098380.393165740] [cloud_detector]: frames 1059 | detection 7.3 ms/frame
+[INFO] [1791098385.393189023] [cloud_detector]: frames 1108 | detection 7.3 ms/frame
+[INFO] [1791098390.393099528] [cloud_detector]: frames 1157 | detection 7.3 ms/frame
+[INFO] [1791098395.393438874] [cloud_detector]: frames 1205 | detection 7.3 ms/frame
+[INFO] [1791098400.393154568] [cloud_detector]: frames 1245 | detection 7.1 ms/frame
+[INFO] [1791098405.393329418] [cloud_detector]: frames 1292 | detection 6.4 ms/frame
+[INFO] [1791098410.393252356] [cloud_detector]: frames 1341 | detection 5.5 ms/frame
+[INFO] [1791098415.393159877] [cloud_detector]: frames 1389 | detection 4.8 ms/frame
+[INFO] [1791098420.393294824] [cloud_detector]: frames 1436 | detection 4.8 ms/frame
+[INFO] [1791098425.393251970] [cloud_detector]: frames 1484 | detection 5.3 ms/frame
+Traceback (most recent call last):
+  File "/home/shaash/ws_px4/install/drone_eval/lib/drone_eval/cloud_detector", line 33, in <module>
+    sys.exit(load_entry_point('drone-eval', 'console_scripts', 'cloud_detector')())
+  File "/home/shaash/ws_px4/build/drone_eval/drone_eval/cloud_detector.py", line 215, in main
+    rclpy.spin(n)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+    raise ExternalShutdownException()
+rclpy.executors.ExternalShutdownException
+[ros2run]: Process exited with failure 1

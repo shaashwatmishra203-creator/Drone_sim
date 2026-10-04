@@ -1,0 +1,2 @@
+truth_logger: /world/factory_hall/dynamic_pose/info -> /home/shaash/drone_sim/out/runs/hall_mission_20261004_031720/truth.csv (n360_quad_9x45_pi5_0, 20 Hz)
+[ros2run]: Terminated

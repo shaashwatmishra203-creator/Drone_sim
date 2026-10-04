@@ -24,6 +24,11 @@ setup(
             'camera_bridge = drone_eval.camera_bridge:main',
             'camera_mapper = drone_eval.camera_mapper:main',
             'state_estimator = drone_eval.state_estimator:main',
+            'truth_logger = drone_eval.truth_logger:main',
+            'hall_mission = drone_eval.hall_mission:main',
+            'vision_view = drone_eval.vision_view:main',
+            'cloud_detector = drone_eval.cloud_detector:main',
+            'cloud_link = drone_eval.cloud_link:main',
         ],
     },
 )

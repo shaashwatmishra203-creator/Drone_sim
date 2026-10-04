@@ -44,7 +44,7 @@ IMG_QOS = QoSProfile(
 )
 
 # gz Image.pixel_format_type -> ROS encoding
-PIXFMT = {1: "l8", 2: "rgb8", 3: "rgba8", 4: "bgra8", 5: "bgr8", 6: "mono16"}
+PIXFMT = {1: "mono8", 2: "mono16", 3: "rgb8", 4: "rgba8", 5: "bgra8", 8: "bgr8"}
 
 
 class CameraBridge(RclNode):

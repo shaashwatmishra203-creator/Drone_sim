@@ -1,0 +1,139 @@
+# factory_hall.yaml - single source of truth for the v2 factory hall.
+#
+# Read by tools/gen_hall.py (to build the Gazebo world), by cloud_detector (to
+# know which colour is which object class, and how tall each class is), by
+# hall_mission (for the hall boundary and the goals) and by tools/hall_report.py
+# (to score the flight and the computer vision against the true geometry).
+# Nothing about the hall is defined anywhere else.
+#
+# Frame: Gazebo world, ENU. x East (down the hall), y North, z up. The launch
+# pad is the world origin, so PX4's local origin is the pad.
+
+hall:
+  name: factory_hall
+  x: [-6.0, 44.0]          # interior extent, 50 m
+  y: [-15.0, 15.0]         # interior extent, 30 m
+  wall_height: 8.0
+  wall_thickness: 0.4
+  # No roof, deliberately: a roof would hide the drone from the Gazebo
+  # viewpoint. A real hall has one; nothing here depends on it.
+
+# Geographic location of the world origin. PX4 looks up the magnetic
+# declination for this position (World Magnetic Model), while Gazebo's
+# simulated magnetometer uses the fixed <magnetic_field> vector in the world
+# file. If the two disagree, PX4's heading is wrong - by 26 degrees on the
+# pad with the old California coordinates, which rotated every camera
+# detection on the map. PX4's stock worlds use this Zurich origin.
+geo:
+  lat: 47.397971057728974
+  lon: 8.546163739800146
+
+pad:
+  xy: [0.0, 0.0]
+  size: 2.4
+  # Low saturation on purpose. A saturated pad (the old one was blue) is
+  # segmented as an obstacle by colour, and the drone would then refuse to
+  # land on its own pad.
+  rgb: [0.88, 0.88, 0.86]
+
+# Object classes. Hues are spread around the colour wheel (red 0, yellow 60,
+# green 120, blue 220 degrees) so colour segmentation cannot confuse them, and
+# none is close to the grey walls, grey floor or pale sky. height_m is what the
+# detector uses for a pinhole range estimate when an object is fully in view.
+classes:
+  shelf_rack:   {rgb: [0.10, 0.30, 0.85], height_m: 4.0}
+  machine:      {rgb: [0.12, 0.62, 0.22], height_m: 3.0}
+  pallet_stack: {rgb: [0.85, 0.15, 0.10], height_m: 3.0}
+  pillar:       {rgb: [0.95, 0.82, 0.08], height_m: 8.0}
+
+# Every object: [name, class, x, y, size_x, size_y]. Height comes from the
+# class. All course objects are taller than the 2.0 m cruise altitude, so they
+# must be flown AROUND - the camera has to find the way, it cannot climb over.
+#
+# THE AISLE. The first version scattered the obstacles in the open hall, and
+# the drone (correctly) flew round the outside of the whole cluster: 30 m of
+# open floor offered a way past every obstacle without weaving between any of
+# them. So the course is now a factory aisle - two long shelving rows, inner
+# faces at y = +/-5 - and every obstacle inside it leaves a single usable gap,
+# alternating side to side. The aisle walls are ordinary shelf racks: the
+# camera has to detect them like anything else; the drone is told nothing.
+#
+# Gap widths. Run 3 had 3.0 m gaps: with 2 x 1.05 m clearance plus ~0.5 m
+# lost to the 0.4 m map grid, the gap past rack_1 closed on the map and the
+# drone (correctly) could not find a way in. Now 4.0 m:
+#   rack_1 x=7   leaves y -5..-1    (4.0 m, south)
+#   machine_1    leaves y -1..+5    (6.0 m, north)
+#   rack_2 x=17  leaves y +1..+5    (4.0 m, north)
+#   pallets_1    leaves y -5..+1    (6.0 m, south)
+#   machine_2    leaves y -0.5..+5  (5.5 m, north)
+# Pillars sit ON the natural line between gaps, so each one forces a dodge.
+objects:
+  - [aisle_north, shelf_rack,  17.25,  5.6, 27.5, 1.2]
+  - [aisle_south, shelf_rack,  17.25, -5.6, 27.5, 1.2]
+  # Storage blocks closing the hall either side of the aisle entrance. Run 2
+  # flew round the west end of the aisle and along the open floor beside it;
+  # with these, the aisle is the only way from the pad to the scan zone.
+  - [store_north, shelf_rack,   4.1,  10.6, 1.2, 8.8]
+  - [store_south, shelf_rack,   4.1, -10.6, 1.2, 8.8]
+  # ...and at the aisle EXIT. Run 9 flew the aisle outbound, then on the way
+  # home left by the open east end and flew round the outside of the aisle.
+  - [store_north_e, shelf_rack, 31.6,  10.6, 1.2, 8.8]
+  - [store_south_e, shelf_rack, 31.6, -10.6, 1.2, 8.8]
+  - [rack_1,     shelf_rack,    7.0,  2.0, 1.2, 6.0]
+  - [machine_1,  machine,      12.0, -2.5, 3.0, 3.0]
+  - [rack_2,     shelf_rack,   17.0, -2.0, 1.2, 6.0]
+  - [pallets_1,  pallet_stack, 22.0,  2.5, 1.6, 3.0]
+  - [machine_2,  machine,      27.0, -2.0, 3.0, 3.0]
+  # Pillars stand in the WIDE lanes. Placed in the transitions between gaps
+  # they sealed the course at the planner's inflation (checked offline with a
+  # grid search before flying - see tools/check_course.py).
+  - [pillar_a,   pillar,       12.0,  2.6, 0.8, 0.8]
+  - [pillar_b,   pillar,       22.0, -2.6, 0.8, 0.8]
+  - [pillar_d,   pillar,       27.0,  3.0, 0.8, 0.8]
+  - [pillar_e,   pillar,       20.2,  4.0, 0.8, 0.8]
+  - [pillar_c,   pillar,       32.0,  1.8, 0.8, 0.8]
+  # scan zone, east end
+  - [machine_3,  machine,      39.0,  6.0, 3.0, 3.0]
+  - [machine_4,  machine,      40.0, -6.5, 3.0, 3.0]
+  - [pallets_2,  pallet_stack, 36.0, -10.0, 1.6, 1.6]
+  - [rack_3,     shelf_rack,   42.6,  0.0, 1.2, 8.0]
+
+mission:
+  cruise_alt_m: 2.0
+  speed_ms: 1.2
+  scan_point: [35.0, 0.0]
+  scan_yaw_rate_dps: 30          # one full turn in 12 s
+  goal_tolerance_m: 0.8
+  land_tolerance_m: 0.5
+  # Avoidance (edge, onboard)
+  airframe_radius_m: 0.35        # 9" props on a ~0.45 m frame, plus margin
+  # 0.5 in run 1 gave 0.26 m true hull clearance at rack_1 (gate 0.4), when
+  # ranges carried ~12% error and the map had only front faces. Raised to 0.7
+  # for run 3; ground-contact ranging then cut the error to 2% median (10.7%
+  # p90) and object depth is mapped, so 0.6 is used. The 0.4 m GATE is not
+  # changed - the margin is what we fly with, the gate is what we judge by.
+  clearance_margin_m: 0.6
+  lookahead_m: 7.0
+  stop_range_m: 1.2              # obstacle closer than this ahead -> stop
+  detection_max_age_s: 0.5       # older detections -> hold (link lag/outage)
+  wall_margin_m: 3.0             # stay this far inside the hall walls
+
+camera:
+  width: 640
+  height: 360
+  hfov_deg: 66.0
+  pitch_down_deg: 15.0
+
+# Emulated factory WiFi between the drone and the cloud detector. These are
+# ASSUMPTIONS, not measurements: capacity from the earlier link budget
+# (compute_tradeoff.py, 11 Mbps usable inside the hall), latency and jitter
+# typical of a loaded 5 GHz enterprise WLAN plus a nearby cloud region.
+link:
+  uplink_mbps: 11.0
+  downlink_mbps: 11.0
+  one_way_latency_ms: 35.0
+  jitter_ms: 15.0
+  loss_pct: 1.0
+  jpeg_quality: 70
+  send_hz: 10.0
+  outages_s: []                  # e.g. [[40, 42]] to test the hold behaviour

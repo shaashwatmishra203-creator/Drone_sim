@@ -1,0 +1,24 @@
+{
+  "status": "complete - returned to pad and landed",
+  "legs_s": {
+    "outbound": 67.69990015029907,
+    "scan": 12.000030994415283,
+    "inbound": 50.49986696243286,
+    "land": 10.00036883354187
+  },
+  "total_s": 140.2001669406891,
+  "decisions": {
+    "stale_hold": 11,
+    "stop": 36,
+    "turn_first": 159,
+    "boxed_in": 66,
+    "go": 875
+  },
+  "detection_msgs": 1402,
+  "map_cells": 2077,
+  "plans": 112,
+  "plans_without_path": 0,
+  "dead_end_escapes": 0,
+  "plan_ms_median": 40.67707061767578,
+  "plan_ms_max": 90.74258804321289
+}

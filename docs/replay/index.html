@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Factory Hall Replay</title>
+<style>
+  :root { --bg:#f4f5f7; --panel:#ffffff; --ink:#1d2330; --muted:#5d6675; --line:#d8dce3; --accent:#2f6fde; --good:#1e8e3e; --bad:#c5221f; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#14171c; --panel:#1d2128; --ink:#e7eaf0; --muted:#9aa3b2; --line:#2e343e; --accent:#6ea0ff; --good:#5cc27a; --bad:#ff7a70; } }
+  :root[data-theme="dark"] { --bg:#14171c; --panel:#1d2128; --ink:#e7eaf0; --muted:#9aa3b2; --line:#2e343e; --accent:#6ea0ff; --good:#5cc27a; --bad:#ff7a70; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+  header { padding:14px 16px 6px; }
+  h1 { font-size:18px; margin:0 0 4px; }
+  .sub { color:var(--muted); font-size:13px; max-width:980px; }
+  .wrap { display:grid; grid-template-columns: minmax(0,1fr) 400px; gap:12px; padding:10px 16px 16px; }
+  @media (max-width: 900px) { .wrap { grid-template-columns: 1fr; } }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  #view { width:100%; height:62vh; min-height:340px; display:block; }
+  .controls { display:flex; gap:10px; align-items:center; padding:10px 12px; border-top:1px solid var(--line); flex-wrap:wrap; }
+  button { background:var(--accent); color:#fff; border:0; border-radius:6px; padding:6px 12px; font:inherit; cursor:pointer; }
+  button.ghost { background:transparent; color:var(--ink); border:1px solid var(--line); }
+  input[type=range] { flex:1; min-width:160px; }
+  .t { font-variant-numeric: tabular-nums; min-width:88px; }
+  .leg { font-weight:600; }
+  .side { display:flex; flex-direction:column; gap:12px; }
+  .cam img { width:100%; display:block; background:#000; aspect-ratio:16/9; }
+  .cap { padding:8px 12px; color:var(--muted); font-size:12px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  td { padding:5px 12px; border-top:1px solid var(--line); }
+  td:last-child { text-align:right; font-variant-numeric: tabular-nums; }
+  .pass { color:var(--good); font-weight:600; } .fail { color:var(--bad); font-weight:600; }
+  .legend { display:flex; gap:12px; flex-wrap:wrap; padding:8px 12px; font-size:12px; color:var(--muted); }
+  .sw { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:4px; vertical-align:-1px; }
+  .warn { margin:0 16px; padding:8px 12px; border:1px solid var(--line); border-radius:8px; background:var(--panel); color:var(--muted); font-size:12.5px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Factory hall mission: replay of a recorded simulation run</h1>
+  <div class="sub">The drone takes off from the pad, flies a factory aisle using only what its camera sees, scans the room at the far end, and flies back to land. Camera frames go over an emulated WiFi link to a cloud object detector; the boxes that come back become the drone's map (red). The path shown is the drone's <b>true</b> position recorded from Gazebo.</div>
+</header>
+<div class="warn">Simulation only (PX4 SITL + Gazebo Harmonic + ROS 2). This is a recording of one run, replayed in your browser. It does not show that the real aircraft is safe to fly. <span id="runname"></span></div>
+<div class="wrap">
+  <div class="card">
+    <canvas id="view"></canvas>
+    <div class="controls">
+      <button id="play">Pause</button>
+      <button class="ghost" id="speed">Speed 4x</button>
+      <button class="ghost" id="cam">Camera: follow</button>
+      <input type="range" id="scrub" min="0" max="1000" value="0">
+      <span class="t" id="time">0.0 s</span>
+      <span class="leg" id="leg"></span>
+    </div>
+    <div class="legend" id="legend"></div>
+  </div>
+  <div class="side">
+    <div class="card cam">
+      <img id="frame" alt="Drone camera with the cloud detector's bounding boxes">
+      <div class="cap">Drone camera with the cloud detector's boxes and labels, at the same moment in the flight.</div>
+    </div>
+    <div class="card">
+      <table id="results"></table>
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(async function () {
+  const D = await (await fetch("data.json")).json();
+  document.getElementById("runname").textContent = "Run: " + D.run + ".";
+  const css = getComputedStyle(document.documentElement);
+
+  // ---------- results table ----------
+  const R = D.results, g = R.gates || {};
+  const pf = v => v === undefined ? "" : (v ? '<span class="pass">PASS</span>' : '<span class="fail">FAIL</span>');
+  const rows = [
+    ["Outcome", R.status || ""],
+    ["Mission time", R.total_s ? R.total_s.toFixed(1) + " s" : ""],
+    ["Closest approach (gate 0.40 m)", (R.min_clearance_m ?? NaN).toFixed(2) + " m " + pf(g["clearance >= 0.4 m"])],
+    ["Contact with anything", (R.contact_samples === 0 ? "none " : R.contact_samples + " samples ") + pf(g["no contact"])],
+    ["Landing error (gate 0.50 m)", (R.landing_error_m ?? NaN).toFixed(2) + " m " + pf(g["landed within 0.5 m"])],
+    ["Detection recall (gate 0.90)", R.recall != null ? R.recall.toFixed(2) + " " + pf(g["CV recall >= 0.90"]) : ""],
+    ["Range error, median", R.range_err_median != null ? (100 * R.range_err_median).toFixed(1) + " % " + pf(g["range error median <= 15%"]) : ""],
+    ["Cloud round trip, median", R.round_trip_ms && R.round_trip_ms.median ? R.round_trip_ms.median.toFixed(0) + " ms" : ""],
+  ];
+  document.getElementById("results").innerHTML = rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("");
+
+  // ---------- scene ----------
+  const canvas = document.getElementById("view");
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xdfe3e8);
+  const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 500);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8f99, 0.95));
+  const sun = new THREE.DirectionalLight(0xffffff, 0.55); sun.position.set(-20, 30, 40); scene.add(sun);
+  // Gazebo is ENU (x East, y North, z Up); three.js is y-up. Map (x, y, z) -> (x, z, -y).
+  const P = (x, y, z) => new THREE.Vector3(x, z, -y);
+
+  const H = D.hall;
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(H.x[1] - H.x[0] + 4, H.y[1] - H.y[0] + 4),
+                               new THREE.MeshLambertMaterial({ color: 0xb9bdc4 }));
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.copy(P((H.x[0] + H.x[1]) / 2, (H.y[0] + H.y[1]) / 2, 0));
+  scene.add(floor);
+  const pad = new THREE.Mesh(new THREE.PlaneGeometry(D.pad.size, D.pad.size),
+                             new THREE.MeshLambertMaterial({ color: 0xf5f5f2 }));
+  pad.rotation.x = -Math.PI / 2; pad.position.copy(P(D.pad.xy[0], D.pad.xy[1], 0.01)); scene.add(pad);
+
+  const colOf = rgb => new THREE.Color(rgb[0], rgb[1], rgb[2]);
+  for (const [nm, cls, x, y, z, sx, sy, sz] of D.objects) {
+    const isWall = cls === "wall";
+    const m = new THREE.Mesh(new THREE.BoxGeometry(sx, sz, sy),
+      new THREE.MeshLambertMaterial({ color: isWall ? 0xcfd2d7 : colOf(D.classes[cls]),
+                                      transparent: isWall, opacity: isWall ? 0.25 : 1 }));
+    m.position.copy(P(x, y, z));
+    scene.add(m);
+  }
+
+  // camera map cells (instanced, revealed over time)
+  const cellGeo = new THREE.BoxGeometry(0.22, 0.06, 0.22);
+  const cellMat = new THREE.MeshBasicMaterial({ color: 0xe0281e });
+  const cells = new THREE.InstancedMesh(cellGeo, cellMat, Math.max(1, D.cells.length));
+  const tmp = new THREE.Object3D();
+  D.cells.forEach((c, i) => { tmp.position.copy(P(c[1], c[2], 0.05)); tmp.updateMatrix(); cells.setMatrixAt(i, tmp.matrix); });
+  cells.count = 0; scene.add(cells);
+
+  // path line (drawn up to the current time)
+  const pts = D.path.map(p => P(p[1], p[2], p[3]));
+  const pathGeo = new THREE.BufferGeometry().setFromPoints(pts);
+  const pathLine = new THREE.Line(pathGeo, new THREE.LineBasicMaterial({ color: 0x111111 }));
+  scene.add(pathLine);
+
+  // simple quadcopter
+  const drone = new THREE.Group();
+  const dark = new THREE.MeshLambertMaterial({ color: 0x222831 });
+  drone.add(new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.08, 0.28), dark));
+  for (const a of [Math.PI / 4, 3 * Math.PI / 4]) {
+    const arm = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.03, 0.04), dark); arm.rotation.y = a; drone.add(arm);
+  }
+  const propMat = new THREE.MeshLambertMaterial({ color: 0x8892a0, transparent: true, opacity: 0.7 });
+  for (const [px, pz] of [[0.25, 0.25], [-0.25, 0.25], [0.25, -0.25], [-0.25, -0.25]]) {
+    const pr = new THREE.Mesh(new THREE.CylinderGeometry(0.115, 0.115, 0.01, 20), propMat);
+    pr.position.set(px, 0.05, pz); drone.add(pr);
+  }
+  const nose = new THREE.Mesh(new THREE.ConeGeometry(0.05, 0.16, 12), new THREE.MeshLambertMaterial({ color: 0x2f6fde }));
+  nose.rotation.z = -Math.PI / 2; nose.position.set(0.2, 0, 0); drone.add(nose);
+  // camera view cone (66 deg horizontal field of view)
+  const fov = new THREE.Mesh(new THREE.ConeGeometry(2.6, 4, 4, 1, true),
+    new THREE.MeshBasicMaterial({ color: 0x2f6fde, transparent: true, opacity: 0.08, side: THREE.DoubleSide }));
+  fov.rotation.z = Math.PI / 2; fov.rotation.y = Math.PI / 4; fov.position.set(2.0, -0.1, 0); drone.add(fov);
+  drone.scale.setScalar(1.6);
+  scene.add(drone);
+
+  // legend
+  const lg = document.getElementById("legend");
+  const swatch = (c, t) => `<span><span class="sw" style="background:${c}"></span>${t}</span>`;
+  const hex = rgb => "#" + colOf(rgb).getHexString();
+  lg.innerHTML = Object.entries(D.classes).map(([k, v]) => swatch(hex(v), k.replace("_", " "))).join("") +
+                 swatch("#e0281e", "camera map") + swatch("#111", "true path");
+
+  // ---------- playback ----------
+  const T = D.path[D.path.length - 1][0];
+  let t = 0, playing = true, speed = 4, follow = true, lastNow = performance.now();
+  const timeEl = document.getElementById("time"), legEl = document.getElementById("leg"),
+        scrub = document.getElementById("scrub"), frameEl = document.getElementById("frame");
+  const bs = (arr, v) => { let lo = 0, hi = arr.length - 1; while (lo < hi) { const m = (lo + hi + 1) >> 1; if (arr[m][0] <= v) lo = m; else hi = m - 1; } return lo; };
+  const legName = { boot: "take-off", outbound: "outbound through the aisle", scan: "scanning the room",
+                    inbound: "returning through the aisle", land: "landing" };
+  let shownFrame = "";
+  // orbit-ish manual camera
+  let yawV = -0.6, pitchV = 0.75, dist = 18, dragging = false, px0 = 0, py0 = 0;
+  canvas.addEventListener("pointerdown", e => { dragging = true; px0 = e.clientX; py0 = e.clientY; canvas.setPointerCapture(e.pointerId); });
+  canvas.addEventListener("pointerup", () => dragging = false);
+  canvas.addEventListener("pointermove", e => { if (!dragging) return; yawV -= (e.clientX - px0) * 0.006; pitchV = Math.min(1.45, Math.max(0.15, pitchV + (e.clientY - py0) * 0.006)); px0 = e.clientX; py0 = e.clientY; });
+  canvas.addEventListener("wheel", e => { e.preventDefault(); dist = Math.min(80, Math.max(5, dist * (1 + Math.sign(e.deltaY) * 0.1))); }, { passive: false });
+
+  document.getElementById("play").onclick = e => { playing = !playing; e.target.textContent = playing ? "Pause" : "Play"; if (t >= T) t = 0; };
+  document.getElementById("speed").onclick = e => { speed = speed === 1 ? 4 : speed === 4 ? 10 : 1; e.target.textContent = "Speed " + speed + "x"; };
+  document.getElementById("cam").onclick = e => { follow = !follow; e.target.textContent = "Camera: " + (follow ? "follow" : "whole hall"); };
+  scrub.oninput = () => { t = scrub.value / 1000 * T; };
+
+  function resize() {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    if (canvas.width !== Math.floor(w * renderer.getPixelRatio()) || canvas.height !== Math.floor(h * renderer.getPixelRatio())) {
+      renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+    }
+  }
+  function frame(now) {
+    const dt = Math.min(0.1, (now - lastNow) / 1000); lastNow = now;
+    if (playing) { t += dt * speed; if (t >= T) { t = T; playing = false; document.getElementById("play").textContent = "Replay"; } }
+    scrub.value = Math.round(t / T * 1000);
+    const i = bs(D.path, t), p = D.path[i], q = D.path[Math.min(i + 1, D.path.length - 1)];
+    const f = q[0] > p[0] ? (t - p[0]) / (q[0] - p[0]) : 0;
+    const x = p[1] + (q[1] - p[1]) * f, y = p[2] + (q[2] - p[2]) * f, z = p[3] + (q[3] - p[3]) * f;
+    let dy = q[4] - p[4]; if (dy > Math.PI) dy -= 2 * Math.PI; if (dy < -Math.PI) dy += 2 * Math.PI;
+    const yaw = p[4] + dy * f;
+    drone.position.copy(P(x, y, z)); drone.rotation.y = yaw;
+    pathGeo.setDrawRange(0, i + 1);
+    cells.count = D.cells.length ? bs(D.cells, t) + (D.cells[0][0] <= t ? 1 : 0) : 0;
+    cells.instanceMatrix.needsUpdate = true;
+    const legs = D.legs; const li = legs.length ? bs(legs, t) : -1;
+    legEl.textContent = li >= 0 && legs[li][0] <= t ? (legName[legs[li][1]] || legs[li][1]) : "take-off";
+    timeEl.textContent = t.toFixed(1) + " / " + T.toFixed(0) + " s";
+    if (D.frames.length) { const fr = D.frames[bs(D.frames, t)][1]; if (fr !== shownFrame) { frameEl.src = "frames/" + fr; shownFrame = fr; } }
+    const target = follow ? P(x, y, z) : P((H.x[0] + H.x[1]) / 2 - 4, 0, 0);
+    const d = follow ? dist : 62;
+    camera.position.set(target.x + d * Math.cos(pitchV) * Math.cos(yawV), target.y + d * Math.sin(pitchV), target.z + d * Math.cos(pitchV) * Math.sin(yawV));
+    camera.lookAt(target);
+    resize(); renderer.render(scene, camera);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

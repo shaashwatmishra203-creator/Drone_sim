@@ -1,0 +1,27 @@
+[INFO] [1791075853.826221730] [cloud_detector]: cloud detector ready: classes shelf_rack(hue 112), machine(hue 66), pallet_stack(hue 2), pillar(hue 26)
+[INFO] [1791075858.817483548] [cloud_detector]: frames 34 | detection 8.4 ms/frame
+[INFO] [1791075863.813075134] [cloud_detector]: frames 73 | detection 8.5 ms/frame
+[INFO] [1791075868.812952802] [cloud_detector]: frames 122 | detection 8.4 ms/frame
+[INFO] [1791075873.818717632] [cloud_detector]: frames 171 | detection 8.3 ms/frame
+[INFO] [1791075878.812994144] [cloud_detector]: frames 219 | detection 8.1 ms/frame
+[INFO] [1791075883.812993923] [cloud_detector]: frames 268 | detection 7.7 ms/frame
+[INFO] [1791075888.813009415] [cloud_detector]: frames 317 | detection 8.3 ms/frame
+[INFO] [1791075893.813104607] [cloud_detector]: frames 354 | detection 8.8 ms/frame
+[INFO] [1791075898.824297070] [cloud_detector]: frames 403 | detection 8.9 ms/frame
+Traceback (most recent call last):
+  File "/home/shaash/ws_px4/install/drone_eval/lib/drone_eval/cloud_detector", line 33, in <module>
+    sys.exit(load_entry_point('drone-eval', 'console_scripts', 'cloud_detector')())
+  File "/home/shaash/ws_px4/build/drone_eval/drone_eval/cloud_detector.py", line 215, in main
+    rclpy.spin(n)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+    raise ExternalShutdownException()
+rclpy.executors.ExternalShutdownException
+[ros2run]: Process exited with failure 1

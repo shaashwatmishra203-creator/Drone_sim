@@ -166,6 +166,48 @@ are rejected), then N>=5 runs reported as a spread, not a best case.
 
 ---
 
+## Retracted: all v1 factory-mission results (frame error)
+
+Mission waypoints were written in Gazebo world coordinates (ENU, course along
+East) and sent to PX4 unchanged; PX4 reads setpoints as NED (x = North). Every
+v1 mission therefore flew the course rotated 90 degrees, in open ground beside
+the walls. The geometric camera model, `check_clearance.py` and the state
+estimator all took PX4's x/y as world x/y, so they agreed with each other in
+a phantom frame and nothing flagged it.
+
+Retracted: gates threaded, zero collisions, 71-74% camera-steered, the 82-92 s
+mission times and path lengths, the closest-approach figures, and the
+camera+IMU fusion numbers (already retracted above for a separate defect).
+This also resolves the long-open "0.00 m clearance with no collision"
+contradiction. Hover physics, thrust, power and endurance are unaffected.
+
+Replacement: docs/10-factory-hall-v2.md. All v2 judging uses Gazebo's true
+pose (`truth_logger`), which does not share PX4's frame.
+
+## Found: PX4 heading 26 degrees wrong in the old worlds
+
+The worlds sat at California coordinates. PX4 looks up the magnetic
+declination there, but Gazebo's magnetometer uses a fixed field vector, so
+PX4's heading was 26 degrees off on the pad, settling to ~6 degrees in flight.
+Moving the origin to PX4's stock (Zurich) location reduced it to -4.8 degrees
+on the pad and ~0-5 degrees in flight, measured against truth.
+
+## Retracted: "cut-off boxes give an upper bound on range"
+
+Claimed in an early `avoid.py`. In the frame-check run the true range
+exceeded the "bound" in 45 of 70 cases. Cut-off boxes now mean "close, range
+unknown"; the drone places them at half the returned range, and the report
+checks that this is nearer than the truth (93 of 97 in run 12).
+
+## Excluded run
+
+A session where the launcher was started twice ran two harnesses over one
+output folder. Its results (120.5 s, complete) are excluded because duplicate
+controllers cannot be ruled out. `hall_run.sh` now takes a lock and writes each
+run to its own folder.
+
+---
+
 ## Open items
 
 - **Measured masses.** 88% of AUW is still estimated. ~2 min endurance per 500 g.

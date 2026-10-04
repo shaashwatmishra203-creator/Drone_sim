@@ -1,0 +1,52 @@
+[INFO] [1791097718.144005327] [cloud_detector]: cloud detector ready: classes shelf_rack(hue 112), machine(hue 66), pallet_stack(hue 2), pillar(hue 26)
+[INFO] [1791097723.128966749] [cloud_detector]: frames 29 | detection 9.4 ms/frame
+[INFO] [1791097728.128979122] [cloud_detector]: frames 78 | detection 9.7 ms/frame
+[INFO] [1791097733.128765133] [cloud_detector]: frames 127 | detection 9.7 ms/frame
+[INFO] [1791097738.129094429] [cloud_detector]: frames 175 | detection 9.6 ms/frame
+[INFO] [1791097743.129321512] [cloud_detector]: frames 223 | detection 9.5 ms/frame
+[INFO] [1791097748.129182241] [cloud_detector]: frames 260 | detection 9.5 ms/frame
+[INFO] [1791097753.128728051] [cloud_detector]: frames 307 | detection 9.6 ms/frame
+[INFO] [1791097758.129124220] [cloud_detector]: frames 356 | detection 9.4 ms/frame
+[INFO] [1791097763.129342240] [cloud_detector]: frames 404 | detection 9.4 ms/frame
+[INFO] [1791097768.130910462] [cloud_detector]: frames 453 | detection 9.4 ms/frame
+[INFO] [1791097773.128852400] [cloud_detector]: frames 500 | detection 9.5 ms/frame
+[INFO] [1791097778.129203845] [cloud_detector]: frames 549 | detection 9.4 ms/frame
+[INFO] [1791097783.128785998] [cloud_detector]: frames 587 | detection 9.3 ms/frame
+[INFO] [1791097788.129546107] [cloud_detector]: frames 636 | detection 9.5 ms/frame
+[INFO] [1791097793.129754954] [cloud_detector]: frames 684 | detection 10.0 ms/frame
+[INFO] [1791097798.128812820] [cloud_detector]: frames 732 | detection 10.3 ms/frame
+[INFO] [1791097803.128646519] [cloud_detector]: frames 780 | detection 9.8 ms/frame
+[INFO] [1791097808.128764834] [cloud_detector]: frames 829 | detection 9.2 ms/frame
+[INFO] [1791097813.286506951] [cloud_detector]: frames 868 | detection 9.4 ms/frame
+[INFO] [1791097818.128702874] [cloud_detector]: frames 914 | detection 9.3 ms/frame
+[INFO] [1791097823.128758911] [cloud_detector]: frames 963 | detection 9.2 ms/frame
+[INFO] [1791097828.130826049] [cloud_detector]: frames 1011 | detection 8.9 ms/frame
+[INFO] [1791097833.128909538] [cloud_detector]: frames 1059 | detection 9.1 ms/frame
+[INFO] [1791097838.128804719] [cloud_detector]: frames 1108 | detection 9.3 ms/frame
+[INFO] [1791097843.128844733] [cloud_detector]: frames 1155 | detection 9.4 ms/frame
+[INFO] [1791097848.140834956] [cloud_detector]: frames 1191 | detection 9.8 ms/frame
+Traceback (most recent call last):
+  File "/home/shaash/ws_px4/install/drone_eval/lib/drone_eval/cloud_detector", line 33, in <module>
+    sys.exit(load_entry_point('drone-eval', 'console_scripts', 'cloud_detector')())
+  File "/home/shaash/ws_px4/build/drone_eval/drone_eval/cloud_detector.py", line 215, in main
+    rclpy.spin(n)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+    executor.spin_once()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 805, in _spin_once_impl
+    raise handler.exception()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/task.py", line 272, in _execute_coroutine_step
+    result = coro.send(None)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 488, in handler
+    await call_coroutine(entity, arg)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 407, in _execute_subscription
+    await await_or_execute(sub.callback, msg)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 110, in await_or_execute
+    return callback(*args)
+  File "/home/shaash/ws_px4/build/drone_eval/drone_eval/cloud_detector.py", line 168, in cb
+    self.pub_det.publish(arr)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/publisher.py", line 70, in publish
+    self.__publisher.publish(msg)
+rclpy._rclpy_pybind11.RCLError: Failed to publish: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[ros2run]: Process exited with failure 1

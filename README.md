@@ -44,23 +44,46 @@ Wind is expensive: 6 m/s with 3 m/s gusts drove hover power from 570 W to
 699 W (**+23%**) and cut endurance to ~9.2 min, with position-hold error
 rising from 0.02 m to 0.93 m RMS.
 
-## Factory navigation mission
+## Factory hall mission (v2)
 
-Launch from base, slalom through an obstacle course, scan a 12 x 12 m room,
-return to base and land:
+A 50 x 30 m factory hall: take off from the pad, fly a 27.5 m aisle whose five
+obstacles each leave one gap (alternating sides), scan the room at the far end,
+fly back and land. The drone knows nothing about the obstacles in advance:
+camera frames go over an **emulated factory WiFi link to a cloud object
+detector**, and the boxes that come back are turned into a map on the drone,
+which plans a path through it.
 
-| | |
-|---|---:|
-| Airborne time | **82.4 s** |
-| Path flown | 122.3 m at 1.50 m/s mean |
-| Energy used | **14.3 Wh** of 107 Wh usable |
-| Pack remaining on touchdown | **89.8%** |
-| Round trips per charge | **7.5** |
+| Drone camera + cloud boxes | True path over the hall plan |
+|---|---|
+| ![camera](docs/media/camera.gif) | ![top-down](docs/media/topdown.gif) |
 
-The course is four full-height gates with a single 2.5 m gap each, in a walled
-corridor - no way over or around. Measured closest approach 0.50 m, with 11 of
-18 obstacles inside 1 m of the hull. Full detail in
-[docs/08-factory-mission.md](docs/08-factory-mission.md).
+**[Watch the 3D replay in your browser](https://shaashwatmishra203-creator.github.io/Drone_sim/replay/)**
+(recorded run 15; needs GitHub Pages switched on, see docs/10 §8). The page
+is `docs/replay/index.html` if you prefer to open it from a local clone.
+
+| Complete runs | Run 11 | Run 12 (watched) | Run 15 (recorded) |
+|---|---:|---:|---:|
+| Mission time | 120.6 s | 142.0 s | 140.2 s |
+| Closest approach (hull, Gazebo truth) | 0.523 m | 0.521 m | 0.540 m |
+| Contact | none | none | none |
+| Landing error from pad centre | 0.089 m | 0.083 m | 0.077 m |
+| Range error, median / p90 | 2.1% / 8.7% | 1.9% / 8.3% | 2.2% / 9.3% |
+| Detection recall (gate 0.90) | **0.758** | **0.787** | **0.786** |
+| Cloud round trip, median | 117 ms | 118 ms | 117 ms |
+
+**3 of 4 clean runs completed the mission**; run 14 got stuck on the way back
+(dead-end escape added since, not yet exercised in flight). Clearance,
+contact, landing and range gates pass; **detection recall fails**. Everything
+is judged against Gazebo's true pose, not PX4's estimate. Full report:
+[docs/10-factory-hall-v2.md](docs/10-factory-hall-v2.md) and
+`out/drone_sim_report_v2.pdf`.
+
+> [!CAUTION]
+> **The v1 factory-mission results are retracted.** Waypoints were sent to PX4
+> in Gazebo's frame without conversion, so the course was flown rotated 90
+> degrees beside the walls, and every check shared the same error. Hover,
+> thrust, power and endurance results are unaffected. See
+> [docs/07-worklog.md](docs/07-worklog.md).
 
 ## Cloud vs edge compute
 
@@ -72,6 +95,13 @@ map is a few hundred KB and travels freely - so edge compute is the
 precondition for sharing maps with your other vehicles, not an alternative to
 it. Full analysis in
 [docs/09-compute-architecture.md](docs/09-compute-architecture.md).
+
+**Update (v2):** the team chose cloud *object detection* with edge navigation
+and safety. With the single Arducam and JPEG frames (5-7 KB at 10 Hz, about
+0.5 Mbps) the uplink fits easily inside the 11 Mbps estimate. The 150 Mbps
+figure above was for raw stereo depth. Safety never depends on the link: the
+drone holds position if detections are more than 0.5 s old.
+
 
 ## Headline findings
 
@@ -209,6 +239,8 @@ python3 tools/gen_report.py --out out/Drone_sim_v1.1_Report.pdf
 ```
 
 ## Documentation
+
+- [docs/10-factory-hall-v2.md](docs/10-factory-hall-v2.md) - factory hall v2: cloud object detection, camera navigation, results and retractions
 
 | Doc | Contents |
 |---|---|

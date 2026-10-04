@@ -1,0 +1,90 @@
+{
+  "truth_samples": 696,
+  "furthest_east_m": 3.1,
+  "hull_clearance_min_m": 1.809,
+  "closest_object": "aisle_north",
+  "contact_samples": 0,
+  "landing_error_m": 0.099,
+  "final_height_m": 0.23,
+  "frame_check": [
+    {
+      "target_enu": [
+        3.0,
+        0.0
+      ],
+      "truth": [
+        2.65,
+        -0.03
+      ]
+    },
+    {
+      "target_enu": [
+        3.0,
+        3.0
+      ],
+      "truth": [
+        3.09,
+        2.73
+      ]
+    },
+    {
+      "target_enu": [
+        0.0,
+        0.0
+      ],
+      "truth": [
+        0.18,
+        0.19
+      ]
+    }
+  ],
+  "mission": {
+    "status": "complete - returned to pad and landed",
+    "legs_s": {
+      "frame_check": 14.300120115280151,
+      "land": 7.9999799728393555
+    },
+    "total_s": 22.300100088119507,
+    "decisions": {
+      "stale_hold": 0,
+      "stop": 0,
+      "turn_first": 0,
+      "boxed_in": 0,
+      "go": 0
+    },
+    "detection_msgs": 311,
+    "map_cells": 112,
+    "plans": 0,
+    "plans_without_path": 0,
+    "plan_ms_median": null,
+    "plan_ms_max": null
+  },
+  "link_round_trip_ms": {
+    "n": 351,
+    "median": 118.26968193054199,
+    "p95": 163.52033615112305,
+    "max": 1252.732276916504
+  },
+  "cv": {
+    "frames_scored": 214,
+    "recall": 0.6799065420560748,
+    "gt_instances": 428,
+    "precision": 0.8224489795918367,
+    "detections": 490,
+    "recall_by_class": {
+      "shelf_rack": 0.68
+    },
+    "range_err_median": 0.05613474043181286,
+    "range_err_p90": 0.14599181807479542,
+    "range_samples": 2070,
+    "close_flags_placed_nearer_than_truth": "13/13"
+  },
+  "plot": "/home/shaash/drone_sim/out/runs/hall_fc/hall_path.png",
+  "gates": {
+    "clearance >= 0.4 m": true,
+    "no contact": true,
+    "landed within 0.5 m": true,
+    "CV recall >= 0.90": false,
+    "range error median <= 15%": true
+  }
+}

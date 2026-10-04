@@ -1,0 +1,25 @@
+{
+  "note": "EMULATED link - parameters are assumptions from config/factory_hall.yaml, not a measured network",
+  "uplink": {
+    "sent": 1506,
+    "lost": 18,
+    "dropped_queue": 0,
+    "dropped_outage": 0,
+    "bytes": 10653397
+  },
+  "downlink": {
+    "sent": 1487,
+    "lost": 15,
+    "dropped_queue": 0,
+    "dropped_outage": 0,
+    "bytes": 1152680
+  },
+  "frames_encoded": 1506,
+  "mean_frame_kb": 6.996424458416334,
+  "round_trip_ms": {
+    "n": 1472,
+    "median": 121.0627555847168,
+    "p95": 170.0613498687744,
+    "max": 1098.0584621429443
+  }
+}

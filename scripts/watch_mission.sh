@@ -32,6 +32,7 @@ cleanup() {
   pkill -f "drone_eval/" 2>/dev/null
   pkill -f "bin/px4" 2>/dev/null
   pkill -f "gz sim" 2>/dev/null
+  pkill -f "gz launch" 2>/dev/null
   pkill -f MicroXRCEAgent 2>/dev/null
   sleep 1
 }
@@ -55,9 +56,38 @@ if ! gz service -i --service /world/factory/scene/info 2>&1 | grep -q "Service p
 fi
 echo "     world ready"
 
-echo "2/5  opening the Gazebo window"
-gz sim -g >$OUT/gz_gui.log 2>&1 &
-GUI=$!
+if [ "${WEB:-0}" = "1" ]; then
+  # Stream the live sim to Gazebo's web viewer instead of opening a Linux
+  # window. On this laptop WSLg intermittently fails to allocate its shared
+  # memory ("rdp_allocate_shared_memory ... Input/output error" in
+  # /mnt/wslg/weston.log) and then every Linux window shows up blank with
+  # [WARN:COPY MODE] in the title. The browser path bypasses WSLg entirely.
+  gz launch $DS/scripts/websocket.gzlaunch >$OUT/websocket.log 2>&1 &
+  sleep 3
+  echo "     web viewer stream on ws://localhost:9002"
+  echo "     open https://app.gazebosim.org/visualization and connect to ws://localhost:9002"
+fi
+
+if [ "${WEB:-0}" != "1" ]; then
+echo "2/5  opening the Gazebo window (GPU: ${GZ_GUI_GPU:-NVIDIA})"
+# GPU for the window. NVIDIA is the default because it is the only adapter
+# whose picture actually reaches the screen through WSLg on this laptop: the
+# Intel Arc renders frames (glxgears ~120 fps) but WSLg shows them black.
+# The NVIDIA path (Mesa d3d12 -> libnvwgf2umx.so) occasionally segfaults while
+# Ogre2 creates its context, so retry up to twice. Both are hardware GPUs -
+# this is NOT software rendering. Override with GZ_GUI_GPU=Intel.
+start_gui() {
+  MESA_D3D12_DEFAULT_ADAPTER_NAME=${GZ_GUI_GPU:-NVIDIA} gz sim -g >$OUT/gz_gui.log 2>&1 &
+  GUI=$!
+}
+start_gui
+for attempt in 2 3; do
+  sleep 8
+  kill -0 $GUI 2>/dev/null && break
+  echo "     window crashed on start - retry $attempt/3"
+  cp $OUT/gz_gui.log $OUT/gz_gui_crash$attempt.log
+  start_gui
+done
 for i in $(seq 1 40); do
   sleep 1
   gz service -l 2>/dev/null | grep -q "^/gui/follow$" && break
@@ -98,8 +128,16 @@ fi
 echo
 echo "  >>> Look for the 'Gazebo Sim' window now. It may be behind this one. <<<"
 echo "      Press Enter when you can see it (or just wait 15 s)."
-read -t 15 -r _ || true
+if [ -t 0 ]; then
+  read -t 15 -r _ || true
+else
+  rm -f /tmp/drone_go
+  echo "     holding takeoff until /tmp/drone_go exists (max ${PREFLIGHT_WAIT_S:-300} s)"
+  for i in $(seq 1 ${PREFLIGHT_WAIT_S:-300}); do [ -e /tmp/drone_go ] && break; sleep 1; done
+fi
 echo
+
+fi
 
 echo "3/5  starting MicroXRCEAgent"
 $HOME/.local/bin/MicroXRCEAgent udp4 -p 8888 >$OUT/agent.log 2>&1 &
@@ -132,6 +170,14 @@ source /opt/ros/humble/setup.bash
 source $WS/install/setup.bash
 export PYTHONUNBUFFERED=1
 set -u
+
+# The web viewer reads the scene once, on connect: hold here, AFTER PX4 has
+# spawned the drone, so a viewer that connects now actually sees it.
+if [ "${WEB:-0}" = "1" ]; then
+  rm -f /tmp/drone_go
+  echo "     waiting for the viewer: the drone is on the pad; takeoff is held until /tmp/drone_go exists (max ${PREFLIGHT_WAIT_S:-600} s)"
+  for i in $(seq 1 ${PREFLIGHT_WAIT_S:-600}); do [ -e /tmp/drone_go ] && break; sleep 1; done
+fi
 
 echo "5/5  starting perception, fusion, logging and the mission"
 ros2 run drone_eval camera_mapper --ros-args \
@@ -168,5 +214,12 @@ grep -E "wrote .*thrust_power" $OUT/logger.log | sed 's/.*flight_logger\]: //' |
 echo
 echo "  outputs in $OUT"
 echo
-echo "  The window stays open so you can look around. Press Enter to close."
-read -r _ || true
+if [ -t 0 ]; then
+  echo "  The window stays open so you can look around. Press Enter to close."
+  read -r _ || true
+else
+  # No terminal attached (launched in the background): a read would hit
+  # end-of-input at once and tear the window down the moment the drone lands.
+  echo "  The window stays open for ${HOLD_S:-600} s so you can look around."
+  sleep ${HOLD_S:-600}
+fi

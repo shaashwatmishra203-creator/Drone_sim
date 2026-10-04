@@ -1,0 +1,63 @@
+{
+  "truth_samples": 2943,
+  "furthest_east_m": 36.72,
+  "hull_clearance_min_m": 0.556,
+  "closest_object": "machine_1",
+  "contact_samples": 0,
+  "landing_error_m": 32.72,
+  "final_height_m": 0.23,
+  "px4_vs_truth_median_m": 0.09,
+  "px4_vs_truth_max_m": 0.254,
+  "mission": {
+    "status": "STUCK in inbound at 32.8,-4.9",
+    "legs_s": {
+      "outbound": 51.60010576248169,
+      "scan": 12.800089597702026,
+      "inbound": 98.80368709564209
+    },
+    "total_s": 163.2038824558258,
+    "decisions": {
+      "stale_hold": 10,
+      "stop": 51,
+      "turn_first": 216,
+      "boxed_in": 55,
+      "go": 1142
+    },
+    "detection_msgs": 1620,
+    "map_cells": 2398,
+    "plans": 142,
+    "plans_without_path": 3,
+    "plan_ms_median": 54.83675003051758,
+    "plan_ms_max": 100.67105293273926
+  },
+  "link_round_trip_ms": {
+    "n": 1650,
+    "median": 121.31166458129883,
+    "p95": 167.69957542419434,
+    "max": 1050.1134395599365
+  },
+  "cv": {
+    "frames_scored": 1569,
+    "recall": 0.8374864572047671,
+    "gt_instances": 2769,
+    "precision": 0.8084900174452413,
+    "detections": 5159,
+    "recall_by_class": {
+      "shelf_rack": 0.753,
+      "machine": 0.88,
+      "pillar": 0.923,
+      "pallet_stack": 0.914
+    },
+    "range_err_median": 0.02865472901130465,
+    "range_err_p90": 0.08586657818314522,
+    "range_samples": 25687,
+    "close_flags_placed_nearer_than_truth": "122/131"
+  },
+  "plot": "/home/shaash/drone_sim/out/runs/hall_mission_20261004_031259/hall_path.png",
+  "gates": {
+    "clearance >= 0.4 m": true,
+    "no contact": true,
+    "CV recall >= 0.90": false,
+    "range error median <= 15%": true
+  }
+}

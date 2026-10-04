@@ -1,0 +1,2 @@
+[INFO] [1791098188.600286021] [vision_view]: wrote 1713 frames to /home/shaash/drone_sim/out/runs/hall_mission_20261004_031259/detections.mp4
+Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:389

@@ -1,0 +1,22 @@
+{
+  "status": "STUCK in inbound at 32.8,-4.9",
+  "legs_s": {
+    "outbound": 51.60010576248169,
+    "scan": 12.800089597702026,
+    "inbound": 98.80368709564209
+  },
+  "total_s": 163.2038824558258,
+  "decisions": {
+    "stale_hold": 10,
+    "stop": 51,
+    "turn_first": 216,
+    "boxed_in": 55,
+    "go": 1142
+  },
+  "detection_msgs": 1620,
+  "map_cells": 2398,
+  "plans": 142,
+  "plans_without_path": 3,
+  "plan_ms_median": 54.83675003051758,
+  "plan_ms_max": 100.67105293273926
+}

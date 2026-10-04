@@ -1,0 +1,21 @@
+{
+  "status": "complete - returned to pad and landed",
+  "legs_s": {
+    "frame_check": 14.300120115280151,
+    "land": 7.9999799728393555
+  },
+  "total_s": 22.300100088119507,
+  "decisions": {
+    "stale_hold": 0,
+    "stop": 0,
+    "turn_first": 0,
+    "boxed_in": 0,
+    "go": 0
+  },
+  "detection_msgs": 311,
+  "map_cells": 112,
+  "plans": 0,
+  "plans_without_path": 0,
+  "plan_ms_median": null,
+  "plan_ms_max": null
+}

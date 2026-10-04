@@ -1,0 +1,14 @@
+[INFO] [1791074226.623578258] [hall_mission]: hall mission (frame_check): pad (0.0, 0.0) -> scan (35.0, 0.0) -> pad, alt 2.0 m, 1.2 m/s, clearance 0.85 m
+[INFO] [1791074228.582838714] [hall_mission]: arm + offboard requested
+[INFO] [1791074237.982448745] [hall_mission]: airborne at 1.8 m - starting frame_check
+[INFO] [1791074243.282872142] [hall_mission]: frame_check point 0: PX4 ENU (2.87,0.18)
+[INFO] [1791074247.882660001] [hall_mission]: frame_check point 1: PX4 ENU (3.05,2.78)
+[INFO] [1791074253.882646911] [hall_mission]: frame_check point 2: PX4 ENU (0.17,0.17)
+[INFO] [1791074253.883061098] [hall_mission]: LEG frame_check: 15.9 s
+[INFO] [1791074258.282652149] [hall_mission]: === HALL MISSION ===
+[INFO] [1791074258.282999778] [hall_mission]:   frame_check    15.9 s
+[INFO] [1791074258.283520320] [hall_mission]:   land            4.4 s
+[INFO] [1791074258.283847960] [hall_mission]:   TOTAL          20.3 s  (0.34 min)
+[INFO] [1791074258.284131596] [hall_mission]:   decisions: stale_hold 0%, stop 0%, turn_first 0%, boxed_in 0%, go 0%
+[INFO] [1791074258.284493001] [hall_mission]:   detection messages 290, map cells 59
+[INFO] [1791074258.284755520] [hall_mission]:   status: complete - returned to pad and landed
